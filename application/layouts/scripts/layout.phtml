@@ -1,0 +1,128 @@
+<html lang="en">
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    
+	    <title><?php echo Zend_Registry::get('app_name')?></title>
+
+	    <!-- Bootstrap core CSS -->
+	    <!--link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"-->
+	    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+	    <!-- Custom styles for this template -->
+		<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="/css/jasny-bootstrap.css" rel="stylesheet" type="text/css">
+		<link href="/css/header.css" rel="stylesheet">
+		<link rel="stylesheet" href="/css/custom.css" type="text/css">
+		<link href="/css/star-rating.css" rel="stylesheet" type="text/css">
+
+	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  	</head>
+  <body>
+  	<!-- Google Tag Manager -->
+	<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PHJRLR"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-PHJRLR');</script>
+	<!-- End Google Tag Manager -->
+
+	<div class="navmenu navmenu-default navmenu-inverse navmenu-fixed-left offcanvas-sm">
+		<a class="navmenu-brand visible-md visible-lg" href="/"><?php echo Zend_Registry::get('app_name')?></a>
+		<ul class="nav navmenu-nav">
+			<?php foreach ($this->categories as $category) { ?>
+			<?php 
+				$category_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'category', 'id' => $category->id), 'default', true); 
+				$active_tab = 1;
+				$class = ($active_tab == $category->id) ? 'active' : '';
+			?>
+			<li class="<?php echo $class; ?>"><a href="<?php echo $category_url; ?>"><?php echo $category->title; ?></a></li>
+			<?php } ?> 
+		</ul>
+	</div>
+
+    <div class="navbar navbar-default navmenu-inverse navbar-fixed-top hidden-md hidden-lg col-xs-12">
+		<div class="col-xs-2 no-padding">
+			<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="col-xs-8">
+			<a class="navbar-brand" href="/" ><img class="logo-img" src="/images/fappexxx_logo.png"></a>
+		</div>
+		<?php 
+		$terms_url = $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'terms'), 'default', true); 
+		$register_url = $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'packages'), 'default', true); 
+		?>
+		<div class="col-xs-2">
+			<ul class="nav navbar-right">
+	            <li class="dropdown user-dropdown">
+	                <a href="#" class="dropdown-toggle action-icon" data-toggle="dropdown">
+	                	<img src="/images/ic_action_overflow.png">
+	                </a>
+	                <ul class="dropdown-menu">
+	                    <li><a href="<?php echo $terms_url;?>">Uslovi koriscenja</a></li>
+	                    <li class="dropdown-submenu pull-left">
+	                    	<a href="#">
+	                            <span>Promeni jezik </span>
+	                        </a>
+	                        <ul class="dropdown-menu">
+	                            <li>
+	                                <a href="#">
+	                                    <span>Srpski</span>
+	                                </a>
+	                            </li>
+	                            <li>
+	                                <a href="#">
+	                                    <span>English</span>
+	                                </a>
+	                            </li>
+	                            <li>
+	                                <a href="#">
+	                                    <span>Deutsch</span>
+	                                </a>
+	                            </li>
+	                            <li>
+	                                <a href="#">
+	                                    <span>Espanol</span>
+	                                </a>
+	                            </li>
+	                        </ul>
+	                    </li>
+	                    <li><a href="<?php echo $register_url;?>">Registruj se</a></li>
+	                </ul>
+	            </li>
+	        </ul>
+		</div>
+
+    </div>
+    <div class="container no-padding">
+        <div class="row main-content">
+            <?php echo $this->layout()->content; ?>
+        </div>
+    </div> 
+    
+	<script src="<?php echo $this->baseUrl('/js/front/uikit.min.js'); ?>"></script>
+	<script src="<?php echo $this->baseUrl('/js/flowplayer/flowplayer-3.2.12.min.js'); ?>"></script>
+	<script src="<?php echo $this->baseUrl('/js/flowplayer/flowplayer.ipad-3.2.12.js'); ?>"></script>
+	<script src="<?php echo $this->baseUrl('/js/front/add2home.js'); ?>"></script>
+	<script src="<?php echo $this->baseUrl('/js/front/videojs.js'); ?>"></script>
+	<script src="<?php echo $this->baseUrl('/js/strobe/swfobject.js'); ?>"></script>
+	<script src="<?php echo $this->baseUrl('/js/strobe/ParsedQueryString.js'); ?>"></script>
+	<script src="<?php echo $this->baseUrl('/js/front/star-rating.min.js'); ?>"></script>
+	<script src="<?php echo $this->baseUrl('/js/front/custom.js'); ?>"></script>
+	<script src="<?php echo $this->baseUrl('/js/front/bootstrap.min.js'); ?>"></script>
+	<script src="<?php echo $this->baseUrl('/js/jasny-bootstrap.min.js'); ?>"></script>
+
+	<div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm offcanvas-clone"></div>
+</body>
+</html>

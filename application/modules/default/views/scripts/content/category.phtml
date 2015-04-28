@@ -1,0 +1,20 @@
+<?php foreach ($this->videos as $one) {
+    $video_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'video', 'id' => $one->id, 'cat_id' => $this->cat_id), 'default', true);
+?>
+    <div class="col-md-12 no-padding">
+        <div class="row holder">
+            <a href="<?php echo $video_url;?>" class="video-link">
+                <div class="img-container">
+                    <div class="badge badge-duration"><?php echo gmdate("H:i:s", $one->duration); ?></div>
+                    <img class="video-image" src="<?php echo $one->thumb_url; ?>">
+                    <p class='content-title'><?php echo $one->title; ?></p>
+                    <span class="thumbnail-views"><?php echo $one->view_count; ?> views</span>
+                    <div class="play"></div>
+                    <?php if($one->is_premium){?>
+                    <div class="logo-hd top"><img src="/images/hd-logo.png"></div>
+                    <?php }?>
+                </div> 
+            </a>
+        </div>
+    </div>
+<?php } ?>

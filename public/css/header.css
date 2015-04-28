@@ -1,0 +1,145 @@
+html, body {
+  height: 100%;
+}
+.row{
+  margin:0;
+}
+body {
+  padding: 50px 0 0 0;
+}
+
+.navmenu {
+  padding-top: 50px;
+}
+
+.navbar {
+  display: block;
+  text-align: center;
+}
+.navbar-brand {
+  display: inline-block;
+  float: none;
+  padding: 12px 14px;
+}
+.navbar-toggle {
+  position: absolute;
+  float: left;
+}
+
+.container {
+  max-width: 100%;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+ background-color: black; 
+}
+
+.nav>li>a:hover, .nav>li>a:focus {
+  background-color: transparent;
+}
+
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus{
+  background-color: transparent;
+}
+
+.navmenu-nav li:hover{
+  color: #fff;
+  background-color: #080808;
+}
+
+ul.nav.navbar-right{
+  display: inline-block;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  z-index: 9999;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+.nav.navbar-nav.navbar-right>.open>a{
+    background-color: transparent;
+}
+
+.open>ul.dropdown-menu{
+  left:auto;
+  right:0;
+}
+.navbar-right .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+@media (min-width: 1px) {
+  .navbar-toggle {
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .container{
+    width: 100%;
+  }
+  .navbar-fixed-top{
+    margin-bottom: 0px;
+    position: relative;
+  }
+  body {
+    padding: 0 0 0 0;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    padding: 0 0 0 300px;
+  }
+  .container{
+    margin-top: 0px;
+  }
+  .navmenu {
+    padding-top: 0;
+  }
+  .navbar {
+    display: block !important; /* IE8 fix */
+  }
+  ul.nav.navbar-right{
+    display: block;
+  }
+}
+
+.navbar .nav>li>.dropdown-menu:before {
+  display: none !important;
+}
+
+.navbar .nav>li>.dropdown-menu:after {
+  display: none  !important;
+}
+
+.navbar .nav>li>a{
+  color: #FFF !important;
+  text-shadow: none !important;
+}
+
+@media(min-width: 320px){
+  .navbar .nav>li>a{
+    padding-left: 35px !important;
+  }
+}
+
+@media(min-width: 480px){
+  .navbar .nav>li>a{
+    padding-left: 50px !important;
+  }
+}
+
+@media(min-width: 640px){
+  .navbar .nav>li>a{
+    padding-left: 85px !important;
+  }
+}
+
+.dropdown-menu>li>a:hover{
+  background-color: #E5E5E5 !important;
+  background-image: none;
+  color:#181818;
+}
