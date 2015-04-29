@@ -14,7 +14,7 @@
             <?php } else if($one->type == 'select'){?>
             <div class="form-group">
                 <label class="label-payment-form"><?php echo $one->label;?></label>
-                <select  class="form-control" name="<?php echo $one->name?>">
+                <select  class="form-control" name="<?php echo $one->name?>" required="<?php echo $one->required;?>">
                     <option value="">Country</option>
                     <option value="srbija">Srbija</option>
                     <option value="crna_gora">Crna Gora</option>
@@ -24,7 +24,7 @@
             <div class="form-group">
                 <label class="label-payment-form"><?php echo $one->label;?></label>
 
-                <select  class="form-control" name="<?php echo $one->name?>" >
+                <select  class="form-control" name="<?php echo $one->name?>" required="<?php echo $one->required;?>">
                     <option value="">Month</option>
                     <?php for ($i=1; $i < 13; $i++) { ?>
                         <option value="<?php echo $i?>"><?php echo $i?></option>
@@ -33,7 +33,7 @@
             </div>
              <?php } else if($one->type == 'expiration_year'){?>
              <div class="form-group">
-                <select  class="form-control" name="<?php echo $one->name?>" >
+                <select  class="form-control" name="<?php echo $one->name?>" required="<?php echo $one->required;?>">
                     <option value="">Year</option>
                     <?php for ($i=date('Y'); $i < date('Y')+10; $i++) { ?>
                       <option value="<?php echo $i?>"><?php echo $i?></option>
@@ -43,7 +43,7 @@
             <?php }else{?>
             <div class="form-group">
                 <label class="label-payment-form"><?php echo $one->label;?></label>
-                <input type="text" class="form-control" name="<?php echo $one->name?>" />
+                <input type="text" class="form-control" name="<?php echo $one->name?>" required="<?php echo $one->required;?>"/>
             </div>
             <?php }?>
         <?php } ?>
@@ -64,7 +64,6 @@
 
         $('#register_form').submit(function(e){
             var isvalidate = $("#register_form").valid();
-            console.log(isvalidate);
             if(!isvalidate){
               e.preventDefault();
             }
@@ -72,33 +71,11 @@
 
         $('#register_form').validate({
             rules: {
-                first_name: {
-                  minlength: 2,
-                  required: true
-                },
-                last_name: {
-                  minlength: 2,
-                  required: true
-                },
                 email: {
-                    required:true,
                     email: true
                 },
                 card_number : {
-                    required:true,
                     digits: true
-                },
-                zip_code : {
-                    required: true
-                },
-                country :{
-                    required: true
-                },
-                expiration_month :{
-                    required: true
-                },
-                expiration_year :{
-                    required: true
                 }
             },
             highlight: function (element) {
