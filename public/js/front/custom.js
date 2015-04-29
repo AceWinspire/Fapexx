@@ -317,7 +317,8 @@ function validateForm(){
     var card_number = $('input[name="card_number"]').val();
     var zip_code = $('input[name="zip_code"]').val();
     var email = $('input[name="email"]').val();
-    var expiration_date = $('input[name="expiration_date"]').val().split("/");
+    var expiration_month = $('input[name="expiration_month"]').val();
+    var expiration_year = $('input[name="expiration_year"]').val();
     
     if(first_name == ''){
         alert('Enter first name!');
@@ -349,12 +350,12 @@ function validateForm(){
         return false;
     }
 
-    if(expiration_date[0] > 12 || expiration_date[0] < 1){
+    if(expiration_month > 12 || expiration_month < 1){
         alert('Month in expiration date not valid!');
         return false;   
     }
 
-    if(expiration_date[1] < 2015){
+    if(expiration_year < 2015){
         alert('Year in expiration date not valid!');
         return false;   
     }

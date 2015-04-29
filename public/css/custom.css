@@ -20,6 +20,10 @@ body{
   line-height: 1.22;
 }
 
+.main-content{
+  height: 100%;
+}
+
 @media (max-width: 480px) {
   .android-page a{
     font-size: 1.2em;
@@ -451,7 +455,9 @@ span.fittext{
 .dropdown>a{
   color:#FFF;
 }
-
+.container{
+  height:100%;
+}
 @media ( max-width :767px) {
   body {
     padding-left: 0px;
@@ -490,4 +496,32 @@ span.fittext{
   background-color: #E5E5E5 !important;
   background-image: none;
   color:#181818;
+}
+
+/*label.valid {
+  width: 24px;
+  height: 24px;
+  background: url(/images/valid.png) center center no-repeat;
+  display: inline-block;
+  text-indent: -9999px;
+}*/
+span.error {
+  font-weight: bold;
+  color: #a94442;
+  padding: 2px 8px;
+  margin-top: 2px;
+}
+span.error.valid{
+  display: none;
+}
+
+.form-group.error .form-control{
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+.form-group.success .form-control{
+  border-color: #3c763d;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
