@@ -20,9 +20,9 @@ class IndexController extends Zend_Controller_Action {
 	}
 
 	public function indexAction(){
-		if (!isset($_SESSION['no_android_'.Zend_Registry::get('remote_ip')])) {
+		/*if (!isset($_SESSION['no_android_'.Zend_Registry::get('remote_ip')])) {
 			$_SESSION['no_android_'.Zend_Registry::get('remote_ip')] = (bool)$this->_getParam('no_android', false);
-		} 
+		} */
 		
 		$this->view->stream_channels = $this->my_service_contents->getStreamChannels();
 	}
@@ -38,7 +38,8 @@ class IndexController extends Zend_Controller_Action {
 			$first_name = $this->_getParam('first_name');
 			$last_name = $this->_getParam('last_name');
 			$card_number = $this->_getParam('card_number');
-			$expiration_date = $this->_getParam('expiration_date');
+			$expiration_month = $this->_getParam('expiration_month');
+			$expiration_year = $this->_getParam('expiration_year');
 			$zip_code = $this->_getParam('zip_code');
 			$country = $this->_getParam('country');
 			$email = $this->_getParam('email');
@@ -48,7 +49,8 @@ class IndexController extends Zend_Controller_Action {
 			var_dump($first_name.'<br/>');
 			var_dump($last_name.'<br/>');
 			var_dump($card_number.'<br/>');
-			var_dump($expiration_date.'<br/>');
+			var_dump($expiration_month.'<br/>');
+			var_dump($expiration_year.'<br/>');
 			var_dump($zip_code.'<br/>');
 			var_dump($country.'<br/>');
 			var_dump($email.'<br/>');

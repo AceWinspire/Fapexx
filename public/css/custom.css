@@ -53,6 +53,35 @@ body{
   background-size: cover;         /* Generic*/
 }
 
+.packages .form-control{
+  height: 40px;
+}
+
+.label-payment-form{
+  font-size: 16px;
+  font-weight: bold;
+}
+span.last{
+  font-weight: normal;
+  font-size: 14px;
+  color: #666;
+}
+
+#register_form_button{
+  width: 33%;
+  margin: 0 auto;
+}
+
+.packages{
+  height: 100%;
+  background-color: #fff;
+}
+
+.payment-title{
+  margin-top: 10%;
+  margin-left: 10%;
+}
+
 .welcome{
   height: 100%;
   background: url(/images/welcome.png) no-repeat 0% 16% fixed;

@@ -1,26 +1,41 @@
-<div class="col-sm-12 packages-container">
+<div class="col-sm-12 packages">
     <div class="col-sm-1">
     </div>
     <div class="col-sm-10">
+        <h2 class="payment-title">Payment</h2>
         <?php $form_url = $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'register'), 'default', true); ?>
         <form name="form" method="POST" class="centered" id="register_form" action="<?php echo $form_url?>" onsubmit="return validateForm()">
             <input type="hidden" id="hidden_package_id" name="hidden_package_id" value="<?php echo $this->package_id;?>">
         <?php foreach(json_decode($this->app_settings->submit_form_elements) as $one){ ?>
             <?php if($one->type == 'button'){?>
                 <br/>
-                <input type="submit" name="<?php echo $one->name?>" id="register_form_button" class="form-control register-inputs button-form" value="<?php echo $one->label?>" required="<?php echo $one->required;?>"><br/>
+                <button type="submit" name="<?php echo $one->name?>" id="register_form_button" class="form-control btn btn-primary btn-block"><?php echo $one->label?> <i class="glyphicon glyphicon-arrow-right"></i>
+                </button>
             <?php } else if($one->type == 'select'){?>
-                <span class="label-register-form"><?php echo $one->label;?></span><br/>
-                <select dir="rtl" class="form-control register-inputs" name="<?php echo $one->name?>">
+                <span class="label-payment-form"><?php echo $one->label;?></span><br/>
+                <select  class="form-control" name="<?php echo $one->name?>">
                   <option value="srbija">Srbija</option>
                   <option value="crna_gora">Crna Gora</option>
                 </select><br/>
-            <?php } else if($one->type == 'credit_card_date'){?>
-                <span class="label-register-form"><?php echo $one->label;?></span><br/>
-                <input type="text" class="form-control register-inputs" data-mask="99/2099" placeholder="mm/yyyy" data-type="<?php echo $one->type;?>" name="<?php echo $one->name?>" required="<?php echo $one->required;?>"><br/>
+            <?php } else if($one->type == 'expiration_month'){?>
+                <span class="label-payment-form"><?php echo $one->label;?></span><br/>
+
+                <select  class="form-control" name="<?php echo $one->name?>" required="<?php echo $one->required;?>">
+                    <option value="0">Month</option>
+                    <?php for ($i=1; $i < 13; $i++) { ?>
+                        <option value="<?php echo $i?>"><?php echo $i?></option>
+                    <?php } ?>
+                </select>
+             <?php } else if($one->type == 'expiration_year'){?>
+                <select  class="form-control" name="<?php echo $one->name?>" required="<?php echo $one->required;?>">
+                    <option value="0">Year</option>
+                    <?php for ($i=date('Y'); $i < date('Y')+10; $i++) { ?>
+                      <option value="<?php echo $i?>"><?php echo $i?></option>
+                    <?php } ?>
+                </select><br/>
             <?php }else{?>
-                <span class="label-register-form"><?php echo $one->label;?></span><br/>
-                <input type="text" class="form-control register-inputs" data-type="<?php echo $one->type;?>" name="<?php echo $one->name?>" required="<?php echo $one->required;?>"><br/>
+                <span class="label-payment-form"><?php echo $one->label;?></span><br/>
+                <input type="text" class="form-control" data-type="<?php echo $one->type;?>" name="<?php echo $one->name?>" required="<?php echo $one->required;?>"><br/>
             <?php }?>
         <?php } ?>
         </form>
@@ -28,3 +43,14 @@
     <div class="col-sm-1">
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function($){  
+        $('.label-payment-form').each(function(){
+            var text = $(this).text().split('-');
+            var last = text.pop();
+            var result =  text.join(" ") + (text.length > 0 ? '<span class="last">'+ '-' + last+'</span>' : last); 
+            $(this).html(result);
+        })
+    });
+</script>
