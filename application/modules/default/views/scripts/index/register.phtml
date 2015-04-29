@@ -15,8 +15,9 @@
             <div class="form-group">
                 <label class="label-payment-form"><?php echo $one->label;?></label>
                 <select  class="form-control" name="<?php echo $one->name?>">
-                  <option value="srbija">Srbija</option>
-                  <option value="crna_gora">Crna Gora</option>
+                    <option value="">Country</option>
+                    <option value="srbija">Srbija</option>
+                    <option value="crna_gora">Crna Gora</option>
                 </select>
             </div>
             <?php } else if($one->type == 'expiration_month'){?>
@@ -24,7 +25,7 @@
                 <label class="label-payment-form"><?php echo $one->label;?></label>
 
                 <select  class="form-control" name="<?php echo $one->name?>" >
-                    <option value="0">Month</option>
+                    <option value="">Month</option>
                     <?php for ($i=1; $i < 13; $i++) { ?>
                         <option value="<?php echo $i?>"><?php echo $i?></option>
                     <?php } ?>
@@ -33,7 +34,7 @@
              <?php } else if($one->type == 'expiration_year'){?>
              <div class="form-group">
                 <select  class="form-control" name="<?php echo $one->name?>" >
-                    <option value="0">Year</option>
+                    <option value="">Year</option>
                     <?php for ($i=date('Y'); $i < date('Y')+10; $i++) { ?>
                       <option value="<?php echo $i?>"><?php echo $i?></option>
                     <?php } ?>
@@ -61,23 +62,11 @@
             $(this).html(result);
         })
 
-        function isValidExpirationDate(month , year) {
-            return !(month === '0' || year ==='0'); 
-        }
-
         $('#register_form').submit(function(e){
             var isvalidate = $("#register_form").valid();
             console.log(isvalidate);
             if(!isvalidate){
               e.preventDefault();
-            }else{
-                  var month = $('[name=expiration_month]').val();
-                  var year = $('[name=expiration_year]').val();
-                  var format = isValidExpirationDate( month, year );
-                  if(format == false){
-                    e.preventDefault();
-                    alert("Neispravan format datuma!");
-                  }
             }
         })
 
@@ -101,9 +90,17 @@
                 },
                 zip_code : {
                     required: true
+                },
+                country :{
+                    required: true
+                },
+                expiration_month :{
+                    required: true
+                },
+                expiration_year :{
+                    required: true
                 }
             },
-            errorElement: 'span',
             highlight: function (element) {
                 $(element).closest('.form-group').removeClass('success').addClass('error');
             },

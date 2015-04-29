@@ -499,15 +499,15 @@ span.fittext{
   background-image: none;
   color:#181818;
 }
+label.valid{
+  display: none !important;
+}
 
-span.error {
+label.error {
   font-weight: bold;
   color: #a94442;
   padding: 2px 8px;
   margin-top: 2px;
-}
-span.error.valid{
-  display: none;
 }
 
 .form-group.error .form-control{

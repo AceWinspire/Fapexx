@@ -22,7 +22,7 @@ class IndexController extends Zend_Controller_Action {
 	public function indexAction(){
 		if (!isset($_SESSION['no_android_'.Zend_Registry::get('remote_ip')])) {
 			$_SESSION['no_android_'.Zend_Registry::get('remote_ip')] = (bool)$this->_getParam('no_android', false);
-		}
+		} 
 		
 		$this->view->stream_channels = $this->my_service_contents->getStreamChannels();
 	}
