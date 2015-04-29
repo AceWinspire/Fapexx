@@ -20,6 +20,10 @@ body{
   line-height: 1.22;
 }
 
+.nav:not(.navbar-right)>li{
+  border-bottom: 1px solid #B00;
+}
+
 .main-content{
   height: 100%;
 }
