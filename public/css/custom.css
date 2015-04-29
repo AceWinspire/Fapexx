@@ -74,9 +74,11 @@ span.last{
 #register_form_button{
   width: 33%;
   margin: 0 auto;
+  margin-bottom: 5%;
 }
 
 .packages{
+    overflow-y: scroll;
   height: 100%;
   background-color: #fff;
 }
@@ -498,13 +500,6 @@ span.fittext{
   color:#181818;
 }
 
-/*label.valid {
-  width: 24px;
-  height: 24px;
-  background: url(/images/valid.png) center center no-repeat;
-  display: inline-block;
-  text-indent: -9999px;
-}*/
 span.error {
   font-weight: bold;
   color: #a94442;

@@ -18,14 +18,14 @@ class My_Plugin_Front extends Zend_Controller_Plugin_Abstract {
 		$view->app_settings	= $my_service_app->getInfo();
 
         session_start();
-        /*$no_android = isset($_SESSION['no_android_'.Zend_Registry::get('remote_ip')]) ? $_SESSION['no_android_'.Zend_Registry::get('remote_ip')] : false;
-        $_SESSION['no_android_'.Zend_Registry::get('remote_ip')] = true;*/
+        $no_android = isset($_SESSION['no_android_'.Zend_Registry::get('remote_ip')]) ? $_SESSION['no_android_'.Zend_Registry::get('remote_ip')] : false;
+        $_SESSION['no_android_'.Zend_Registry::get('remote_ip')] = true;
         
         $device = new My_Device($_SERVER['HTTP_USER_AGENT']);
-        /*if(!$device->isMobile()){
+        if(!$device->isMobile()){
             $request->setControllerName('index');
             $request->setActionName('desktop');
-        }else */if($device->isMobile() && !$no_android){
+        }else if($device->isMobile() && !$no_android){
             $request->setControllerName('index');
             $request->setActionName('android');
         }
