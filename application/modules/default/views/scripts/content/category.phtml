@@ -1,33 +1,37 @@
+<?php foreach ($this->categories as $category) { 
+    if($category->id == $this->cat_id ){
+        $title = $category->title;
+    } 
+}?>
 <div class="categorie-title">
-    <h4>Teens</h4>
+    <h4><?php echo $title; ?></h4>
 </div>
 <?php foreach ($this->videos as $index => $one) {
     $class = ($index % 2 == 0) ? 'odd' : '';
-    $video_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'video', 'id' => $one->id, 'cat_id' => $this->cat_id), 'default', true);
-?>
+    $video_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'video', 'id' => $one->id, 'cat_id' => $this->cat_id), 'default', true); ?>
     <div class="col-md-12 no-padding">
-            <div class="row holder <?php echo $class;?>">
-                <div class="col-sm-5 col-xs-5 img-container">
-                    <a href="<?php echo $stream_url;?>" class="video-link">
-                        <img class="video-image" src="<?php echo $one->thumb_url; ?>">
-                        <div class="play small"></div>
+        <div class="row holder <?php echo $class;?>">
+            <div class="col-sm-5 col-xs-5 img-container">
+                <a href="<?php echo $stream_url;?>" class="video-link">
+                    <img class="video-image" src="<?php echo $one->thumb_url; ?>">
+                    <div class="play small"></div>
+                </a>
+            </div>
+            <div class="col-sm-7 col-xs-7">
+                <div class="col-xs-12">
+                    <a class="video-link" href="<?php echo $stream_url; ?>">
+                        <p class="video-info-title"><?php echo $one->title; ?></p>
                     </a>
                 </div>
-                <div class="col-sm-7 col-xs-7">
-                    <div class="col-xs-12">
-                        <a class="video-link" href="<?php echo $stream_url; ?>">
-                            <p class="video-info-title"><?php echo $one->title; ?></p>
-                        </a>
-                    </div>
-                    <div class="col-xs-12 video-info-tags">
-                        <?php foreach(explode(',', $one->tags) as $one_tag){?>
-                            <span class="label label-default"><?php echo $one_tag;?></span>
-                        <?php }?>
-                    </div>
-                    <div class="col-xs-12">
-                        <span class="video-date"><?php echo $one->view_count.' views';?></span>
-                    </div>
+                <div class="col-xs-12 video-info-tags">
+                    <?php foreach(explode(',', $one->tags) as $one_tag){?>
+                        <span class="label label-default"><?php echo $one_tag;?></span>
+                    <?php }?>
+                </div>
+                <div class="col-xs-12">
+                    <span class="video-date"><?php echo $one->view_count.' views';?></span>
                 </div>
             </div>
         </div>
+    </div>
 <?php } ?>
