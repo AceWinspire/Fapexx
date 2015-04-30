@@ -1,4 +1,5 @@
 <?php foreach($this->featured_content as $index => $one){ 
+    $class = $index > $this->app_settings->first_x_big_thumbs_contents-1  && $index% 2 == 0 ? '' : 'odd';
     $stream_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'stream', 'id' => $one->id), 'default', true); 
     if($index < $this->app_settings->first_x_big_thumbs_contents) {?>
         <div class="col-md-12 no-padding">
@@ -10,9 +11,6 @@
                         <p class='content-title'><?php echo $one->title; ?></p>
                         <span class="thumbnail-views"><?php echo $one->view_count; ?> views</span>
                         <div class="play"></div>
-                        <!--?php if($one->is_premium){?-->
-                        <!--div class="logo-hd top"><img src="/images/hd-logo.png"></div-->
-                        <!--?php }?-->
                     </div> 
                 </a>
             </div>
@@ -20,7 +18,7 @@
 
     <?php }else{ ?>
         <div class="col-md-12 no-padding">
-            <div class="row holder">
+            <div class="row holder <?php echo $class;?>">
                 <div class="col-sm-5 col-xs-5 img-container">
                     <a href="<?php echo $stream_url;?>" class="video-link">
                         <img class="video-image" src="<?php echo $one->thumb_url; ?>">
