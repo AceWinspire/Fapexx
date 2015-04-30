@@ -6,11 +6,6 @@
 	    
 	    <title><?php echo Zend_Registry::get('app_name')?></title>
 
-	    <!-- Bootstrap core CSS -->
-	    <!--link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"-->
-	    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-
-	    <!-- Custom styles for this template -->
 		<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 		<link href="/css/jasny-bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="/css/header.css" rel="stylesheet">
@@ -42,14 +37,15 @@
 	<div class="navmenu navmenu-default navmenu-inverse navmenu-fixed-left offcanvas-sm">
 		<a class="navmenu-brand visible-md visible-lg" href="/"><?php echo Zend_Registry::get('app_name')?></a>
 		<ul class="nav navmenu-nav">
-			<?php foreach ($this->categories as $category) { ?>
-			<?php 
+			<li><a href="#">Home</a></li>
+			<?php foreach ($this->categories as $category) { 
 				$category_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'category', 'id' => $category->id), 'default', true); 
 				$active_tab = 1;
 				$class = ($active_tab == $category->id) ? 'active' : '';
 			?>
 			<li class="<?php echo $class; ?>"><a href="<?php echo $category_url; ?>"><?php echo $category->title; ?></a></li>
 			<?php } ?> 
+			<li><a href="#">Subscribe</a></li>
 		</ul>
 	</div>
 
@@ -116,7 +112,6 @@
         </div>
     </div> 
     
-	<!--script src="<?php //echo $this->baseUrl('/js/front/uikit.min.js'); ?>"></script-->
 	<script src="<?php echo $this->baseUrl('/js/flowplayer/flowplayer-3.2.12.min.js'); ?>"></script>
 	<script src="<?php echo $this->baseUrl('/js/flowplayer/flowplayer.ipad-3.2.12.js'); ?>"></script>
 	<script src="<?php echo $this->baseUrl('/js/front/add2home.js'); ?>"></script>

@@ -24,6 +24,14 @@ body{
   border-bottom: 1px solid #B00;
 }
 
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+}
+.navbar-toggle .icon-bar {
+  height: 3px;
+  width: 26px;
+}
+
 .main-content{
   height: 100%;
 }
@@ -52,7 +60,12 @@ body{
   padding: 0% 8% 8% 8%;
 }
 
+.packages-container h2{
+  padding: 0% 8% 8% 8%;
+  color: #C8C8C8;
+}
 .packages-container{
+  height: 100%;
   padding-top:8%;
   background: url(/images/background.png) no-repeat center center fixed;
   -webkit-background-size: cover; /* For WebKit*/
@@ -82,7 +95,7 @@ span.last{
 }
 
 .packages{
-    overflow-y: scroll;
+  overflow-y: scroll;
   height: 100%;
   background-color: #fff;
 }

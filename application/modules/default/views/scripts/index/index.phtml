@@ -1,16 +1,55 @@
 <?php foreach($this->featured_content as $index => $one){ 
     $stream_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'stream', 'id' => $one->id), 'default', true); 
     if($index < $this->app_settings->first_x_big_thumbs_contents) {?>
-        <div class="stream-channels"><a href="<?php echo $stream_url;?>"><img src="<?php echo $one->thumb_url; ?>" width="100%"></a></div>
+        <div class="col-md-12 no-padding">
+            <div class="row holder">
+                <a href="<?php echo $stream_url;?>" class="video-link">
+                    <div class="img-container">
+                        <div class="badge badge-duration"><?php echo gmdate("H:i:s", $one->duration); ?></div>
+                        <img class="video-image" src="<?php echo $one->thumb_url; ?>">
+                        <p class='content-title'><?php echo $one->title; ?></p>
+                        <span class="thumbnail-views"><?php echo $one->view_count; ?> views</span>
+                        <div class="play"></div>
+                        <!--?php if($one->is_premium){?-->
+                        <!--div class="logo-hd top"><img src="/images/hd-logo.png"></div-->
+                        <!--?php }?-->
+                    </div> 
+                </a>
+            </div>
+        </div>
+
     <?php }else{ ?>
         <div class="col-md-12 no-padding">
             <div class="row holder">
-                <a class="video-link" href="<?php echo $stream_url; ?>">
-                    <div class="col-sm-12 col-xs-12 img-container">
-                            <img src="<?php echo $one->thumb_url; ?>">
-                        <span class="fittext"><?php echo $one->title; ?></span>
+                <div class="col-sm-5 col-xs-5 img-container">
+                    <a href="<?php echo $stream_url;?>" class="video-link">
+                        <img class="video-image" src="<?php echo $one->thumb_url; ?>">
+                        <!--div class="badge badge-duration"><?php //echo gmdate("H:i:s", $video->duration);?></div-->
+                        <div class="play small"></div>
+                        <div class="logo-hd"><img src="/images/hd-logo.png"></div>
+                    </a>
+                </div>
+                <div class="col-sm-7 col-xs-7">
+                    <div class="col-xs-12">
+                        <a class="video-link" href="<?php echo $stream_url; ?>">
+                            <p class="video-info-title"><?php echo $one->title; ?></p>
+                        </a>
                     </div>
-                </a>
+                    <div class="col-xs-12 video-info-tags">
+                        <?php foreach(explode(',', $one->tags) as $one_tag){?>
+                            <span class="label label-default"><?php echo $one_tag;?></span>
+                        <?php }?>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="col-xs-5 star-rating-holder">
+                            <input id="fake-rating" type="number" class="rating smallest" min=0 max=5 step=1 value=<?php echo $one->rating?> data-size="xs">
+                        </div>
+                        <div class="col-xs-7">
+                            <span class="video-date"><?php echo $one->view_count.' views';?></span>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
         </div>
     <?php }?>

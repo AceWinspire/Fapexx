@@ -45,9 +45,8 @@ class ContentController extends Zend_Controller_Action {
 
 		$code_try_count = $memcache->get($this->memcache_options['prefix'] . $ip_address);
 
-		//increment try counter
 		$memcache->set($this->memcache_options['prefix'] . $ip_address, (($code_try_count) ? ++$code_try_count : 1), false);
-
+		
 		if ($code_try_count > $this->app_settings->show_subscribe_prompt_value) {
 			$this->_redirect('/index/packages/');
 		}
