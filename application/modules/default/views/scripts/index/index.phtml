@@ -6,11 +6,15 @@
             <div class="row holder">
                 <a href="<?php echo $stream_url;?>" class="video-link">
                     <div class="img-container">
-                        <div class="badge badge-duration"><?php echo gmdate("H:i:s", $one->duration); ?></div>
+                        <div class="badge badge-duration"><?php echo $one->view_count.' views'; ?></div>
                         <img class="video-image" src="<?php echo $one->thumb_url; ?>">
                         <p class='content-title'><?php echo $one->title; ?></p>
-                        <span class="thumbnail-views"><?php echo $one->view_count; ?> views</span>
                         <div class="play"></div>
+                        <div class="tags-stream video-info-tags">
+                        <?php foreach(explode(',', $one->tags) as $one_tag){?>
+                            <span class="label label-default"><?php echo $one_tag;?></span>
+                        <?php }?>
+                    </div>
                     </div> 
                 </a>
             </div>

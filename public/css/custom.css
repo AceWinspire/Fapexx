@@ -318,6 +318,14 @@ span.thumbnail-views{
   padding-bottom: 15px;
 }
 
+.tags-stream.video-info-tags{
+  position: absolute;
+  left: 10px;
+  bottom: 4px;
+  max-width: 70%;
+  padding-bottom: 10px;
+}
+
 .video-date{
   font-size: 0.8em;
   font-weight: bold;
