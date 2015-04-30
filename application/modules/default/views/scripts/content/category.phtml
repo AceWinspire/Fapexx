@@ -1,17 +1,16 @@
 <div class="categorie-title">
     <h4>Teens</h4>
 </div>
-<?php foreach ($this->videos as $one) {
+<?php foreach ($this->videos as $index => $one) {
+    $class = ($index % 2 == 0) ? 'odd' : '';
     $video_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'video', 'id' => $one->id, 'cat_id' => $this->cat_id), 'default', true);
 ?>
     <div class="col-md-12 no-padding">
-            <div class="row holder">
+            <div class="row holder <?php echo $class;?>">
                 <div class="col-sm-5 col-xs-5 img-container">
                     <a href="<?php echo $stream_url;?>" class="video-link">
                         <img class="video-image" src="<?php echo $one->thumb_url; ?>">
-                        <!--div class="badge badge-duration"><?php //echo gmdate("H:i:s", $video->duration);?></div-->
                         <div class="play small"></div>
-                        
                     </a>
                 </div>
                 <div class="col-sm-7 col-xs-7">

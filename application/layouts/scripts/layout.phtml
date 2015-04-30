@@ -37,7 +37,7 @@
 	<div class="navmenu navmenu-default navmenu-inverse navmenu-fixed-left offcanvas-sm">
 		<a class="navmenu-brand visible-md visible-lg" href="/"><?php echo Zend_Registry::get('app_name')?></a>
 		<ul class="nav navmenu-nav">
-			<li><a href="#">Home</a></li>
+			<li><a href="/">Home</a></li>
 			<?php foreach ($this->categories as $category) { 
 				$category_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'category', 'id' => $category->id), 'default', true); 
 				$active_tab = 1;
@@ -45,7 +45,7 @@
 			?>
 			<li class="<?php echo $class; ?>"><a href="<?php echo $category_url; ?>"><?php echo $category->title; ?></a></li>
 			<?php } ?> 
-			<li><a href="#">Subscribe</a></li>
+			<li><a href="/index/packages/">Subscribe</a></li>
 		</ul>
 	</div>
 
