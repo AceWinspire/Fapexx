@@ -20,11 +20,12 @@ class IndexController extends Zend_Controller_Action {
 	}
 
 	public function indexAction(){
-		if (!isset($_SESSION['no_android_'.Zend_Registry::get('remote_ip')])) {
-			$_SESSION['no_android_'.Zend_Registry::get('remote_ip')] = (bool)$this->_getParam('no_android', false);
-		} 
-		
-		$this->view->stream_channels = $this->my_service_contents->getStreamChannels();
+		$session = new Zend_Session_Namespace('no_android');
+		$remote_ip = Zend_Registry::get('remote_ip');
+		if (!isset($session->$remote_ip)) {
+			$session->$remote_ip = (bool)$this->_getParam('no_android', false);
+ 		} 
+		$this->view->featured_content = $this->my_service_contents->getFeaturedContent();
 	}
 
 	public function packagesAction(){

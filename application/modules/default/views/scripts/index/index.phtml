@@ -1,22 +1,17 @@
-<?php foreach($this->stream_channels as $one){ ?>
-    <?php 
-        $stream_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'stream', 'id' => $one->id), 'default', true); 
-    ?>
-    <div class="stream-channels"><a href="<?php echo $stream_url;?>"><img src="<?php echo $one->thumb_url; ?>" width="100%"></a></div>
-<?php } ?>
-<?php foreach ($this->categories as $category) { ?>
-    <?php 
-        $category_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'category', 'id' => $category->id), 'default', true); 
-    ?>
-    <div class="col-md-12 no-padding">
-        <div class="row holder">
-            <a class="video-link" href="<?php echo $category_url; ?>">
-                <div class="col-sm-12 col-xs-12 img-container">
-                        <img src="<?php echo $category->thumb_url; ?>">
-                    <span class="fittext"><?php echo $category->title; ?></span>
-                </div>
-            </a>
+<?php foreach($this->featured_content as $index => $one){ 
+    $stream_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'stream', 'id' => $one->id), 'default', true); 
+    if($index < $this->app_settings->first_x_big_thumbs_contents) {?>
+        <div class="stream-channels"><a href="<?php echo $stream_url;?>"><img src="<?php echo $one->thumb_url; ?>" width="100%"></a></div>
+    <?php }else{ ?>
+        <div class="col-md-12 no-padding">
+            <div class="row holder">
+                <a class="video-link" href="<?php echo $stream_url; ?>">
+                    <div class="col-sm-12 col-xs-12 img-container">
+                            <img src="<?php echo $one->thumb_url; ?>">
+                        <span class="fittext"><?php echo $one->title; ?></span>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
+    <?php }?>
 <?php } ?>
-

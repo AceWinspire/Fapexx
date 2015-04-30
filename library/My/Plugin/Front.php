@@ -17,9 +17,10 @@ class My_Plugin_Front extends Zend_Controller_Plugin_Abstract {
 		$view->categories 	= $my_service_contents->getCategories();
 		$view->app_settings	= $my_service_app->getInfo();
 
-        session_start();
-        $no_android = isset($_SESSION['no_android_'.Zend_Registry::get('remote_ip')]) ? $_SESSION['no_android_'.Zend_Registry::get('remote_ip')] : false;
-        $_SESSION['no_android_'.Zend_Registry::get('remote_ip')] = true;
+        $session = new Zend_Session_Namespace('no_android');
+        $remote_ip = Zend_Registry::get('remote_ip');
+        $no_android = isset($session->$remote_ip) ? $session->$remote_ip : false;
+        $session->$remote_ip = true;
         
         $device = new My_Device($_SERVER['HTTP_USER_AGENT']);
         if(!$device->isMobile()){

@@ -15,7 +15,7 @@ class My_Service_Contents extends My_Service{
 
 	public function getBanners($position){
 		try {
-			$this->http_client->setUri($this->api_url.'/content/get-videos');
+			$this->http_client->setUri($this->api_url.'/content/get-banners');
 
 			$this->http_client->resetParameters();
 
@@ -66,6 +66,28 @@ class My_Service_Contents extends My_Service{
 
 			$this->http_client->setParameterGet(array('app_id' => $this->app_id));
 			$this->http_client->setParameterGet(array('cat_id' => $cat_id));
+
+			$response = $this->http_client->request('GET');
+			$result   = json_decode($response->getBody());
+
+			if($response->getStatus() == 200){
+				return $result;
+			}else{
+				return array();
+			}
+		}
+		catch (Exception $e) {
+			throw new Exception('Service unavailable');
+		}
+	}
+
+	public function getFeaturedContent(){
+		try {
+			$this->http_client->setUri($this->api_url.'/content/get-featured-content');
+
+			$this->http_client->resetParameters();
+
+			$this->http_client->setParameterGet(array('app_id' => $this->app_id));
 
 			$response = $this->http_client->request('GET');
 			$result   = json_decode($response->getBody());
