@@ -36,6 +36,18 @@ body{
   height: 100%;
 }
 
+.categorie-title{
+  text-align: center;
+  background-color: #B60000;
+}
+
+h4{
+  margin: 0;
+  padding: 6px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
 @media (max-width: 480px) {
   .android-page a{
     font-size: 1.2em;
