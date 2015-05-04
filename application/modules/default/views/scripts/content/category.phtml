@@ -6,8 +6,8 @@
 <div class="categorie-title">
     <h4><?php echo $title; ?></h4>
 </div>
-<?php foreach ($this->videos as $index => $one) {
-    $class = ($index % 2 == 0) ? 'odd' : '';
+<?php $i = 0; foreach ($this->videos as $one) {
+    $class = ($i % 2 == 0) ? 'odd' : '';
     $video_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'video', 'id' => $one->id, 'cat_id' => $this->cat_id), 'default', true); ?>
     <div class="col-md-12 no-padding">
         <div class="row holder <?php echo $class;?>">
@@ -34,4 +34,4 @@
             </div>
         </div>
     </div>
-<?php } ?>
+<?php $i++; } ?>

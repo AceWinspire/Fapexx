@@ -23,8 +23,8 @@
         </div>
      </div>
 
-    <?php foreach ($this->videos as $index => $video) {
-        $class = ($index % 2 == 0) ? 'odd' : '';
+    <?php $i = 1; foreach ($this->videos as $video) {
+        $class = ($i % 2 == 0) ? 'odd' : '';
         if($video->id == $this->existing->id){
             continue;
         }
@@ -61,7 +61,7 @@
             
         </div>
     </div>
-    <?php } ?>
+    <?php $i++; } ?>
 </div>
 <script>
 var content_object = <?php echo json_encode($this->existing);?>;
