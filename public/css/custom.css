@@ -533,7 +533,7 @@ span.fittext{
 
 .dropdown-menu>li>a:hover{
   background-color: transparent !important;
-  color:#888;
+  color: #B60000;
 }
 label.valid{
   display: none !important;
