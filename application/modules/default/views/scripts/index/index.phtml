@@ -41,8 +41,16 @@
                             <span class="label label-default"><?php echo $one_tag;?></span>
                         <?php }?>
                     </div>
-                    <div class="col-xs-12">
+                    <!--div class="col-xs-12">
                         <span class="video-date"><?php echo $one->view_count.' views';?></span>
+                    </div-->
+                    <div class="col-xs-12">
+                        <div class="col-xs-5 star-rating-holder">
+                            <input id="fake-rating" type="number" class="rating smallest" min=0 max=5 step=1 value=<?php echo $one->rating?> data-size="xs">
+                        </div>
+                        <div class="col-xs-7">
+                            <span class="video-date"><?php echo $one->view_count.' views';?></span>
+                        </div>
                     </div>
                 </div>
             </div>
