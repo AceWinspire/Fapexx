@@ -23,19 +23,20 @@
         </div>
      </div>
 
-    <?php foreach ($this->videos as $video) {
+    <?php foreach ($this->videos as $index => $video) {
+        $class = ($index % 2 == 0) ? 'odd' : '';
         if($video->id == $this->existing->id){
             continue;
         }
         $video_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'video', 'id' => $video->id,'cat_id' => $this->cat_id), 'default', true);
     ?>
-    <div class="row holder">
+    <div class="row holder <?php echo $class;?>">
         <div class="col-sm-5 col-xs-5 img-container">
             <a href="<?php echo $video_url;?>" class="video-link">
                 <img class="video-image" src="<?php echo $video->thumb_url; ?>">
                 <!--div class="badge badge-duration"><?php //echo gmdate("H:i:s", $video->duration);?></div-->
                 <div class="play small"></div>
-                <div class="logo-hd"><img src="/images/hd-logo.png"></div>
+                <!--div class="logo-hd"><img src="/images/hd-logo.png"></div-->
             </a>
         </div>
         <div class="col-sm-7 col-xs-7">

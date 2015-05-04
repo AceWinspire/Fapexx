@@ -246,7 +246,7 @@ function html5Video(obj) {
     videoTag += '<div style="position:relative;height:' + h + ';width:' + $("#webtv").width() + '">';
     videoTag += '<video id="webtv_html5Video" style="position:relative;z-index:5" width="100%" height="' + h + '" preload="none" autoplay controls x-webkit-airplay="allow" src="' + obj.url + 'playlist.m3u8" poster="' + obj.img + '">';
     videoTag += '</video>';
-    videoTag += '<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:9999999999999999999" id="click-simulate"></div>';
+    videoTag += '<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:999" id="click-simulate"></div>';
     videoTag += '</div>';
     $("#webtv").html(videoTag);
     var video = $('#webtv_html5Video')[0];
