@@ -96,14 +96,14 @@ ul.nav.navbar-right{
   .container{
     margin-top: 0px;
   }
-  .navmenu {
-    padding-top: 0;
-  }
   .navbar {
     display: block !important; /* IE8 fix */
   }
   ul.nav.navbar-right{
     display: block;
+  }
+  .navbar-toggle{
+    display: none !important;
   }
 }
 
