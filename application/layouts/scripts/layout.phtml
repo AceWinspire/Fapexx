@@ -60,7 +60,8 @@
 		</div>
 		<?php 
 		$terms_url = $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'terms'), 'default', true); 
-		$register_url = $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'packages'), 'default', true); 
+		$register_url = $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'packages'), 'default', true);
+		$login_url = $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'login'), 'default', true); 
 		?>
 		<div class="col-xs-2 no-padding">
 			<ul class="nav navbar-right">
@@ -99,6 +100,7 @@
 	                        </ul>
 	                    </li>
 	                    <li><a href="<?php echo $register_url;?>">Registruj se</a></li>
+	                    <li><a href="<?php echo $login_url;?>">Login</a></li>
 	                </ul>
 	            </li>
 	        </ul>

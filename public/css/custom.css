@@ -113,6 +113,46 @@ span.last{
   background-color: #fff;
 }
 
+.login{
+  background: url(/images/background.png) no-repeat;
+  -webkit-background-size: cover; /* For WebKit*/
+  -moz-background-size: cover;    /* Mozilla*/
+  -o-background-size: cover;      /* Opera*/
+  background-size: cover;         /* Generic*/
+}
+.login-form{
+  margin: 30% auto 10%;
+  width: 80%;
+}
+
+.login .form-group input{
+  background-color: transparent;
+  height: 46px;
+  border: none;
+  border-bottom: 1px solid #adadad;
+  color: #888;
+  font-size: 24px;
+  padding: 6px 0;
+  border-radius: 0;
+}
+.login .form-group input:focus{
+  box-shadow: none;
+}
+
+.register-login, .forgot-password-login{
+  display: block;
+  text-align: center;
+  margin-bottom: 14px;
+  color: #888;
+}
+
+.login-submit{
+  width: 100%;
+  font-size: 24px;
+  margin-top: 30px;
+  background-color: rgba(136,136,136,0.7);
+}
+
 .payment-title{
   margin-top: 10%;
   margin-left: 10%;
@@ -469,7 +509,8 @@ p.video-main-user{
 
 .terms-conditions{
   color: white;
-  padding: 20px 20px 20px 10px;
+  padding: 8%;
+  text-align: justify;
 }
 
 .desktop-view{
