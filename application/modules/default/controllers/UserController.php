@@ -15,4 +15,16 @@ class UserController extends Zend_Controller_Action {
 		
 	}
 
+	public function forgottenPasswordAction(){
+
+	}
+
+	public function resetPasswordAction(){
+		
+	}
+
+	public function registerAction(){
+		
+	}
+
 }

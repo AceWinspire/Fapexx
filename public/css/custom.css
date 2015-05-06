@@ -140,6 +140,10 @@ span.last{
   box-shadow: none;
 }
 
+.login .form-group button:focus{
+  outline: 0;
+}
+
 .register-login, .forgot-password-login{
   display: block;
   text-align: center;
@@ -156,6 +160,30 @@ span.last{
   font-size: 24px;
   margin-top: 30px;
   background-color: rgba(136,136,136,0.7);
+}
+
+.forgotten-password{
+  height: 100%;
+  background-color: #fff;
+  -webkit-background-size: cover; /* For WebKit*/
+  -moz-background-size: cover;    /* Mozilla*/
+  -o-background-size: cover;      /* Opera*/
+  background-size: cover;         /* Generic*/
+}
+
+.forgotten-password-submit{
+  width: 100%;
+}
+.change-password-title {
+  color: #666;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.forgotten-password-form{
+  margin: 6% 0 auto;
+
 }
 
 .payment-title{
