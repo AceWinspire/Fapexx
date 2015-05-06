@@ -114,6 +114,7 @@ span.last{
 }
 
 .login{
+  height: 100%;
   background: url(/images/background.png) no-repeat;
   -webkit-background-size: cover; /* For WebKit*/
   -moz-background-size: cover;    /* Mozilla*/
@@ -143,6 +144,10 @@ span.last{
   display: block;
   text-align: center;
   margin-bottom: 14px;
+  color: #888;
+}
+
+.register-login:hover, .forgot-password-login:hover{
   color: #888;
 }
 
@@ -544,6 +549,9 @@ p.video-main-user{
   .container {
     max-width: 100%;
   }
+}
+.container.layout-holder{
+  height: 100%;
 }
 
 .action-icon a{
