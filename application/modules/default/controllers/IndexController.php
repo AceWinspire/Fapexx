@@ -13,10 +13,12 @@ class IndexController extends Zend_Controller_Action {
 
 	private $my_service_app;
 	private $my_service_contents;
+	private $my_service_users;
 
 	public function init(){
 		$this->my_service_app  		= new My_Service_App();
 		$this->my_service_contents  = new My_Service_Contents();
+		$this->my_service_users    	= new My_Service_Users();
 	}
 
 	public function indexAction(){
@@ -32,7 +34,7 @@ class IndexController extends Zend_Controller_Action {
 		$this->view->cc_sub_packages = $this->my_service_app->getCcSubscriptionPackages();
 	}
 
-	public function registerAction(){
+	public function paymentAction(){
 		$this->view->package_id = $this->_getParam('package_id');
 
 		if($this->_request->isPost()){
@@ -70,6 +72,17 @@ class IndexController extends Zend_Controller_Action {
 	}
 
 	public function loginAction(){
-		
+		if($this->_request->isPost()){
+			$email = $this->_getParam('email');
+			$password = $this->_getParam('password');
+			$ip_address = Zend_Registry::get('remote_ip');
+			$this->view->user = $this->my_service_users->auth( $email, $password, $ip_address);
+		}
+	}
+
+	public function registerAction(){
+		if($this->_request->isPost()){
+			
+		}
 	}
 }

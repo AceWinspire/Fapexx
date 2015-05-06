@@ -9,6 +9,9 @@
                         <div class="badge badge-duration"><?php echo $one->view_count.' views'; ?></div>
                         <img class="video-image" src="<?php echo $one->thumb_url; ?>">
                         <p class='content-title'><?php echo $one->title; ?></p>
+                        <p class='content-raiting'>
+                            <input id="fake-rating" type="number" class="rating smallest" min=0 max=5 step=1 value=<?php echo $one->rating?> data-size="sm">
+                        </p>
                         <div class="play"></div>
                         <div class="tags-stream video-info-tags">
                         <?php foreach(explode(',', $one->tags) as $one_tag){?>
@@ -36,14 +39,7 @@
                             <p class="video-info-title"><?php echo $one->title; ?></p>
                         </a>
                     </div>
-                    <div class="col-xs-12 video-info-tags">
-                        <?php foreach(explode(',', $one->tags) as $one_tag){?>
-                            <span class="label label-default"><?php echo $one_tag;?></span>
-                        <?php }?>
-                    </div>
-                    <!--div class="col-xs-12">
-                        <span class="video-date"><?php echo $one->view_count.' views';?></span>
-                    </div-->
+
                     <div class="col-xs-12">
                         <div class="col-xs-5 star-rating-holder">
                             <input id="fake-rating" type="number" class="rating smallest" min=0 max=5 step=1 value=<?php echo $one->rating?> data-size="xs">
