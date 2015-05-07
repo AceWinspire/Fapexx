@@ -2,7 +2,7 @@
     <div class="col-sm-1">
     </div>
     <div class="col-sm-10">
-        <h2 class="payment-title">Payment</h2>
+        <h2 class="payment-title">Register</h2>
         <?php $form_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'register'), 'default', true); ?>
         <form role="form"  method="POST" class="centered" id="register_form" action="<?php echo $form_url?>" >
             <input type="hidden" id="hidden_package_id" name="hidden_package_id" value="<?php echo $this->package_id;?>">
@@ -11,15 +11,6 @@
                 
                 <button type="submit" name="<?php echo $one->name?>" id="register_form_button" class="form-control btn btn-primary btn-block"><?php echo $one->label?> <i class="glyphicon glyphicon-arrow-right"></i>
                 </button>
-            <?php } else if($one->type == 'select'){?>
-            <div class="form-group">
-                <label class="label-payment-form"><?php echo $one->label;?></label>
-                <select  class="form-control" name="<?php echo $one->name?>" required="<?php echo $one->required;?>">
-                    <option value="">Country</option>
-                    <option value="srbija">Srbija</option>
-                    <option value="crna_gora">Crna Gora</option>
-                </select>
-            </div>
             <?php } else if($one->type == 'password'){?>
             <div class="form-group">
                 <label class="label-payment-form"><?php echo $one->label;?></label>

@@ -19,6 +19,8 @@ class UserController extends Zend_Controller_Action {
 	private $my_service_contents;
 	private $my_service_users;
 
+	private $email_validator;
+
 	public function init(){
 		$this->user_auth 	= Zend_Auth::getInstance();
 		$this->auth_storage = $this->user_auth->getStorage();
@@ -27,6 +29,8 @@ class UserController extends Zend_Controller_Action {
 		$this->my_service_app  		= new My_Service_App();
 		$this->my_service_contents  = new My_Service_Contents();
 		$this->my_service_users    	= new My_Service_Users();
+
+		$this->email_validator  = new Zend_Validate_EmailAddress();
 	}
 
 	public function loginAction(){
@@ -83,7 +87,45 @@ class UserController extends Zend_Controller_Action {
 
 	public function registerAction(){
 		if($this->_request->isPost()){
-			
+			$email = $this->_getParam('email');
+			$password = $this->_getParam('password');
+			$re_password = $this->_getParam('re_password');
+
+			/*if (!$this->email_validator->isValid($email)) {
+				My_Utilities::fmsg($this->view->translate('error_email_not_valid'));
+				return;
+			}
+
+			if (!$password) {
+				My_Utilities::fmsg($this->view->translate('error_password_required'));
+				return;
+			}
+			if (!$re_password) {
+				My_Utilities::fmsg($this->view->translate('error_password_repeated_required'));
+				return;
+			}
+			if ($password !== $re_password) {
+				My_Utilities::fmsg($this->view->translate('error_password_not_match'));
+				return;
+			}*/
+
+			/*var_dump($email.'<br/>');
+			var_dump($password.'<br/>');
+			var_dump($re_password.'<br/>');
+			die;*/
+
+			$session_id =  md5(rand(1000, 10000).time());
+			$result = $this->my_service_users->register( $email, $password, $session_id);
+			var_dump($result);die;
+			if($result->success == true){
+				$user_info = $this->my_service_users->get($result->user_id);
+				$this->auth_storage->write($user_info);
+				$this->_redirect('user/payment');
+			}else{
+				$this->view->msg = $result->msg;
+			}
+
+
 		}
 	}
 
