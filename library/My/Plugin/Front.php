@@ -10,7 +10,8 @@ class My_Plugin_Front extends Zend_Controller_Plugin_Abstract {
         $layout = Zend_Layout::getMvcInstance();
         $view = $layout->getView();
         
-        $user_auth = Zend_Auth::getInstance();    
+        $user_auth = Zend_Auth::getInstance();
+        $view->user = $user_auth->getIdentity();    
 
         $my_service_contents  	= new My_Service_Contents();
         $my_service_app  		= new My_Service_App();

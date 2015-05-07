@@ -71,15 +71,6 @@ class IndexController extends Zend_Controller_Action {
 	public function androidAction(){
 	}
 
-	public function loginAction(){
-		if($this->_request->isPost()){
-			$email = $this->_getParam('email');
-			$password = $this->_getParam('password');
-			$ip_address = Zend_Registry::get('remote_ip');
-			$this->view->user = $this->my_service_users->auth( $email, $password, $ip_address);
-		}
-	}
-
 	public function registerAction(){
 		if($this->_request->isPost()){
 			

@@ -1,3 +1,60 @@
-<div>
-	hej
+<div class="col-sm-12 login">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-10">
+        <?php $form_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true); ?>
+        <form role="form"  method="POST" class="login-form" id="login_form" action="<?php echo $form_url?>" >
+            <div class="form-group">
+				<input type="email" class="form-control" name="email" id="email" value="" placeholder="Email" />
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" name="password" id="password" placeholder="Password" />
+			</div>
+			<div class="form-group">
+				<button type="submit" name="login-submit" class="btn login-submit">Login</button>
+			</div>
+        </form>
+				<a class="register-login" href="/user/register">Register</a>
+				<a class="forgot-password-login" href="/user/forgotten-password">Forgot your password?</a>
+    </div>
+    <div class="col-sm-1">
+    </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function($){  
+        
+        $('#login_form').submit(function(e){
+            var isvalidate = $("#login_form").valid();
+            if(!isvalidate){
+              e.preventDefault();
+            }
+        })
+
+        $('#login_form').validate({
+            rules: {
+                email: {
+                	required: true,
+                    email: true
+                },
+                password : {
+                    required: true
+                }
+            },
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('success').addClass('error');
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass('error').addClass('success');
+            },
+            success: function (element) {
+                element.addClass('valid')
+                    .closest('.form-group').removeClass('error').addClass('success');
+            }/*,
+	        errorPlacement: function (error, element) {
+	            alert(error.text());
+	        }*/
+        });
+    });
+</script>
+
