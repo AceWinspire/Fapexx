@@ -374,3 +374,11 @@ $("input[id='fake-rating']").rating({
     'disabled':true,
     'showCaption':false,
 });
+
+$(function() {
+    $('.right-part').css('height',$('.left-part').height());
+});
+
+$( window ).resize(function() {
+    $('.right-part').css('height',$('.left-part').height());
+});
