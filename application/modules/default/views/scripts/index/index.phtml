@@ -26,30 +26,33 @@
     <?php }else{ ?>
         <div class="col-md-12 no-padding">
             <div class="row holder <?php echo $class;?>">
-                <div class="col-sm-5 col-xs-5 img-container">
+                <div class="left-part">
                     <a href="<?php echo $video_url;?>" class="video-link">
                         <img class="video-image" src="<?php echo $one->thumb_url; ?>">
-                        <!--div class="badge badge-duration"><?php //echo gmdate("H:i:s", $video->duration);?></div-->
                         <div class="play small"></div>
                     </a>
                 </div>
-                <div class="col-sm-7 col-xs-7">
-                    <div class="col-xs-12">
-                        <a class="video-link" href="<?php echo $video_url; ?>">
-                            <p class="video-info-title"><?php echo $one->title; ?></p>
-                        </a>
+                <div class="right-part">
+                    <a class="title-holder" href="<?php echo $video_url; ?>">
+                        <p><?php echo $one->title; ?></p>
+                    </a>
+                    <div class="stars-holder">
+                        <input id="fake-rating" type="number" class="rating smallest" min=0 max=5 step=1 value=<?php echo $one->rating?> data-size="xs">
                     </div>
-
-                    <div class="col-xs-12">
-                        <div class="col-xs-5 star-rating-holder">
-                            <input id="fake-rating" type="number" class="rating smallest" min=0 max=5 step=1 value=<?php echo $one->rating?> data-size="xs">
-                        </div>
-                        <div class="col-xs-7">
-                            <span class="video-date"><?php echo $one->view_count.' views';?></span>
-                        </div>
+                    <div class="views-holder">
+                        <span class="video-date"><?php echo $one->view_count.' views';?></span>
                     </div>
                 </div>
             </div>
         </div>
     <?php }?>
 <?php } ?>
+
+<script type="text/javascript">
+    $(function() {
+        $('.right-part').css('height',$('.left-part').height());
+    });
+    $( window ).resize(function() {
+        $('.right-part').css('height',$('.left-part').height());
+    });
+</script>
