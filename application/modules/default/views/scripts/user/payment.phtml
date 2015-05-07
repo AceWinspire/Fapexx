@@ -3,7 +3,7 @@
     </div>
     <div class="col-sm-10">
         <h2 class="payment-title">Payment</h2>
-        <?php $form_url = $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'payment'), 'default', true); ?>
+        <?php $form_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'payment'), 'default', true); ?>
         <form role="form"  method="POST" class="centered" id="payment_form" action="<?php echo $form_url?>" >
             <input type="hidden" id="hidden_package_id" name="hidden_package_id" value="<?php echo $this->package_id;?>">
         <?php foreach(json_decode($this->app_settings->submit_form_elements) as $one){ ?>

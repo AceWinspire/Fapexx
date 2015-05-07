@@ -58,8 +58,10 @@
 			<a class="navbar-brand" href="/" ><img class="logo-img" src="/images/fappexxx_logo.png"></a>
 		</div>
 		<?php 
-		$terms_url = $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'terms'), 'default', true); 
-		$login_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true); 
+			$terms_url = $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'terms'), 'default', true); 
+			$login_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true); 
+			$logout_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'logout'), 'default', true);
+			$profile_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'profile'), 'default', true);
 		?>
 		<div class="col-xs-2 no-padding">
 			<ul class="nav navbar-right">
@@ -97,7 +99,12 @@
 	                            </li>
 	                        </ul>
 	                    </li>
-	                    <li><a href="<?php echo $login_url;?>">Login</a></li>
+	                    <?php if ($this->user) { ?>
+	                    	<li><a href="<?php echo $profile_url;?>">My profile</a></li>
+	                    	<li><a href="<?php echo $logout_url;?>">Logout</a></li>
+	                    <?php } else{ ?>
+	                    	<li><a href="<?php echo $login_url;?>">Login</a></li>
+	                    <?php }?>
 	                </ul>
 	            </li>
 	        </ul>
