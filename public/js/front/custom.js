@@ -250,7 +250,7 @@ function html5Video(obj) {
     videoTag += '</div>';
     $("#webtv").html(videoTag);
     var video = $('#webtv_html5Video')[0];
-    video.load();
+    //video.load();
     $("#webtv_html5Video,#click-simulate").on("click touch",function() {
         video.load();
         video.webkitEnterFullscreen();
@@ -375,7 +375,7 @@ $("input[id='fake-rating']").rating({
     'showCaption':false,
 });
 
-$(function() {
+$( document ).ready(function() {
     $('.right-part').css('height',$('.left-part').height());
 });
 

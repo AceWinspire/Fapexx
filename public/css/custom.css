@@ -20,6 +20,13 @@ body{
   line-height: 1.22;
 }
 
+.android-page.mobile-url{
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+
+}
+
 .nav:not(.navbar-right)>li{
   border-bottom: 1px solid #B00;
 }
@@ -167,6 +174,10 @@ span.last{
   left: 10px;
 }
 
+.stars-holder .rating-container .rating-stars{
+  color: gold;
+}
+
 .views-holder{
   display: inline-block;
   position: absolute;
@@ -253,6 +264,7 @@ span.last{
 }
 
 .welcome{
+  height: 100%;
   background: url(/images/welcome.png) no-repeat 0% 12%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -365,7 +377,7 @@ p.content-title{
     font-size:16px;  
     color:white;  
     padding: 0 4px;
-    background-color: rgba(0,0,0,0.5);
+    /*background-color: rgba(0,0,0,0.5);*/
     text-transform: uppercase;
     /*white-space: nowrap;
     text-overflow: ellipsis;*/
@@ -386,6 +398,15 @@ p.content-raiting{
     background-color: rgba(0,0,0,0.5);
     font-size: 18px;
 } 
+
+p.content-raiting.color{
+    background-color: transparent;
+    font-size: 14px;
+} 
+
+p.content-raiting.color .rating-container .rating-stars {
+  color: white;
+}
 
 span.thumbnail-views{
     position:absolute; 

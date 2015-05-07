@@ -9,7 +9,7 @@
                         <div class="badge badge-duration"><?php echo $one->view_count.' views'; ?></div>
                         <img class="video-image" src="<?php echo $one->thumb_url; ?>">
                         <p class='content-title'><?php echo $one->title; ?></p>
-                        <p class='content-raiting'>
+                        <p class='content-raiting color'>
                             <input id="fake-rating" type="number" class="rating smallest" min=0 max=5 step=1 value=<?php echo $one->rating?> data-size="sm">
                         </p>
                         <div class="play"></div>
@@ -47,3 +47,4 @@
         </div>
     <?php }?>
 <?php } ?>
+
