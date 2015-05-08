@@ -143,7 +143,7 @@ class My_Service_Users extends My_Service{
 			$this->http_client->resetParameters();
 
 			$this->http_client->setParameterGet(array('app_id'	=> $this->app_id));
-			$this->http_client->setParameterGet(array('msisdn'	=> $msisdn));
+			$this->http_client->setParameterGet(array('identity'	=> $msisdn));
 
 			$response = $this->http_client->request('GET');
 			$result   = json_decode($response->getBody());
