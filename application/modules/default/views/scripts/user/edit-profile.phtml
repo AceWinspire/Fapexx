@@ -9,17 +9,17 @@
               
             <div class="form-group">
                 <label class="label-payment-form">Email</label>
-                <input type="email" class="form-control" name="<?php echo $one->name?>" required=true/>
+                <input type="email" class="form-control" name="<?php echo $one->name?>" required=true value="<?php echo $this->user->email; ?>"/>
             </div>
 
             <div class="form-group">
                 <label class="label-payment-form">Password</label>
-                <input type="password" class="form-control" name="<?php echo $one->name?>" required=true/>
+                <input type="password" class="form-control" name="password" id="password" required=true/>
             </div>
             
             <div class="form-group">
                 <label class="label-payment-form">Repeat password</label>
-                <input type="password" class="form-control" name="<?php echo $one->name?>" required=true/>
+                <input type="password" class="form-control" name="re_password" required=true/>
             </div>
 
             <button type="submit" name="<?php echo $one->name?>" id="register_form_button" class="form-control btn btn-primary btn-block">Save profile information <i class="glyphicon glyphicon-arrow-right"></i>
@@ -30,3 +30,40 @@
     <div class="col-sm-1">
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function($){  
+    
+        $('#edit_profile_form').submit(function(e){
+            var isvalidate = $("#edit_profile_form").valid();
+            if(!isvalidate){
+              e.preventDefault();
+            }
+        })
+
+        $('#edit_profile_form').validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password : {
+                    required: true
+                },
+                re_password: {
+                  equalTo: "#password"
+                }
+            },
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('success').addClass('error');
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass('error').addClass('success');
+            },
+            success: function (element) {
+                element.addClass('valid')
+                    .closest('.form-group').removeClass('error').addClass('success');
+            }
+        });
+    });
+</script>
