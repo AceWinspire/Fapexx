@@ -134,7 +134,16 @@ class UserController extends Zend_Controller_Action {
 	}
 
 	public function logoutAction() {
+		if($this->user->id){
+			//My_Utilities::logAction(Zend_Registry::get('logout_act_id'), $params = null, $this->user->id);
+			$user_id = $this->user->id;
+			$session->$user_id = null;
 
+			$this->user_auth->clearIdentity();
+			$this->_redirect('user/register');
+		}else{
+			$this->_redirect('user/login');
+		}
 	}
 
 	public function profileAction() {
