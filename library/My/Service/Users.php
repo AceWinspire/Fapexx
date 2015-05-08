@@ -36,17 +36,16 @@ class My_Service_Users extends My_Service{
 		}
 	}
 
-	public function auth($msisdn, $password, $session_id, $ip_address){
+	public function auth($email, $password, $session_id){
 		try {
 			$this->http_client->setUri($this->api_url.'/users/auth');
 
 			$this->http_client->resetParameters();
 
 			$this->http_client->setParameterGet(array('app_id'	=> $this->app_id));
-			$this->http_client->setParameterGet(array('msisdn'	=> $msisdn));
+			$this->http_client->setParameterGet(array('identity'	=> $email));
 			$this->http_client->setParameterGet(array('password'	=> $password));
 			$this->http_client->setParameterGet(array('session_id'	=> $session_id));
-			$this->http_client->setParameterGet(array('ip_address'	=> $ip_address));
 
 			$response = $this->http_client->request('GET');
 			$result   = json_decode($response->getBody());
@@ -143,6 +142,54 @@ class My_Service_Users extends My_Service{
 
 			$this->http_client->setParameterGet(array('app_id'	=> $this->app_id));
 			$this->http_client->setParameterGet(array('msisdn'	=> $msisdn));
+
+			$response = $this->http_client->request('GET');
+			$result   = json_decode($response->getBody());
+
+			if($response->getStatus() == 200){
+				return $result;
+			}else{
+				return array();
+			}
+		}
+		catch (Exception $e) {
+			throw new Exception('Service unavailable');
+		}
+	}
+
+	public function register($email, $password, $session_id){
+		try {
+			$this->http_client->setUri($this->api_url.'/users/register');
+
+			$this->http_client->resetParameters();
+
+			$this->http_client->setParameterGet(array('app_id'	=> $this->app_id));
+			$this->http_client->setParameterGet(array('identity'	=> $email));
+			$this->http_client->setParameterGet(array('password'	=> $password));
+			$this->http_client->setParameterGet(array('session_id'	=> $session_id));
+
+			$response = $this->http_client->request('GET');
+			$result   = json_decode($response->getBody());
+
+			if($response->getStatus() == 200){
+				return $result;
+			}else{
+				return array();
+			}
+		}
+		catch (Exception $e) {
+			throw new Exception('Service unavailable');
+		}
+	}
+
+	public function charge($user_id){
+		try {
+			$this->http_client->setUri($this->api_url.'/users/charge');
+
+			$this->http_client->resetParameters();
+
+			$this->http_client->setParameterGet(array('app_id'	=> $this->app_id));
+			$this->http_client->setParameterGet(array('user_id'	=> $user_id));
 
 			$response = $this->http_client->request('GET');
 			$result   = json_decode($response->getBody());
