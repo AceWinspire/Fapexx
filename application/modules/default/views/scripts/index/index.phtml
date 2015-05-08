@@ -1,4 +1,3 @@
-<?php //var_dump($this->user);die; ?>
 <?php foreach($this->featured_content as $index => $one){ 
     $class = $index > $this->app_settings->first_x_big_thumbs_contents-1  && $index% 2 == 0 ? '' : 'odd';
     $video_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'video', 'id' => $one->id,'cat_id' => 0), 'default', true);
