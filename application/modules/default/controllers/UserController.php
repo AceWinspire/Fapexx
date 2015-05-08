@@ -120,7 +120,7 @@ class UserController extends Zend_Controller_Action {
 
 			$session_id =  md5(rand(1000, 10000).time());
 			$result = $this->my_service_users->register( $email, $password, $session_id);
-			var_dump($result);die;
+			
 			if($result->success == true){
 				$user_info = $this->my_service_users->get($result->user_id);
 				$this->auth_storage->write($user_info);
@@ -135,7 +135,6 @@ class UserController extends Zend_Controller_Action {
 
 	public function logoutAction() {
 		if($this->user->id){
-			//My_Utilities::logAction(Zend_Registry::get('logout_act_id'), $params = null, $this->user->id);
 			$user_id = $this->user->id;
 			$session->$user_id = null;
 
