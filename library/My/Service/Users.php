@@ -136,18 +136,16 @@ class My_Service_Users extends My_Service{
 		}
 	}
 
-	public function passRecovery($msisdn){
+	public function passRecovery($email){
 	try {
 			$this->http_client->setUri($this->api_url.'/users/pass-recovery');
-
 			$this->http_client->resetParameters();
 
 			$this->http_client->setParameterGet(array('app_id'	=> $this->app_id));
-			$this->http_client->setParameterGet(array('identity'	=> $msisdn));
+			$this->http_client->setParameterGet(array('identity'	=> $email));
 
 			$response = $this->http_client->request('GET');
 			$result   = json_decode($response->getBody());
-
 			if($response->getStatus() == 200){
 				return $result;
 			}else{
