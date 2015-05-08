@@ -34,14 +34,21 @@ class UserController extends Zend_Controller_Action {
 	}
 
 	public function loginAction(){
+		if($this->user ){
+			$this->_redirect('index');
+		}
+
 		if($this->_request->isPost()){
 			$email = $this->_getParam('email');
 			$password = $this->_getParam('password');
 			$session_id =  md5(rand(1000, 10000).time());
+
 			$result = $this->my_service_users->auth( $email, $password, $session_id);
+			var_dump($result);die;
 			if($result->success == true){
 				$user_info = $this->my_service_users->get($result->user_id);
 				$this->auth_storage->write($user_info);
+				$this->_redirect('index');
 			}else{
 				$this->view->msg = $result->msg;
 			}
@@ -134,7 +141,20 @@ class UserController extends Zend_Controller_Action {
 	}
 
 	public function profileAction() {
+		/*if (!$this->user_auth->hasIdentity()) {
+			$this->_redirect('user/register');
+		}
 
+		$this->view->existing 		= $this->my_service_users->get($this->user->id); //$user_info 
+		$this->view->subscription 	= $this->paypal_subscriptions_model->getByUserId($this->user['id']);
+
+		if(isset($this->user['payment_id'])){
+			$this->view->payments = $this->ch_packages_model->getByPaymentId($this->user['payment_id']);
+		}*/
+	}
+
+	public function editProfileAction() {
+		
 	}
 
 }

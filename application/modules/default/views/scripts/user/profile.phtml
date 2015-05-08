@@ -1,63 +1,32 @@
-<div class="col-sm-12 login">
+<div class="col-sm-12 packages">
     <div class="col-sm-1">
     </div>
     <div class="col-sm-10">
-        <?php $form_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true); ?>
-        <form role="form"  method="POST" class="login-form" id="login_form" action="<?php echo $form_url?>" >
+        <h2 class="payment-title">Profile</h2>
+
+        <h4 class="user-title">info</h4>
+        <?php $form_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'register'), 'default', true); ?>
+        <form role="form"  method="POST" class="centered" id="register_form" action="<?php echo $form_url?>" >
+            <input type="hidden" id="hidden_package_id" name="hidden_package_id" value="<?php echo $this->package_id;?>">
+        <?php foreach(json_decode($this->app_settings->submit_register_form) as $one){ ?>
+            <?php if($one->type == 'button'){?>
+                
+                <button type="submit" name="<?php echo $one->name?>" id="register_form_button" class="form-control btn btn-primary btn-block"><?php echo $one->label?> <i class="glyphicon glyphicon-arrow-right"></i>
+                </button>
+            <?php } else if($one->type == 'password'){?>
             <div class="form-group">
-				<input type="email" class="form-control" name="email" id="email" value="" placeholder="Email" />
-			</div>
-			<div class="form-group">
-				<input type="password" class="form-control" name="password" id="password" placeholder="Password" />
-			</div>
-			<div class="form-group">
-				<button type="submit" name="login-submit" class="btn login-submit">Login</button>
-			</div>
+                <label class="label-payment-form"><?php echo $one->label;?></label>
+                <input type="password" class="form-control" name="<?php echo $one->name?>" id="<?php echo $one->name?>" required="<?php echo $one->required;?>"/>
+            </div>
+            <?php }else{?>
+            <div class="form-group">
+                <label class="label-payment-form"><?php echo $one->label;?></label>
+                <input type="text" class="form-control" name="<?php echo $one->name?>" required="<?php echo $one->required;?>"/>
+            </div>
+            <?php }?>
+        <?php } ?>
         </form>
-				<a class="register-login" href="/user/register">Register</a>
-				<a class="forgot-password-login" href="/user/forgotten-password">Forgot your password?</a>
-				<?php if($this->msg){
-					echo $this->msg;
-					} ?>
     </div>
     <div class="col-sm-1">
     </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function($){  
-        
-        $('#login_form').submit(function(e){
-            var isvalidate = $("#login_form").valid();
-            if(!isvalidate){
-              e.preventDefault();
-            }
-        })
-
-        $('#login_form').validate({
-            rules: {
-                email: {
-                	required: true,
-                    email: true
-                },
-                password : {
-                    required: true
-                }
-            },
-            highlight: function (element) {
-                $(element).closest('.form-group').removeClass('success').addClass('error');
-            },
-            unhighlight: function(element) {
-                $(element).closest('.form-group').removeClass('error').addClass('success');
-            },
-            success: function (element) {
-                element.addClass('valid')
-                    .closest('.form-group').removeClass('error').addClass('success');
-            }/*,
-	        errorPlacement: function (error, element) {
-	            alert(error.text());
-	        }*/
-        });
-    });
-</script>
-

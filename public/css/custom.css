@@ -151,6 +151,18 @@ span.last{
   overflow: hidden;
 }
 
+h4.user-title{
+  color: #333;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #666;
+  padding: 0;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 40px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
 @media (max-width: 480px) {
   .title-holder p{
     font-size: 1em;
