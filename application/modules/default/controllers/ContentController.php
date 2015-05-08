@@ -47,9 +47,9 @@ class ContentController extends Zend_Controller_Action {
 
 		$memcache->set($this->memcache_options['prefix'] . $ip_address, (($code_try_count) ? ++$code_try_count : 1), false);
 		
-		/*if ($code_try_count > $this->app_settings->show_subscribe_prompt_value) {
+		if ($code_try_count > $this->app_settings->show_subscribe_prompt_value) {
 			$this->_redirect('/index/packages/');
-		}*/
+		}
 		
 		$this->view->cat_id = $this->_getParam('cat_id', 0);
 		$video_id = $this->_getParam('id');
@@ -77,9 +77,9 @@ class ContentController extends Zend_Controller_Action {
 
 		$memcache->set($this->memcache_options['prefix'] . $ip_address, (($code_try_count) ? ++$code_try_count : 1), false);
 
-		/*if ($code_try_count > $this->app_settings->show_subscribe_prompt_value) {
+		if ($code_try_count > $this->app_settings->show_subscribe_prompt_value) {
 			$this->_redirect('/index/packages/');
-		}*/
+		}
 		
 		$video_id = $this->_getParam('id');
 		$this->view->existing = $this->my_service_contents->getContent($video_id);

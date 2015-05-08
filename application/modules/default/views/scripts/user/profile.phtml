@@ -1,3 +1,4 @@
+<?php //echo '<pre>';var_dump($this->user); ?>
 <div class="col-sm-12 packages">
     <div class="col-sm-1">
     </div>
@@ -5,26 +6,25 @@
         <h2 class="payment-title">Profile</h2>
 
         <h4 class="user-title">info</h4>
-        <?php $form_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'register'), 'default', true); ?>
-        <form role="form"  method="POST" class="centered" id="register_form" action="<?php echo $form_url?>" >
-            <input type="hidden" id="hidden_package_id" name="hidden_package_id" value="<?php echo $this->package_id;?>">
-        <?php foreach(json_decode($this->app_settings->submit_register_form) as $one){ ?>
-            <?php if($one->type == 'button'){?>
-                
-                <button type="submit" name="<?php echo $one->name?>" id="register_form_button" class="form-control btn btn-primary btn-block"><?php echo $one->label?> <i class="glyphicon glyphicon-arrow-right"></i>
-                </button>
-            <?php } else if($one->type == 'password'){?>
+
+        <form class="form-horizontal view-profile" role="form">
             <div class="form-group">
-                <label class="label-payment-form"><?php echo $one->label;?></label>
-                <input type="password" class="form-control" name="<?php echo $one->name?>" id="<?php echo $one->name?>" required="<?php echo $one->required;?>"/>
+                <label class="control-label col-sm-2" for="email">Email:</label>
+                <div class="col-sm-10">
+                <p class="form-control-static"><?php echo $this->user->email; ?></p>
+                </div>
             </div>
-            <?php }else{?>
             <div class="form-group">
-                <label class="label-payment-form"><?php echo $one->label;?></label>
-                <input type="text" class="form-control" name="<?php echo $one->name?>" required="<?php echo $one->required;?>"/>
+                <label class="control-label col-sm-2" for="pwd">Password:</label>
+                <div class="col-sm-10">          
+                <p class="form-control-static" id="pwd">123</p>
+                </div>
             </div>
-            <?php }?>
-        <?php } ?>
+            <div class="form-group">        
+                <div class="col-sm-12">
+                <a class="form-control btn btn-primary btn-block">Edit profile</a>
+                </div>
+            </div>
         </form>
     </div>
     <div class="col-sm-1">

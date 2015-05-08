@@ -159,7 +159,11 @@ class UserController extends Zend_Controller_Action {
 	}
 
 	public function editProfileAction() {
-		
+		if($this->_request->isPost()){
+			$email = $this->_getParam('email');
+			$password = $this->_getParam('password');
+			$re_password = $this->_getParam('re_password');
+		}
 	}
 
 }
