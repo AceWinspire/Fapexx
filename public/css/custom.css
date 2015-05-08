@@ -20,6 +20,13 @@ body{
   line-height: 1.22;
 }
 
+.android-page.mobile-url{
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+
+}
+
 .nav:not(.navbar-right)>li{
   border-bottom: 1px solid #B00;
 }
@@ -104,9 +111,8 @@ span.last{
 }
 
 #register_form_button{
-  width: 33%;
   margin: 0 auto;
-  margin-bottom: 5%;
+  margin: 30px 0;
 }
 
 .packages{
@@ -140,7 +146,7 @@ span.last{
   font-size: 1.3em;
   color: #FFF;
   margin: 0;
-  padding: 0;
+  padding: 0 10px 0 0;
   word-break: break-word;
   overflow: hidden;
 }
@@ -165,6 +171,10 @@ span.last{
   position: absolute;
   bottom: 6px;
   left: 10px;
+}
+
+.stars-holder .rating-container .rating-stars{
+  color: gold;
 }
 
 .views-holder{
@@ -253,6 +263,7 @@ span.last{
 }
 
 .welcome{
+  height: 100%;
   background: url(/images/welcome.png) no-repeat 0% 12%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -365,7 +376,7 @@ p.content-title{
     font-size:16px;  
     color:white;  
     padding: 0 4px;
-    background-color: rgba(0,0,0,0.5);
+    /*background-color: rgba(0,0,0,0.5);*/
     text-transform: uppercase;
     /*white-space: nowrap;
     text-overflow: ellipsis;*/
@@ -387,6 +398,15 @@ p.content-raiting{
     font-size: 18px;
 } 
 
+p.content-raiting.color{
+    background-color: transparent;
+    font-size: 14px;
+} 
+
+p.content-raiting.color .rating-container .rating-stars {
+  color: white;
+}
+
 span.thumbnail-views{
     position:absolute; 
     top: 10px; 
@@ -395,12 +415,10 @@ span.thumbnail-views{
     color:white;  
 }
 
-.badge{
+.duration-holder{
   position: absolute;
   bottom: 10px;
   right: 10px;
-}
-.badge-duration{
   background-color: transparent;
   display: inline-block;
   text-align: center;
@@ -410,7 +428,7 @@ span.thumbnail-views{
   padding-left: 5px;
   font-weight: bold;
   z-index: 10;
-  border-radius: 0px;
+  font-size: 1.25em;
 }
 
 .play{
@@ -466,18 +484,12 @@ span.thumbnail-views{
   overflow: hidden;
 }
 
-.video-info-tags{
-  font-size: 0.8em;
-  line-height: 1.6;
-  padding-bottom: 15px;
-}
-
-.tags-stream.video-info-tags{
+.tags-stream{
   position: absolute;
   left: 10px;
   bottom: 4px;
   max-width: 70%;
-  padding-bottom: 10px;
+  padding-bottom: 6px;
 }
 
 .video-date{

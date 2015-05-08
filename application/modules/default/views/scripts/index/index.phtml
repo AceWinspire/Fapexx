@@ -6,14 +6,14 @@
             <div class="row holder">
                 <a href="<?php echo $video_url;?>" class="video-link">
                     <div class="img-container">
-                        <div class="badge badge-duration"><?php echo $one->view_count.' views'; ?></div>
+                        <div class="duration-holder"><?php echo $one->view_count.' views'; ?></div>
                         <img class="video-image" src="<?php echo $one->thumb_url; ?>">
                         <p class='content-title'><?php echo $one->title; ?></p>
-                        <p class='content-raiting'>
+                        <p class='content-raiting color'>
                             <input id="fake-rating" type="number" class="rating smallest" min=0 max=5 step=1 value=<?php echo $one->rating?> data-size="sm">
                         </p>
                         <div class="play"></div>
-                        <div class="tags-stream video-info-tags">
+                        <div class="tags-stream">
                         <?php foreach(explode(',', $one->tags) as $one_tag){?>
                             <span class="label label-default"><?php echo $one_tag;?></span>
                         <?php }?>
@@ -48,11 +48,3 @@
     <?php }?>
 <?php } ?>
 
-<script type="text/javascript">
-    $(function() {
-        $('.right-part').css('height',$('.left-part').height());
-    });
-    $( window ).resize(function() {
-        $('.right-part').css('height',$('.left-part').height());
-    });
-</script>
