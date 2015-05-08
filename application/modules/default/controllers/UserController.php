@@ -44,7 +44,6 @@ class UserController extends Zend_Controller_Action {
 			$session_id =  md5(rand(1000, 10000).time());
 
 			$result = $this->my_service_users->auth( $email, $password, $session_id);
-			var_dump($result);die;
 			if($result->success == true){
 				$user_info = $this->my_service_users->get($result->user_id);
 				$this->auth_storage->write($user_info);
@@ -52,8 +51,6 @@ class UserController extends Zend_Controller_Action {
 			}else{
 				$this->view->msg = $result->msg;
 			}
-
-
 		}
 	}
 
