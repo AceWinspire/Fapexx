@@ -1,4 +1,3 @@
-<?php //echo '<pre>';var_dump($this->user); ?>
 <div class="col-sm-12 packages">
     <div class="col-sm-1">
     </div>
@@ -17,7 +16,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="pwd">Password:</label>
                 <div class="col-sm-10">          
-                <p class="form-control-static" id="pwd">123</p>
+                <p class="form-control-static" id="pwd"><?php echo $this->user->password; ?></p>
                 </div>
             </div>
             <div class="form-group">        

@@ -175,10 +175,16 @@ class UserController extends Zend_Controller_Action {
 			$email = $this->user->email;
 			$old_password = $this->user->password;
 			$user_id = $this->user->id;
-		
-			$this->view->result = $this->my_service_users->update($user_id , $password, $old_password);
 
-			var_dump($this->view->result);die;
+			$result = $this->my_service_users->update(array('password' => $password, 'old_password' => $old_password), $user_id);
+
+			if($result->success == true){
+				$user = $this->my_service_users->get($user_id);
+				$this->auth_storage->write($this->user);
+				$this->_redirect('user/profile');
+			}else{
+				$this->view->msg = $result->msg;
+			}
 		}
 	}
 
