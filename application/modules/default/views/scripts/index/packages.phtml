@@ -2,7 +2,7 @@
 	<h2>CHOOSE YOUR PREMIUM SUBSCRIPTION</h2>
 	<?php foreach($this->cc_sub_packages as $one){ ?>
 	    <?php 
-	        $cc_pack_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'payment', 'package_id' => $one->id), 'default', true); 
+	        $cc_pack_url =  $this->user ? $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'payment', 'package_id' => $one->id), 'default', true) :  $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'register'), 'default', true);
 	    ?>
 	    <div class="cc-sub-packages">
 	    	<a href="<?php echo $cc_pack_url;?>"><img src="<?php echo $one->img; ?>" width="100%"></a>
