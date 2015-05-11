@@ -180,6 +180,8 @@ class UserController extends Zend_Controller_Action {
 
 			if($result->success == true){
 				$user = $this->my_service_users->get($user_id);
+				
+				$this->user_auth->clearIdentity();
 				$this->auth_storage->write($this->user);
 				$this->_redirect('user/profile');
 			}else{
