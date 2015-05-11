@@ -117,7 +117,8 @@ span.last{
 
 .packages{
   background-color: #fff;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
 }
 
 .left-part{
