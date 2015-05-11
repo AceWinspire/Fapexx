@@ -318,7 +318,7 @@ $( document ).ready(function() {
     });
 });
 
-function validateForm(){
+/*function validateForm(){
     var first_name = $('input[name="first_name"]').val();
     var last_name = $('input[name="last_name"]').val();
     var card_number = $('input[name="card_number"]').val();
@@ -374,7 +374,7 @@ function validateForm(){
     }
 
     return true;
-}
+}*/
 
 $("input[id='fake-rating']").rating({
     'showClear':false,
