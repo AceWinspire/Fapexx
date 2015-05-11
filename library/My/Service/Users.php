@@ -137,7 +137,7 @@ class My_Service_Users extends My_Service{
 	}
 
 	public function passRecovery($email){
-	try {
+		try {
 			$this->http_client->setUri($this->api_url.'/users/pass-recovery');
 			$this->http_client->resetParameters();
 
@@ -182,14 +182,17 @@ class My_Service_Users extends My_Service{
 		}
 	}
 
-	public function charge($user_id){
+	public function update($data, $user_id){
 		try {
-			$this->http_client->setUri($this->api_url.'/users/charge');
+			$this->http_client->setUri($this->api_url.'/users/update');
 
 			$this->http_client->resetParameters();
 
 			$this->http_client->setParameterGet(array('app_id'	=> $this->app_id));
 			$this->http_client->setParameterGet(array('user_id'	=> $user_id));
+			foreach ($data as $key => $value) {
+				$this->http_client->setParameterGet(array($key	=> $value));
+			}
 
 			$response = $this->http_client->request('GET');
 			$result   = json_decode($response->getBody());
