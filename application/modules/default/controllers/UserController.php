@@ -68,6 +68,7 @@ class UserController extends Zend_Controller_Action {
 	}
 
 	public function resetPasswordAction(){
+
 		
 	}
 
@@ -169,9 +170,15 @@ class UserController extends Zend_Controller_Action {
 
 	public function editProfileAction() {
 		if($this->_request->isPost()){
-			$email = $this->_getParam('email');
 			$password = $this->_getParam('password');
 			$re_password = $this->_getParam('re_password');
+			$email = $this->user->email;
+			$old_password = $this->user->password;
+			$user_id = $this->user->id;
+		
+			$this->view->result = $this->my_service_users->update($user_id , $password, $old_password);
+
+			var_dump($this->view->result);die;
 		}
 	}
 

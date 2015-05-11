@@ -1,3 +1,10 @@
+$( document ).ready(function() {
+    $('.right-part').css('height',$('.left-part').height());
+});
+
+$( window ).resize(function() {
+    $('.right-part').css('height',$('.left-part').height());
+});
 //@todo event update-channel za statistiku ne radi kako treba, ako se pusti jedan kanal, trigeruje se update-channel/channel_id na 
 // odredjeni interval, kada se pusti drugi kanal, trigeruje se update-channel sa id-em tog kanala ali se trigeruje i prvi event i 	
 // dobija se netacna statistika
@@ -250,7 +257,7 @@ function html5Video(obj) {
     videoTag += '</div>';
     $("#webtv").html(videoTag);
     var video = $('#webtv_html5Video')[0];
-    //video.load();
+    video.load();
     $("#webtv_html5Video,#click-simulate").on("click touch",function() {
         video.load();
         video.webkitEnterFullscreen();
@@ -375,10 +382,3 @@ $("input[id='fake-rating']").rating({
     'showCaption':false,
 });
 
-$( document ).ready(function() {
-    $('.right-part').css('height',$('.left-part').height());
-});
-
-$( window ).resize(function() {
-    $('.right-part').css('height',$('.left-part').height());
-});
