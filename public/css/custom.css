@@ -164,6 +164,11 @@ h4.user-title{
   font-weight: 400;
 }
 
+.existing-user{
+  width:80%;
+  margin:0 auto;
+}
+
 @media (max-width: 480px) {
   .title-holder p{
     font-size: 1em;
