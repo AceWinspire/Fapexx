@@ -52,7 +52,9 @@ class ContentController extends Zend_Controller_Action {
 		if(!($this->user && $this->user->charged == true) && $video->is_premium){
 			$video->url = $video->preview_url;
 		}
-		
+
+		$this->view->charged_user = ($this->user && $this->user->charged == true) ? 'true' : 'false';
+
 		$this->view->existing = $video;
 
 		if($this->view->cat_id == 0){

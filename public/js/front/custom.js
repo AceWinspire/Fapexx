@@ -32,11 +32,11 @@ function checkAndroidVersion() {
     }
 }
 function resizeVideoContainer() {
-    var windowHeight = $(window).height();
+    /*var windowHeight = $(window).height();
     var headerHeight = $("#header").height();
     var footerHeight = $("#footer").height();
     var channelsHeight = $(".channels").height();
-    var heightSum = headerHeight + footerHeight + channelsHeight;
+    var heightSum = headerHeight + footerHeight + channelsHeight;*/
     var webTv = $("#webtv").width();
     var h = webTv * 9 / 16;
     return h;
@@ -89,7 +89,8 @@ function onJavaScriptBridgeCreated(playerId)
 {
     if (player == null) {
         player = document.getElementById(playerId);
-
+        //console.log('player',player);
+        player.addEventListener("complete", "completeFunc");
         if (checkHelper == null) {
             checkHelper = true;
             time = true;
@@ -99,6 +100,8 @@ function onJavaScriptBridgeCreated(playerId)
 }
 
 function playerStrobe(obj) {
+    //console.log('obj',obj);
+    //console.log('charged_user',charged_user);
     if (noflash == true || flashembed.getVersion()[0] < 10) {
         noFlashFn();
         return;
@@ -138,6 +141,8 @@ function playerStrobe(obj) {
         }
         delete parameters.wmode;
     }
+    var name = "StrobeMediaPlayback_" ;
+        name += obj['is_premium'] && charged_user == false ? "premium_video" : '';
 
     // Embed the player SWF:	            
     swfobject.embedSWF(
@@ -153,7 +158,7 @@ function playerStrobe(obj) {
         wmode: wmodeValue
     }
     , {
-        name: "StrobeMediaPlayback"
+        name: name
     }
     );
 }
@@ -279,6 +284,13 @@ function noFlashFn() {
     $("#strobe h2").html("Flash verzija 10.1 ili veća je obavezna")
     $("#strobe p").html("Nemate instaliran flash plugin<br>Možete ga skinuti klikom na sledeći <a href='http://get.adobe.com/flashplayer/' target='_blank'>Link</a>");
 }
+
+function completeFunc() {
+    if(player['name'].indexOf("premium_video") > -1){
+        window.location.href = BASE_URL + "index/packages";
+    }
+}
+
 $(function() {
     $(window).resize(function() {
         $("#webtv").width('100%');
