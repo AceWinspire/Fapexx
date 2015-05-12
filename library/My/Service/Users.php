@@ -133,6 +133,28 @@ class My_Service_Users extends My_Service{
 		}
 	}
 
+	public function uncharge($user_id){
+		try {
+			$this->http_client->setUri($this->api_url.'/users/uncharge');
+
+			$this->http_client->resetParameters();
+
+			$this->http_client->setParameterGet(array('app_id'	=> $this->app_id));
+			$this->http_client->setParameterGet(array('user_id'	=> $user_id));
+
+			$response = $this->http_client->request('GET');
+			$result   = json_decode($response->getBody());
+
+			if($response->getStatus() == 200){
+				return $result;
+			}else{
+				return array();
+			}
+		}
+		catch (Exception $e) {
+			throw new Exception('Service unavailable');
+		}
+	}
 	public function verify($code, $password, $repeated_password, $ip_address){
 		try {
 			$this->http_client->setUri($this->api_url.'/users/verify');

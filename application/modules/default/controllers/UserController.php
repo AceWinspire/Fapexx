@@ -183,4 +183,14 @@ class UserController extends Zend_Controller_Action {
 		}
 	}
 
+	public function cancelSubscriptionAction(){
+		if($this->_request->isPost()){
+			$result = $this->my_service_users->uncharge($this->user->id);
+			if($result->success == true){
+				$this->_redirect('/');
+			}else{
+				$this->view->msg = 'Error';
+			}
+		}
+	}
 }
