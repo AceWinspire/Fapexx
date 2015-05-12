@@ -76,7 +76,9 @@ class UserController extends Zend_Controller_Action {
 		$this->view->package_id = $this->_getParam('package_id');
 
 		if($this->_request->isPost()){
-			$first_name = $this->_getParam('first_name');
+			$user_id = $this->user->id;
+
+			/*$first_name = $this->_getParam('first_name');
 			$last_name = $this->_getParam('last_name');
 			$card_number = $this->_getParam('card_number');
 			$expiration_month = $this->_getParam('expiration_month');
@@ -84,18 +86,16 @@ class UserController extends Zend_Controller_Action {
 			$zip_code = $this->_getParam('zip_code');
 			$country = $this->_getParam('country');
 			$email = $this->_getParam('email');
-			$package_id = $this->_getParam('hidden_package_id');
-			
-			var_dump('package_id:'.$package_id.'<br/>');
-			var_dump($first_name.'<br/>');
-			var_dump($last_name.'<br/>');
-			var_dump($card_number.'<br/>');
-			var_dump($expiration_month.'<br/>');
-			var_dump($expiration_year.'<br/>');
-			var_dump($zip_code.'<br/>');
-			var_dump($country.'<br/>');
-			var_dump($email.'<br/>');
-			die;
+			$package_id = $this->_getParam('hidden_package_id');*/
+
+			$result = $this->my_service_users->charge($user_id);
+			if($result->success == true){
+				$user_info = $this->my_service_users->get($result->user_id);
+				$this->auth_storage->write($user_info);
+				$this->_redirect('/');
+			}else{
+				$this->view->msg = $result->msg;
+			}
 		}
 	}
 
@@ -122,11 +122,6 @@ class UserController extends Zend_Controller_Action {
 				My_Utilities::fmsg($this->view->translate('error_password_not_match'));
 				return;
 			}*/
-
-			/*var_dump($email.'<br/>');
-			var_dump($password.'<br/>');
-			var_dump($re_password.'<br/>');
-			die;*/
 
 			$session_id =  md5(rand(1000, 10000).time());
 			$result = $this->my_service_users->register( $email, $password, $session_id);
