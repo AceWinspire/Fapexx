@@ -1,5 +1,12 @@
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
 body{
   background-color: #000 !important;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 }
 
 .no-padding{
