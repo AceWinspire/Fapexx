@@ -59,7 +59,8 @@ class UserController extends Zend_Controller_Action {
 			$email = $this->_getParam('email');
 	
 			$result = $this->my_service_users->passRecovery($email);
-			if($result['success'] == true){
+
+			if($result->success == true){
 				$this->_redirect('user/reset-password');
 			}else{
 				$this->view->msg = $result->msg;
