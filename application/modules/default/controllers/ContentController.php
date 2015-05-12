@@ -48,9 +48,11 @@ class ContentController extends Zend_Controller_Action {
 		$video_id = $this->_getParam('id');
 
 		$video  =  $this->my_service_contents->getContent($video_id);
-		/*if($this->user && $this->user->charged == true && $video->is_premium){
+
+		if(!($this->user && $this->user->charged == true) && $video->is_premium){
 			$video->url = $video->preview_url;
-		}*/
+		}
+		
 		$this->view->existing = $video;
 
 		if($this->view->cat_id == 0){
