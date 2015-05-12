@@ -187,13 +187,15 @@ class UserController extends Zend_Controller_Action {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
-		if($this->_request->isPost()){
-			$result = $this->my_service_users->uncharge($this->user->id);
-			if($result->success == true){
-				$this->view->msg = 'Success';				
-			}else{
-				$this->view->msg = 'Error';
-			}
+		$user_id = $this->user->id;
+
+		$result = $this->my_service_users->uncharge($user_id);
+		if($result->success == true){
+			$user = $this->my_service_users->get($user_id);
+			$this->auth_storage->write($user);			
+			$this->view->msg = 'Success';				
+		}else{
+			$this->view->msg = 'Error';
 		}
 		$this->_redirect('/');
 	}
