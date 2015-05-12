@@ -297,25 +297,26 @@ $(function() {
 
 $( document ).ready(function() {
     var result = typeof content_object === 'undefined' ? '' : content_object;
-    
-    if (checkAndroidVersion() >= 4.0 && checkAndroidVersion() < 4.3) {
-        html5Video(result);
-        //streamValidationCheck();
-        return;
+    if(result != ''){
+        if (checkAndroidVersion() >= 4.0 && checkAndroidVersion() < 4.3) {
+            html5Video(result);
+            //streamValidationCheck();
+            return;
+        }
+        if (checkAndroidVersion() >= 4.3) {
+            directStream(result);
+            //streamValidationCheck();
+            return;
+        }
+        if (idevice) {
+            html5Video(result);
+            //streamValidationCheck();
+            return;
+        }
+        $("#webtv").slideDown('fast', function() {
+            playerStrobe(result);
+        });
     }
-    if (checkAndroidVersion() >= 4.3) {
-        directStream(result);
-        //streamValidationCheck();
-        return;
-    }
-    if (idevice) {
-        html5Video(result);
-        //streamValidationCheck();
-        return;
-    }
-    $("#webtv").slideDown('fast', function() {
-        playerStrobe(result);
-    });
 });
 
 /*function validateForm(){

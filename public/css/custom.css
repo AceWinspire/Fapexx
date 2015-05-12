@@ -261,7 +261,7 @@ h4.user-title{
   width: 100%;
   font-size: 24px;
   margin-top: 30px;
-  background-color: rgba(136,136,136,0.7);
+  background-color: rgba(255,255,255,0.6);
 }
 
 .forgotten-password{
@@ -423,7 +423,8 @@ p.content-raiting{
     right: 10px; 
     max-width: 50%; 
     font-size:16px;  
-    color:white;  
+    color:white;
+    opacity: 0.8; 
     padding: 0 4px;
     background-color: rgba(0,0,0,0.5);
     font-size: 18px;
@@ -460,6 +461,7 @@ span.thumbnail-views{
   font-weight: bold;
   z-index: 10;
   font-size: 1.25em;
+  opacity: 0.8;
 }
 
 .play{
