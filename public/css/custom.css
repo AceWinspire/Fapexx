@@ -626,11 +626,6 @@ p.video-main-user{
   max-width: 70%;
 }
 
-@media (min-width: 768px) {
-  .welcome{
-    float: left;
-  }
-}
 
 @media (max-width: 500px) {
   .settings p{

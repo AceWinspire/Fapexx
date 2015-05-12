@@ -41,9 +41,11 @@ class IndexController extends Zend_Controller_Action {
 	}
 
 	public function desktopAction(){
+		$this->_helper->layout()->disableLayout();
 	}
 
 	public function androidAction(){
+		$this->_helper->layout()->disableLayout();
 	}
 
 	
