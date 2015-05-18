@@ -192,9 +192,29 @@ class My_Service_Users extends My_Service{
 			$response = $this->http_client->request('GET');
 			$result   = json_decode($response->getBody());
 
-			var_dump($this->http_client->getLastResponse()); 
-			var_dump($this->http_client->getLastRequest());die;
+			if($response->getStatus() == 200){
+				return $result;
+			}else{
+				return array();
+			}
+		}
+		catch (Exception $e) {
+			throw new Exception('Service unavailable');
+		}
+	}
 
+	public function resetPassword($code, $password){
+		try {
+			$this->http_client->setUri($this->api_url.'/users/reset-password');
+			$this->http_client->resetParameters();
+
+			$this->http_client->setParameterGet(array('app_id'		=> $this->app_id));
+			$this->http_client->setParameterGet(array('code'		=> $code));
+			$this->http_client->setParameterGet(array('password'	=> $password));
+
+			$response = $this->http_client->request('GET');
+			$result   = json_decode($response->getBody());
+			
 			if($response->getStatus() == 200){
 				return $result;
 			}else{

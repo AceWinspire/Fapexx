@@ -69,8 +69,44 @@ class UserController extends Zend_Controller_Action {
 	}
 
 	public function resetPasswordAction(){
+		if ($this->_request->isPost()) {
+			$password 		= $this->_getParam('password');
+			$repeated_pass 	= $this->_getParam('re_password');
+			$code 			= $this->_getParam('code');
 
-		
+			/*if (!$code) {
+				My_Utilities::fmsg($this->view->translate('error_verification_code_invalid'));
+				return;
+			}
+			
+			if (!trim($this->filter_alnum->filter($code))) {
+				My_Utilities::fmsg($this->view->translate('error_verification_code_invalid'));
+				return;
+			}
+
+			if (!$this->length_validator->isValid($password)) {
+				My_Utilities::fmsg($this->view->translate('error_password_minimum_required'));
+				return;
+			}
+
+			if ($password != $repeated_pass) {
+				My_Utilities::fmsg($this->view->translate('error_password_not_match'));
+				return;
+			}*/
+
+			$result = $this->my_service_users->resetPassword($code, $password);
+			
+			if($result->success == true){
+				$user_info = $this->my_service_users->get($result->user_id);
+				$this->auth_storage->write($user_info);
+				//My_Utilities::fmsg($this->view->translate('alert_password_reset'));
+				$this->_redirect('index');
+			}else{
+				//My_Utilities::fmsg($this->view->translate('error_data_not_updated'));
+				//$this->view->msg = $result->msg;
+			}
+		}
+
 	}
 
 	public function paymentAction(){
