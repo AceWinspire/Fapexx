@@ -169,6 +169,8 @@ class My_Service_Users extends My_Service{
 
 			$response = $this->http_client->request('GET');
 			$result   = json_decode($response->getBody());
+			var_dump($this->http_client->getLastResponse()); 
+			var_dump($this->http_client->getLastRequest());die;
 			if($response->getStatus() == 200){
 				return $result;
 			}else{
