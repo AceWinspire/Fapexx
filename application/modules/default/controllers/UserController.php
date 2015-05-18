@@ -59,8 +59,8 @@ class UserController extends Zend_Controller_Action {
 			$email = $this->_getParam('email');
 	
 			$result = $this->my_service_users->passRecovery($email);
-			var_dump($result);die;
-			if($result['success'] == true){
+
+			if($result->success == true){
 				$this->_redirect('user/reset-password');
 			}else{
 				$this->view->msg = $result->msg;
@@ -184,4 +184,20 @@ class UserController extends Zend_Controller_Action {
 		}
 	}
 
+	public function cancelSubscriptionAction(){
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+
+		$user_id = $this->user->id;
+
+		$result = $this->my_service_users->uncharge($user_id);
+		if($result->success == true){
+			$user = $this->my_service_users->get($user_id);
+			$this->auth_storage->write($user);			
+			$this->view->msg = 'Success';				
+		}else{
+			$this->view->msg = 'Error';
+		}
+		$this->_redirect('/');
+	}
 }
