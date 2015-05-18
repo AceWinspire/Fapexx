@@ -44,7 +44,9 @@
         $('#edit_profile_form').validate({
             rules: {
                 password : {
-                    required: true
+                    required: true,
+                    minlength: 5,
+                    maxlength: 10
                 },
                 re_password: {
                   equalTo: "#password"

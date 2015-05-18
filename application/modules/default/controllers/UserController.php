@@ -147,23 +147,23 @@ class UserController extends Zend_Controller_Action {
 			$password = $this->_getParam('password');
 			$re_password = $this->_getParam('re_password');
 
-			/*if (!$this->email_validator->isValid($email)) {
-				My_Utilities::fmsg($this->view->translate('error_email_not_valid'));
+			if (!$this->email_validator->isValid($email)) {
+				My_Utilities::fmsg('error_email_not_valid');
 				return;
 			}
 
 			if (!$password) {
-				My_Utilities::fmsg($this->view->translate('error_password_required'));
+				My_Utilities::fmsg('error_password_required');
 				return;
 			}
 			if (!$re_password) {
-				My_Utilities::fmsg($this->view->translate('error_password_repeated_required'));
+				My_Utilities::fmsg('error_password_repeated_required');
 				return;
 			}
 			if ($password !== $re_password) {
-				My_Utilities::fmsg($this->view->translate('error_password_not_match'));
+				My_Utilities::fmsg('error_password_not_match');
 				return;
-			}*/
+			}
 
 			$session_id =  md5(rand(1000, 10000).time());
 			$result = $this->my_service_users->register( $email, $password, $session_id);
@@ -212,6 +212,16 @@ class UserController extends Zend_Controller_Action {
 			$email = $this->user->email;
 			$old_password = $this->user->password;
 			$user_id = $this->user->id;
+
+			if (!$this->length_validator->isValid($password)) {
+				My_Utilities::fmsg('error_password_minimum_required');
+				return;
+			}
+
+			if ($password != $re_password) {
+				My_Utilities::fmsg('error_password_not_match');
+				return;
+			}
 
 			$result = $this->my_service_users->update(array('password' => $password, 'old_password' => $old_password), $user_id);
 
