@@ -155,38 +155,13 @@ class My_Service_Users extends My_Service{
 			throw new Exception('Service unavailable');
 		}
 	}
-	public function verify($code, $password, $repeated_password, $ip_address){
-		try {
-			$this->http_client->setUri($this->api_url.'/users/verify');
-
-			$this->http_client->resetParameters();
-
-			$this->http_client->setParameterGet(array('app_id'				=> $this->app_id));
-			$this->http_client->setParameterGet(array('code'				=> $code));
-			$this->http_client->setParameterGet(array('password'			=> $password));
-			$this->http_client->setParameterGet(array('repeated_password'	=> $repeated_password));
-			$this->http_client->setParameterGet(array('ip_address'			=> $ip_address));
-
-			$response = $this->http_client->request('GET');
-			$result   = json_decode($response->getBody());
-
-			if($response->getStatus() == 200){
-				return $result;
-			}else{
-				return array();
-			}
-		}
-		catch (Exception $e) {
-			throw new Exception('Service unavailable');
-		}
-	}
-
+	
 	public function passRecovery($email){
 		try {
 			$this->http_client->setUri($this->api_url.'/users/pass-recovery');
 			$this->http_client->resetParameters();
 
-			$this->http_client->setParameterGet(array('app_id'	=> $this->app_id));
+			$this->http_client->setParameterGet(array('app_id'		=> $this->app_id));
 			$this->http_client->setParameterGet(array('identity'	=> $email));
 
 			$response = $this->http_client->request('GET');

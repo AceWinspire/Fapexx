@@ -95,15 +95,15 @@ class UserController extends Zend_Controller_Action {
 			}*/
 
 			$result = $this->my_service_users->resetPassword($code, $password);
-			
+
 			if($result->success == true){
 				$user_info = $this->my_service_users->get($result->user_id);
 				$this->auth_storage->write($user_info);
-				//My_Utilities::fmsg($this->view->translate('alert_password_reset'));
+				My_Utilities::fmsg($result->msg);
 				$this->_redirect('index');
 			}else{
 				//My_Utilities::fmsg($this->view->translate('error_data_not_updated'));
-				//$this->view->msg = $result->msg;
+				My_Utilities::fmsg($result->msg);
 			}
 		}
 
