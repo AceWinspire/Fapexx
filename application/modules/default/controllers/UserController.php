@@ -20,17 +20,23 @@ class UserController extends Zend_Controller_Action {
 	private $my_service_users;
 
 	private $email_validator;
+	private $length_validator;
+	private $filter_alnum;
+	private $filter_alnum_no_white_sp;
 
 	public function init(){
 		$this->user_auth 	= Zend_Auth::getInstance();
 		$this->auth_storage = $this->user_auth->getStorage();
 		$this->user = $this->user_auth->getIdentity();
 
-		$this->my_service_app  		= new My_Service_App();
-		$this->my_service_contents  = new My_Service_Contents();
-		$this->my_service_users    	= new My_Service_Users();
+		$this->my_service_app  				= new My_Service_App();
+		$this->my_service_contents  		= new My_Service_Contents();
+		$this->my_service_users    			= new My_Service_Users();
 
-		$this->email_validator  = new Zend_Validate_EmailAddress();
+		$this->email_validator  			= new Zend_Validate_EmailAddress();
+		$this->length_validator 			= new Zend_Validate_StringLength(array('min' => 5, 'max' => 10));
+		$this->filter_alnum     			= new Zend_Filter_Alnum(array('allowwhitespace' => true));
+		$this->filter_alnum_no_white_sp     = new Zend_Filter_Alnum(array('allowwhitespace' => false));
 	}
 
 	public function loginAction(){
@@ -74,35 +80,34 @@ class UserController extends Zend_Controller_Action {
 			$repeated_pass 	= $this->_getParam('re_password');
 			$code 			= $this->_getParam('code');
 
-			/*if (!$code) {
-				My_Utilities::fmsg($this->view->translate('error_verification_code_invalid'));
+			if (!$code) {
+				My_Utilities::fmsg('error_verification_code_invalid');
 				return;
 			}
 			
 			if (!trim($this->filter_alnum->filter($code))) {
-				My_Utilities::fmsg($this->view->translate('error_verification_code_invalid'));
+				My_Utilities::fmsg('error_verification_code_invalid');
 				return;
 			}
 
 			if (!$this->length_validator->isValid($password)) {
-				My_Utilities::fmsg($this->view->translate('error_password_minimum_required'));
+				My_Utilities::fmsg('error_password_minimum_required');
 				return;
 			}
 
 			if ($password != $repeated_pass) {
-				My_Utilities::fmsg($this->view->translate('error_password_not_match'));
+				My_Utilities::fmsg('error_password_not_match');
 				return;
-			}*/
+			}
 
 			$result = $this->my_service_users->resetPassword($code, $password);
 
 			if($result->success == true){
 				$user_info = $this->my_service_users->get($result->user_id);
 				$this->auth_storage->write($user_info);
-				My_Utilities::fmsg($result->msg);
+				My_Utilities::fmsg('data are updated');
 				$this->_redirect('index');
 			}else{
-				//My_Utilities::fmsg($this->view->translate('error_data_not_updated'));
 				My_Utilities::fmsg($result->msg);
 			}
 		}
