@@ -55,7 +55,7 @@ class UserController extends Zend_Controller_Action {
 				$this->auth_storage->write($user_info);
 				$this->_redirect('index');
 			}else{
-				$this->view->msg = $result->msg;
+				My_Utilities::fmsg($result->msg);
 			}
 		}
 	}
@@ -69,7 +69,7 @@ class UserController extends Zend_Controller_Action {
 			if($result->success == true){
 				$this->_redirect('user/reset-password');
 			}else{
-				$this->view->msg = $result->msg;
+				My_Utilities::fmsg($result->msg);
 			}
 		}
 	}
@@ -136,7 +136,7 @@ class UserController extends Zend_Controller_Action {
 				$this->auth_storage->write($user_info);
 				$this->_redirect('/');
 			}else{
-				$this->view->msg = $result->msg;
+				My_Utilities::fmsg($result->msg);
 			}
 		}
 	}
@@ -173,7 +173,7 @@ class UserController extends Zend_Controller_Action {
 				$this->auth_storage->write($user_info);
 				$this->_redirect('user/payment');
 			}else{
-				$this->view->msg = $result->msg;
+				My_Utilities::fmsg($result->msg);
 			}
 
 
@@ -220,7 +220,7 @@ class UserController extends Zend_Controller_Action {
 				$this->auth_storage->write($user);
 				$this->_redirect('user/profile');
 			}else{
-				$this->view->msg = $result->msg;
+				My_Utilities::fmsg($result->msg);
 			}
 		}
 	}
