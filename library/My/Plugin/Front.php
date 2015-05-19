@@ -26,7 +26,7 @@ class My_Plugin_Front extends Zend_Controller_Plugin_Abstract {
         $device = new My_Device($_SERVER['HTTP_USER_AGENT']);
         if(!$device->isMobile()){
             $request->setControllerName('index');
-            $request->setActionName('desktop');
+            //$request->setActionName('desktop');
         }else if($device->isMobile() && !$no_android){
             $request->setControllerName('index');
             //$request->setActionName('android');

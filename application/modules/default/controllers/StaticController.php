@@ -17,9 +17,6 @@ class StaticController extends Zend_Controller_Action {
     public function privacyAction() {
     }
 
-    public function returnAction() {
-    }
-
 	public function faqAction() {
     }
 }
