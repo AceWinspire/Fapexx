@@ -160,7 +160,7 @@ h4.user-title{
 .existing-user{
   width:80%;
   margin:0 auto;
-  margin-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 @media (max-width: 480px) {
