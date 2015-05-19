@@ -60,7 +60,10 @@
 			<a class="navbar-brand" href="/" ><img class="logo-img" src="/images/fappexxx_logo.png"></a>
 		</div>
 		<?php 
-			$terms_url = $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'terms'), 'default', true); 
+			$terms_url = $this->url(array('module' => 'default', 'controller' => 'static', 'action' => 'terms'), 'default', true);
+			$privacy_url = $this->url(array('module' => 'default', 'controller' => 'static', 'action' => 'privacy'), 'default', true);
+			$faq_url = $this->url(array('module' => 'default', 'controller' => 'static', 'action' => 'faq'), 'default', true);
+
 			$login_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true); 
 			$logout_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'logout'), 'default', true);
 			$profile_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'profile'), 'default', true);
@@ -120,6 +123,15 @@
         </div>
     </div> 
     
+    <div id="footer" class="fix" >
+        <p class="copyRight">
+            <a href="<?php echo $terms_url;?>">Terms of Service</a> 
+            <a href="<?php echo $privacy_url;?>">Privacy Policy</a>
+            <a href="<?php echo $faq_url;?>">FAQ</a>
+				<span>Copyright © 2015 Fappexxx</span>
+        </p>
+    </div>
+
 	<script src="<?php echo $this->baseUrl('/js/toastr.js'); ?>"></script>
 	<script src="<?php echo $this->baseUrl('/js/flowplayer/flowplayer-3.2.12.min.js'); ?>"></script>
 	<script src="<?php echo $this->baseUrl('/js/flowplayer/flowplayer.ipad-3.2.12.js'); ?>"></script>

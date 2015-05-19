@@ -706,3 +706,59 @@ label.error {
   -moz-border-radius: 6px 0 6px 6px;
   border-radius: 6px 0 6px 6px;
 }
+
+
+#footer {
+    height: 50px;
+    color: #333;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    bottom: 0px;
+    background-color: #fff;
+    z-index: 10;
+}
+
+#footer
+p {
+    padding: 10px 20px;
+    color: #ff00c0;
+}
+
+#footer a, #footer
+p {
+    color: #333 !important;
+    font-size: 12px;
+    margin: 10px 5px;
+    line-height: 100%;
+    padding: 0;
+}
+
+#footer
+a {
+    float: right;
+    margin-left: 0;
+    float: none;
+}
+
+#footer a:hover {
+    text-decoration: none;
+}
+
+#footer a:hover {
+    color: #222;
+}
+
+#footer {
+    width: 100%;
+    bottom: 0px;
+    position: fixed;
+}
+
+
+.copyRight span {
+  display: block;
+  color: #333;
+  padding: 5px 0 0 0;
+}
