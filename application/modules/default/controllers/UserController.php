@@ -49,6 +49,16 @@ class UserController extends Zend_Controller_Action {
 			$password = $this->_getParam('password');
 			$session_id =  md5(rand(1000, 10000).time());
 
+			if (!$this->email_validator->isValid($email)) {
+				My_Utilities::fmsg('error_email_not_valid', 'error');
+				return;
+			}
+
+			if (!$password) {
+				My_Utilities::fmsg('error_password_required', 'error');
+				return;
+			}
+
 			$result = $this->my_service_users->auth( $email, $password, $session_id);
 			if($result->success == true){
 				$user_info = $this->my_service_users->get($result->user_id);
@@ -64,7 +74,12 @@ class UserController extends Zend_Controller_Action {
 	public function forgottenPasswordAction(){
 		if($this->_request->isPost()){
 			$email = $this->_getParam('email');
-	
+			
+			if (!$this->email_validator->isValid($email)) {
+				My_Utilities::fmsg('error_email_not_valid', 'error');
+				return;
+			}
+
 			$result = $this->my_service_users->passRecovery($email);
 
 			if($result->success == true){
@@ -150,7 +165,7 @@ class UserController extends Zend_Controller_Action {
 			$re_password = $this->_getParam('re_password');
 
 			if (!$this->email_validator->isValid($email)) {
-				My_Utilities::fmsg('error_email_not_valid');
+				My_Utilities::fmsg('error_email_not_valid', 'error');
 				return;
 			}
 
@@ -247,7 +262,7 @@ class UserController extends Zend_Controller_Action {
 		if($result->success == true){
 			$user = $this->my_service_users->get($user_id);
 			$this->auth_storage->write($user);			
-			$this->view->msg = 'Success';				
+			My_Utilities::fmsg('Success!', 'success');				
 		}else{
 			My_Utilities::fmsg('Eror!', 'error');
 		}
