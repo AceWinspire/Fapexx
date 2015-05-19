@@ -145,7 +145,7 @@ class UserController extends Zend_Controller_Action {
 			throw new Exception('Error conecting memcache server ' . $e->getMessage());
 		}	
 
-		$memcache->set($this->memcache_options['prefix'].'package_id_clicked' . Zend_Registry::get('remote_ip'), $this->view->package_id , false);
+		$memcache->set($this->memcache_options['prefix'].'package_id_clicked' . Zend_Registry::get('remote_ip'), $this->view->package_id , false, 0);
 
 		if($this->_request->isPost()){
 			$user_id = $this->user->id;
