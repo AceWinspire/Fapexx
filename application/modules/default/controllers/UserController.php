@@ -53,6 +53,7 @@ class UserController extends Zend_Controller_Action {
 			if($result->success == true){
 				$user_info = $this->my_service_users->get($result->user_id);
 				$this->auth_storage->write($user_info);
+				My_Utilities::fmsg('Welcome', 'success');
 				$this->_redirect('index');
 			}else{
 				My_Utilities::fmsg($result->msg, 'error');

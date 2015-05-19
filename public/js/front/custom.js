@@ -395,3 +395,41 @@ $("input[id='fake-rating']").rating({
     'showCaption':false,
 });
 
+$( document ).ready(function() {
+    if( !$('#flash-messanger').is(':empty') ) {
+        var opts = {
+                "closeButton": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+        $.each($("div[class^='wrapper']"),function(){
+            var message = $(this).data("message");
+            var type = $(this).data("type");
+            switch(type){
+                case 'success': 
+                    toastr.success(message, null, opts);
+                    break;
+                case 'info' : 
+                    toastr.info(message, null, opts);
+                    break;
+                case 'error' :
+                    toastr.error(message, null, opts);
+                    break;
+                case 'warning' :
+                    toastr.warning(message, null, opts);
+                    break;
+                default:
+                    break;
+            }
+        })
+    }
+})
