@@ -55,7 +55,7 @@ class UserController extends Zend_Controller_Action {
 				$this->auth_storage->write($user_info);
 				$this->_redirect('index');
 			}else{
-				My_Utilities::fmsg($result->msg);
+				My_Utilities::fmsg($result->msg, 'error');
 			}
 		}
 	}
@@ -67,9 +67,10 @@ class UserController extends Zend_Controller_Action {
 			$result = $this->my_service_users->passRecovery($email);
 
 			if($result->success == true){
+				My_Utilities::fmsg('Check your inbox.', 'success');
 				$this->_redirect('user/reset-password');
 			}else{
-				My_Utilities::fmsg($result->msg);
+				My_Utilities::fmsg($result->msg, 'error');
 			}
 		}
 	}
@@ -81,22 +82,22 @@ class UserController extends Zend_Controller_Action {
 			$code 			= $this->_getParam('code');
 
 			if (!$code) {
-				My_Utilities::fmsg('error_verification_code_invalid');
+				My_Utilities::fmsg('error_verification_code_invalid', 'error');
 				return;
 			}
 			
 			if (!trim($this->filter_alnum->filter($code))) {
-				My_Utilities::fmsg('error_verification_code_invalid');
+				My_Utilities::fmsg('error_verification_code_invalid', 'error');
 				return;
 			}
 
 			if (!$this->length_validator->isValid($password)) {
-				My_Utilities::fmsg('error_password_minimum_required');
+				My_Utilities::fmsg('error_password_minimum_required', 'error');
 				return;
 			}
 
 			if ($password != $repeated_pass) {
-				My_Utilities::fmsg('error_password_not_match');
+				My_Utilities::fmsg('error_password_not_match', 'error');
 				return;
 			}
 
@@ -105,10 +106,10 @@ class UserController extends Zend_Controller_Action {
 			if($result->success == true){
 				$user_info = $this->my_service_users->get($result->user_id);
 				$this->auth_storage->write($user_info);
-				My_Utilities::fmsg('data are updated');
+				My_Utilities::fmsg('data are updated', 'success');
 				$this->_redirect('index');
 			}else{
-				My_Utilities::fmsg($result->msg);
+				My_Utilities::fmsg($result->msg, 'error');
 			}
 		}
 
@@ -153,15 +154,15 @@ class UserController extends Zend_Controller_Action {
 			}
 
 			if (!$password) {
-				My_Utilities::fmsg('error_password_required');
+				My_Utilities::fmsg('error_password_required', 'error');
 				return;
 			}
 			if (!$re_password) {
-				My_Utilities::fmsg('error_password_repeated_required');
+				My_Utilities::fmsg('error_password_repeated_required', 'error');
 				return;
 			}
 			if ($password !== $re_password) {
-				My_Utilities::fmsg('error_password_not_match');
+				My_Utilities::fmsg('error_password_not_match', 'error');
 				return;
 			}
 
@@ -173,7 +174,7 @@ class UserController extends Zend_Controller_Action {
 				$this->auth_storage->write($user_info);
 				$this->_redirect('user/payment');
 			}else{
-				My_Utilities::fmsg($result->msg);
+				My_Utilities::fmsg($result->msg, 'error');
 			}
 
 
@@ -214,12 +215,12 @@ class UserController extends Zend_Controller_Action {
 			$user_id = $this->user->id;
 
 			if (!$this->length_validator->isValid($password)) {
-				My_Utilities::fmsg('error_password_minimum_required');
+				My_Utilities::fmsg('error_password_minimum_required', 'error');
 				return;
 			}
 
 			if ($password != $re_password) {
-				My_Utilities::fmsg('error_password_not_match');
+				My_Utilities::fmsg('error_password_not_match', 'error');
 				return;
 			}
 
@@ -230,7 +231,7 @@ class UserController extends Zend_Controller_Action {
 				$this->auth_storage->write($user);
 				$this->_redirect('user/profile');
 			}else{
-				My_Utilities::fmsg($result->msg);
+				My_Utilities::fmsg($result->msg, 'error');
 			}
 		}
 	}
@@ -247,7 +248,7 @@ class UserController extends Zend_Controller_Action {
 			$this->auth_storage->write($user);			
 			$this->view->msg = 'Success';				
 		}else{
-			$this->view->msg = 'Error';
+			My_Utilities::fmsg('Eror!', 'error');
 		}
 		$this->_redirect('/');
 	}
