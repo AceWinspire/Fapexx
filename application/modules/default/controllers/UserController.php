@@ -24,6 +24,8 @@ class UserController extends Zend_Controller_Action {
 	private $filter_alnum;
 	private $filter_alnum_no_white_sp;
 
+	private $memcache_options;
+
 	public function init(){
 		$this->user_auth 	= Zend_Auth::getInstance();
 		$this->auth_storage = $this->user_auth->getStorage();
@@ -37,6 +39,8 @@ class UserController extends Zend_Controller_Action {
 		$this->length_validator 			= new Zend_Validate_StringLength(array('min' => 5, 'max' => 10));
 		$this->filter_alnum     			= new Zend_Filter_Alnum(array('allowwhitespace' => true));
 		$this->filter_alnum_no_white_sp     = new Zend_Filter_Alnum(array('allowwhitespace' => false));
+
+		$this->memcache_options = Zend_Registry::get('memcache');
 	}
 
 	public function loginAction(){
@@ -132,7 +136,16 @@ class UserController extends Zend_Controller_Action {
 	}
 
 	public function paymentAction(){
-		$this->view->package_id = $this->_getParam('package_id');
+		$this->view->package_id = $this->_getParam('package_id',0);
+
+		try {
+			$memcache = new Memcache;
+			$memcache->connect($this->memcache_options['host'], $this->memcache_options['port']);
+		} catch (Exception $e) {
+			throw new Exception('Error conecting memcache server ' . $e->getMessage());
+		}	
+
+		$memcache->set($this->memcache_options['prefix'].'package_id_clicked' . Zend_Registry::get('remote_ip'), $this->view->package_id , false);
 
 		if($this->_request->isPost()){
 			$user_id = $this->user->id;
@@ -214,13 +227,17 @@ class UserController extends Zend_Controller_Action {
 			$this->_redirect('user/register');
 		}
 		
-		/*
-		$this->view->existing 		= $this->my_service_users->get($this->user->id); //$user_info 
-		$this->view->subscription 	= $this->paypal_subscriptions_model->getByUserId($this->user->id);
+		$this->view->cc_sub_packages = $this->my_service_app->getCcSubscriptionPackages();
 
-		if(isset($this->user->payment_type_id)){
-			$this->view->payments = $this->ch_packages_model->getByPaymentId($this->user->payment_type_id);
-		}*/
+		try {
+			$memcache = new Memcache;
+			$memcache->connect($this->memcache_options['host'], $this->memcache_options['port']);
+		} catch (Exception $e) {
+			throw new Exception('Error conecting memcache server ' . $e->getMessage());
+		}	
+
+		$this->view->package_id_clicked = $memcache->get($this->memcache_options['prefix'].'package_id_clicked' . Zend_Registry::get('remote_ip'));
+
 	}
 
 	public function editProfileAction() {
