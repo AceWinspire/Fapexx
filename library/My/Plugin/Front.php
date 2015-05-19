@@ -24,12 +24,8 @@ class My_Plugin_Front extends Zend_Controller_Plugin_Abstract {
         $session->$remote_ip = true;
         
         $device = new My_Device($_SERVER['HTTP_USER_AGENT']);
-        if(!$device->isMobile()){
+        if($device->isMobile() && !$no_android){
             $request->setControllerName('index');
-            //$request->setActionName('desktop');
-        }else if($device->isMobile() && !$no_android){
-            $request->setControllerName('index');
-            //$request->setActionName('android');
             $request->setActionName('index');
         }
     }
