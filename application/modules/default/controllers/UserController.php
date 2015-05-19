@@ -153,7 +153,7 @@ class UserController extends Zend_Controller_Action {
 				$this->auth_storage->write($user_info);
 				$this->_redirect('/');
 			}else{
-				My_Utilities::fmsg($result->msg);
+				My_Utilities::fmsg($result->msg, 'error');
 			}
 		}
 	}
@@ -210,15 +210,16 @@ class UserController extends Zend_Controller_Action {
 	}
 
 	public function profileAction() {
-		/*if (!$this->user_auth->hasIdentity()) {
+		if (!$this->user_auth->hasIdentity()) {
 			$this->_redirect('user/register');
 		}
-
+		
+		/*
 		$this->view->existing 		= $this->my_service_users->get($this->user->id); //$user_info 
-		$this->view->subscription 	= $this->paypal_subscriptions_model->getByUserId($this->user['id']);
+		$this->view->subscription 	= $this->paypal_subscriptions_model->getByUserId($this->user->id);
 
-		if(isset($this->user['payment_id'])){
-			$this->view->payments = $this->ch_packages_model->getByPaymentId($this->user['payment_id']);
+		if(isset($this->user->payment_type_id)){
+			$this->view->payments = $this->ch_packages_model->getByPaymentId($this->user->payment_type_id);
 		}*/
 	}
 
