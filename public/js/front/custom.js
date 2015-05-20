@@ -5,9 +5,6 @@ $( document ).ready(function() {
 $( window ).resize(function() {
     $('.right-part').css('height',$('.left-part').height());
 });
-//@todo event update-channel za statistiku ne radi kako treba, ako se pusti jedan kanal, trigeruje se update-channel/channel_id na 
-// odredjeni interval, kada se pusti drugi kanal, trigeruje se update-channel sa id-em tog kanala ali se trigeruje i prvi event i 	
-// dobija se netacna statistika
 
 var ua = navigator.userAgent;
 var video = document.createElement("video"),
@@ -32,11 +29,6 @@ function checkAndroidVersion() {
     }
 }
 function resizeVideoContainer() {
-    /*var windowHeight = $(window).height();
-    var headerHeight = $("#header").height();
-    var footerHeight = $("#footer").height();
-    var channelsHeight = $(".channels").height();
-    var heightSum = headerHeight + footerHeight + channelsHeight;*/
     var webTv = $("#webtv").width();
     var h = webTv * 9 / 16;
     return h;
@@ -253,10 +245,12 @@ function videoJsInitialize(obj) {
     VideoJS.setupAllWhenReady();
 }
 function html5Video(obj) {
+    //console.log('obj',obj);
+    var name = obj['is_premium'] && charged_user == false ? "premium_video" : '';
     var videoTag = "";
     var h = resizeVideoContainer();
     videoTag += '<div style="position:relative;height:' + h + ';width:' + $("#webtv").width() + '">';
-    videoTag += '<video id="webtv_html5Video" style="position:relative;z-index:5" width="100%" height="' + h + '" preload="none" autoplay controls x-webkit-airplay="allow" src="' + obj.url + 'playlist.m3u8" poster="' + obj.img + '">';
+    videoTag += '<video id="webtv_html5Video" style="position:relative;z-index:5" width="100%" height="' + h + '" preload="none" autoplay controls x-webkit-airplay="allow" src="' + obj.url + 'playlist.m3u8" poster="' + obj.img + '" name="' + name + '">';
     videoTag += '</video>';
     videoTag += '<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:999" id="click-simulate"></div>';
     videoTag += '</div>';
@@ -271,6 +265,11 @@ function html5Video(obj) {
         }, 500);
 
     });
+    video.onended = function() {
+        if(video.getAttribute('name').indexOf("premium_video") > -1){
+            window.location.href = BASE_URL + "index/packages";
+        }
+    };
 }
 function directStream(obj) {
     var player = document.getElementById("webtv");
@@ -330,64 +329,6 @@ $( document ).ready(function() {
         });
     }
 });
-
-/*function validateForm(){
-    var first_name = $('input[name="first_name"]').val();
-    var last_name = $('input[name="last_name"]').val();
-    var card_number = $('input[name="card_number"]').val();
-    var zip_code = $('input[name="zip_code"]').val();
-    var email = $('input[name="email"]').val();
-    var expiration_month = $('input[name="expiration_month"]').val();
-    var expiration_year = $('input[name="expiration_year"]').val();
-    
-    if(first_name == ''){
-        alert('Enter first name!');
-        return false;
-    }
-
-    if(last_name == ''){
-        alert('Enter your last name!');
-        return false;
-    }
-
-    if(card_number.length != 16){
-        alert('Card number not valid!');
-        return false;
-    }
-
-    if(zip_code.length < 4){
-        alert('Zip code not valid!');
-        return false;
-    }
-
-    if(!(/^\d+$/.test(card_number))){
-        alert('Card number not valid, digits only!');
-        return false;
-    }
-
-    if(!(/^\d+$/.test(zip_code))){
-        alert('Zip code not valid, digits only!');
-        return false;
-    }
-
-    if(expiration_month > 12 || expiration_month < 1){
-        alert('Month in expiration date not valid!');
-        return false;   
-    }
-
-    if(expiration_year < 2015){
-        alert('Year in expiration date not valid!');
-        return false;   
-    }
-    
-    var email_regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(!email_regex.test(email)){
-        alert('Email address not valid!');
-        return false;
-    }
-
-    return true;
-}*/
 
 $("input[id='fake-rating']").rating({
     'showClear':false,
