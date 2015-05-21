@@ -232,7 +232,7 @@ function endVideo() {
     }
 };
 
- function playbackFailed(e) {
+function playbackFailed(e) {
    // video playback failed - show a message saying why
    switch (e.target.error.code) {
      case e.target.error.MEDIA_ERR_ABORTED:
@@ -245,9 +245,9 @@ function endVideo() {
       alert('The video playback was aborted due to a corruption problem or because the video used features your browser did not support.');
       break;
    case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
-        $("#webtv").empty();
-        playerStrobe(content_object);
-     //alert('The video could not be loaded, either because the server or network failed or because the format is not supported.');
+        //$("#webtv").empty();
+        //playerStrobe(content_object);
+     alert('The video could not be loaded, either because the server or network failed or because the format is not supported.');
      break;
    default:
      alert('An unknown error occurred.');
