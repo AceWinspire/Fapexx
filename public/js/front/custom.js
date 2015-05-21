@@ -133,7 +133,7 @@ function playerInitialize(obj) {
             ipadUrl: obj.url + "playlist.m3u8",
             urlResolvers: ["httpstreaming", "brselect"],
             provider: "httpstreaming",
-            //image: obj.img,
+            image: obj.img,
             bitrates: [
                 {
                     bitrate: 600,
@@ -148,7 +148,6 @@ function playerInitialize(obj) {
             ],
             onStart: function(clip) {
                 time = true;
-                //streamValidationCheck();
             }
         },
         plugins: {
@@ -224,11 +223,6 @@ function html5Video(obj) {
         setTimeout(function() {
             video.play();
         }, 500);
-        setTimeout(function(){
-            if(video.getAttribute('name').indexOf("premium_video") > -1){
-                window.location.href = BASE_URL + "index/packages";
-            }
-        },3000);
     });
     video.addEventListener('ended', endVideo, false);
 }
