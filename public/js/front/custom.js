@@ -202,11 +202,12 @@ function videoJsInitialize(obj) {
     VideoJS.setupAllWhenReady();
 }
 function html5Video(obj) {
+    //console.log('obj',obj);
     var name = obj['is_premium'] && charged_user == false ? "premium_video" : '';
     var videoTag = "";
     var h = resizeVideoContainer();
     videoTag += '<div style="position:relative;height:' + h + ';width:' + $("#webtv").width() + '">';
-    videoTag += '<video id="webtv_html5Video" style="position:relative;z-index:5" width="100%" height="' + h + '" preload="none" autoplay controls x-webkit-airplay="allow" src="' + obj.url + '" poster="' + obj.img + '" name="' + name + '">';
+    videoTag += '<video id="webtv_html5Video" style="position:relative;z-index:5" width="100%" height="' + h + '" preload="none" autoplay controls x-webkit-airplay="allow" src="' + obj.url + '" poster="' + obj.img + '" name="' + name + '" type="video/mp4">';
     videoTag += '</video>';
     videoTag += '<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:999" id="click-simulate"></div>';
     videoTag += '</div>';
@@ -221,6 +222,7 @@ function html5Video(obj) {
         }, 500);
     });
     video.addEventListener('ended', endVideo, false);
+    video.addEventListener('error', playbackFailed, true);
 }
 
 function endVideo() {
@@ -229,6 +231,29 @@ function endVideo() {
         window.location.href = BASE_URL + "index/packages";
     }
 };
+
+ function playbackFailed(e) {
+   // video playback failed - show a message saying why
+   switch (e.target.error.code) {
+     case e.target.error.MEDIA_ERR_ABORTED:
+       alert('You aborted the video playback.');
+       break;
+    case e.target.error.MEDIA_ERR_NETWORK:
+      alert('A network error caused the video download to fail part-way.');
+      break;
+   case e.target.error.MEDIA_ERR_DECODE:
+      alert('The video playback was aborted due to a corruption problem or because the video used features your browser did not support.');
+      break;
+   case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+        $("#webtv").empty();
+        playerStrobe(content_object);
+     //alert('The video could not be loaded, either because the server or network failed or because the format is not supported.');
+     break;
+   default:
+     alert('An unknown error occurred.');
+     break;
+   }
+}
 
 function directStream(obj) {
     var player = document.getElementById("webtv");
