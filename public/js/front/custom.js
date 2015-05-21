@@ -43,7 +43,6 @@ function onJavaScriptBridgeCreated(playerId)
 {
     if (player == null) {
         player = document.getElementById(playerId);
-        //console.log('player',player);
         player.addEventListener("complete", "completeFunc");
         if (checkHelper == null) {
             checkHelper = true;
@@ -53,8 +52,6 @@ function onJavaScriptBridgeCreated(playerId)
 }
 
 function playerStrobe(obj) {
-    //console.log('obj',obj);
-    //console.log('charged_user',charged_user);
     if (noflash == true || flashembed.getVersion()[0] < 10) {
         noFlashFn();
         return;
@@ -205,7 +202,6 @@ function videoJsInitialize(obj) {
     VideoJS.setupAllWhenReady();
 }
 function html5Video(obj) {
-    //console.log('obj',obj);
     var name = obj['is_premium'] && charged_user == false ? "premium_video" : '';
     var videoTag = "";
     var h = resizeVideoContainer();
@@ -228,6 +224,7 @@ function html5Video(obj) {
 }
 
 function endVideo() {
+    var video = $('#webtv_html5Video')[0];
     if(video.getAttribute('name').indexOf("premium_video") > -1){
         window.location.href = BASE_URL + "index/packages";
     }
