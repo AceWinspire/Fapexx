@@ -207,7 +207,7 @@ function html5Video(obj) {
     var videoTag = "";
     var h = resizeVideoContainer();
     videoTag += '<div style="position:relative;height:' + h + ';width:' + $("#webtv").width() + '">';
-    videoTag += '<video id="webtv_html5Video" style="position:relative;z-index:5" width="100%" height="' + h + '" preload="none" autoplay controls x-webkit-airplay="allow" src="' + obj.url + '" poster="' + obj.img + '" name="' + name + '" type="video/mp4">';
+    videoTag += '<video id="webtv_html5Video" style="position:relative;z-index:5" width="100%" height="' + h + '" preload="none" autoplay controls x-webkit-airplay="allow" src="' + obj.url + '" poster="' + obj.img + '" name="' + name + '" type="application/x-mpegURL">';
     videoTag += '</video>';
     videoTag += '<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:999" id="click-simulate"></div>';
     videoTag += '</div>';
@@ -298,7 +298,8 @@ $( document ).ready(function() {
             return;
         }
         if (checkAndroidVersion() >= 4.3) {
-            directStream(result);
+            html5Video(result);
+            //directStream(result);
             return;
         }
         if (idevice) {
