@@ -63,7 +63,7 @@ function playerStrobe(obj) {
     var width = $("#webtv").width();
     var h = resizeVideoContainer();
     var parameters = {
-        src: obj.url + "playlist.m3u8",
+        src: obj.url,
         autoPlay: "true",
         verbose: true,
         controlBarAutoHide: "true",
@@ -126,8 +126,8 @@ function playerInitialize(obj) {
         clip: {
             scaling: 'fit',
             autoPlay: true,
-            url: obj.url + "playlist.m3u8",
-            ipadUrl: obj.url + "playlist.m3u8",
+            url: obj.url,
+            ipadUrl: obj.url,
             urlResolvers: ["httpstreaming", "brselect"],
             provider: "httpstreaming",
             image: obj.img,
@@ -195,7 +195,7 @@ function videoJsInitialize(obj) {
     var h = resizeVideoContainer();
     videoTag += '<div style="height:' + h + ';width:' + $("#webtv").width() + '">';
     videoTag += '<video class="video-js" width="100%" height="100%" preload="none" controls x-webkit-airplay="allow">';
-    videoTag += '  <source src="' + obj.url + 'playlist.m3u8" type="application/vnd.apple.mpegurl" />';
+    videoTag += '<source src="' + obj.url + '" type="application/vnd.apple.mpegurl" />';
     videoTag += '</video>';
     videoTag += '</div>';
     $("#webtv").html(videoTag);
@@ -206,7 +206,7 @@ function html5Video(obj) {
     var videoTag = "";
     var h = resizeVideoContainer();
     videoTag += '<div style="position:relative;height:' + h + ';width:' + $("#webtv").width() + '">';
-    videoTag += '<video id="webtv_html5Video" style="position:relative;z-index:5" width="100%" height="' + h + '" preload="none" autoplay controls x-webkit-airplay="allow" src="' + obj.url + 'playlist.m3u8" poster="' + obj.img + '" name="' + name + '">';
+    videoTag += '<video id="webtv_html5Video" style="position:relative;z-index:5" width="100%" height="' + h + '" preload="none" autoplay controls x-webkit-airplay="allow" src="' + obj.url + '" poster="' + obj.img + '" name="' + name + '">';
     videoTag += '</video>';
     videoTag += '<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:999" id="click-simulate"></div>';
     videoTag += '</div>';
@@ -234,7 +234,7 @@ function directStream(obj) {
     var player = document.getElementById("webtv");
     var h = resizeVideoContainer();
     $("#webtv").removeClass('fp3');
-    player.innerHTML = '<a href="' + obj.url + 'playlist.m3u8" style="height:' + h + 'px;display:block;width:100%;background:url(' + obj.img + ') no-repeat center center"></a>';
+    player.innerHTML = '<a href="' + obj.url + '" style="height:' + h + 'px;display:block;width:100%;background:url(' + obj.img + ') no-repeat center center"></a>';
 }
 
 function noFlashFn() {
