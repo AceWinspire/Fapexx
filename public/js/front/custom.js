@@ -38,45 +38,7 @@ function alertFn() {
     window.location.href = BASE_URL + "user/login";
     return;
 }
-/*function streamValidationCheck() {
-    if (time != false) {
-        reloadInterval = setInterval(function() {
-            checkSession();
-            //updateChannel();
-        }, stat_interval * 1000);
-    } else {
-        clearInterval(reloadInterval);
-    }
-}
-function checkSession() {
-    jQuery.ajax({
-        url: BASE_URL + 'ajax/check-session',
-        type: 'POST',
-        data: {
-            channel: current_channel_id
-        },
-        dataType: "json",
-        success: function(result) {
-            if (result != false) {
-                alertFn();
-            }
-        }
-    });
-}
-function updateChannel() {
-    jQuery.ajax({
-        url: BASE_URL + 'ajax/update-channel',
-        type: 'POST',
-        data: {
-            channel: current_channel_id
-        },
-        dataType: "json"
-    });
-}
-function streamLoopTest() {
-    timerHelper = timerHelper + 1;
-    console.log(timerHelper);
-}*/
+
 function onJavaScriptBridgeCreated(playerId)
 {
     if (player == null) {
@@ -86,7 +48,6 @@ function onJavaScriptBridgeCreated(playerId)
         if (checkHelper == null) {
             checkHelper = true;
             time = true;
-            //streamValidationCheck();
         }
     }
 }
@@ -263,14 +224,21 @@ function html5Video(obj) {
         setTimeout(function() {
             video.play();
         }, 500);
-
+        setTimeout(function(){
+            if(video.getAttribute('name').indexOf("premium_video") > -1){
+                window.location.href = BASE_URL + "index/packages";
+            }
+        },3000);
     });
-    video.onended = function() {
-        if(video.getAttribute('name').indexOf("premium_video") > -1){
-            window.location.href = BASE_URL + "index/packages";
-        }
-    };
+    video.addEventListener('ended', endVideo, false);
 }
+
+function endVideo() {
+    if(video.getAttribute('name').indexOf("premium_video") > -1){
+        window.location.href = BASE_URL + "index/packages";
+    }
+};
+
 function directStream(obj) {
     var player = document.getElementById("webtv");
     var h = resizeVideoContainer();
@@ -311,17 +279,14 @@ $( document ).ready(function() {
     if(result != ''){
         if (checkAndroidVersion() >= 4.0 && checkAndroidVersion() < 4.3) {
             html5Video(result);
-            //streamValidationCheck();
             return;
         }
         if (checkAndroidVersion() >= 4.3) {
             directStream(result);
-            //streamValidationCheck();
             return;
         }
         if (idevice) {
             html5Video(result);
-            //streamValidationCheck();
             return;
         }
         $("#webtv").slideDown('fast', function() {
