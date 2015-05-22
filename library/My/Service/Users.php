@@ -201,7 +201,7 @@ class My_Service_Users extends My_Service{
 		}
 	}
 
-	public function register($email, $password, $session_id){
+	public function register($email, $password){
 		try {
 			$this->http_client->setUri($this->api_url.'/users/register');
 
@@ -210,7 +210,6 @@ class My_Service_Users extends My_Service{
 			$this->http_client->setParameterGet(array('app_id'	=> $this->app_id));
 			$this->http_client->setParameterGet(array('identity'	=> $email));
 			$this->http_client->setParameterGet(array('password'	=> $password));
-			$this->http_client->setParameterGet(array('session_id'	=> $session_id));
 
 			$response = $this->http_client->request('GET');
 			$result   = json_decode($response->getBody());

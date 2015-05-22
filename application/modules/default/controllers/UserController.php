@@ -195,8 +195,7 @@ class UserController extends Zend_Controller_Action {
 				return;
 			}
 
-			$session_id =  md5(rand(1000, 10000).time());
-			$result = $this->my_service_users->register( $email, $password, $session_id);
+			$result = $this->my_service_users->register($email, $password);
 			
 			if($result->success == true){
 				$user_info = $this->my_service_users->get($result->user_id);
@@ -241,6 +240,10 @@ class UserController extends Zend_Controller_Action {
 	}
 
 	public function editProfileAction() {
+		if (!$this->user_auth->hasIdentity()) {
+			$this->_redirect('user/login');
+		}
+
 		if($this->_request->isPost()){
 			$password = $this->_getParam('password');
 			$re_password = $this->_getParam('re_password');
