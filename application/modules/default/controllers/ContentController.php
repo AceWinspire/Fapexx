@@ -88,7 +88,4 @@ class ContentController extends Zend_Controller_Action {
 		$this->my_service_log->contentViewed($this->view->existing->id, $ip_address);
 	}
 
-	public function testAction(){
-		
-	}
 }

@@ -45,7 +45,9 @@ body{
   color: #fff;
 }
 .main-content{
-  height: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 50px;
 }
 
 .categorie-title{
@@ -88,10 +90,6 @@ h4{
   background-size: cover;         /* Generic*/
 }
 
-.packages .form-control{
-  height: 40px;
-}
-
 .label-payment-form{
   font-size: 16px;
   font-weight: bold;
@@ -107,10 +105,14 @@ span.last{
   margin: 30px 0;
 }
 
-.packages{
+.user{
   background-color: #fff;
   height: auto;
   min-height: 100%;
+}
+
+.user .form-control{
+  height: 40px;
 }
 
 .left-part{
@@ -255,15 +257,6 @@ h4.user-title{
   font-size: 24px;
   margin-top: 30px;
   background-color: rgba(255,255,255,0.6);
-}
-
-.forgotten-password{
-  height: 100%;
-  background-color: #fff;
-  -webkit-background-size: cover; /* For WebKit*/
-  -moz-background-size: cover;    /* Mozilla*/
-  -o-background-size: cover;      /* Opera*/
-  background-size: cover;         /* Generic*/
 }
 
 .forgotten-password-submit{
