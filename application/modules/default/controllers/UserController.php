@@ -266,6 +266,7 @@ class UserController extends Zend_Controller_Action {
 			if($result->success == true){
 				$user = $this->my_service_users->get($user_id);
 				$this->auth_storage->write($user);
+				My_Utilities::fmsg('data are updated', 'success');
 				$this->_redirect('user/profile');
 			}else{
 				My_Utilities::fmsg($result->msg, 'error');
