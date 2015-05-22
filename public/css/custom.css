@@ -46,7 +46,6 @@ body{
 }
 .main-content{
   position: relative;
-  overflow: hidden;
   margin-bottom: 50px;
 }
 
