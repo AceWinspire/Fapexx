@@ -45,7 +45,8 @@ body{
   color: #fff;
 }
 .main-content{
-  height: 100%;
+  position: relative;
+  margin-bottom: 50px;
 }
 
 .categorie-title{
@@ -70,16 +71,6 @@ h4{
   }
 }
 
-.big-img{
-  padding-top: 20px;
-  padding-left: 0px;
-  max-width: 90%;
-}
-
-.stream-channels{
-  border-bottom: 1px solid orange;
-}
-
 .cc-sub-packages{
   padding: 0% 8% 8% 8%;
 }
@@ -98,10 +89,6 @@ h4{
   background-size: cover;         /* Generic*/
 }
 
-.packages .form-control{
-  height: 40px;
-}
-
 .label-payment-form{
   font-size: 16px;
   font-weight: bold;
@@ -117,10 +104,14 @@ span.last{
   margin: 30px 0;
 }
 
-.packages{
+.user{
   background-color: #fff;
   height: auto;
   min-height: 100%;
+}
+
+.user .form-control{
+  height: 40px;
 }
 
 .left-part{
@@ -170,6 +161,7 @@ h4.user-title{
 .existing-user{
   width:80%;
   margin:0 auto;
+  padding-bottom: 40px;
 }
 
 @media (max-width: 480px) {
@@ -266,15 +258,6 @@ h4.user-title{
   background-color: rgba(255,255,255,0.6);
 }
 
-.forgotten-password{
-  height: 100%;
-  background-color: #fff;
-  -webkit-background-size: cover; /* For WebKit*/
-  -moz-background-size: cover;    /* Mozilla*/
-  -o-background-size: cover;      /* Opera*/
-  background-size: cover;         /* Generic*/
-}
-
 .forgotten-password-submit{
   width: 100%;
 }
@@ -348,11 +331,6 @@ h4.user-title{
   background-color: #3D3D3D;;
 }
 
-.video-title{
-  color: white;
-  margin: 0;
-}
-
 a,a:hover{
   text-decoration: none;
 }
@@ -373,33 +351,9 @@ div.holder{
 }
 
 div.wrapper{  
-    float:left; /* important */  
-    position:relative; /* important(so we can absolutely position the description div */  
+    float:left;
+    position:relative;
 }  
-
-div.description-top{
-    position:absolute; 
-    top: 0px; 
-    left:0px;  
-    width:100%;  
-    /* styling bellow */  
-    background-color:transparent;  
-    font-family: 'tahoma';  
-    font-size:12px;  
-    color:white;  
-    background-color: rgba(0,0,0,0.4);
-    
-} 
-span.description-content{  
-    position:absolute; 
-    top: 10px; 
-    left: 10px;  
-    font-size:16px;  
-    color:white;  
-    padding: 0 4px;
-    background-color: rgba(0,0,0,0.5);
-    text-transform: uppercase;
-} 
 
 p.content-title{  
     position:absolute; 
@@ -441,14 +395,6 @@ p.content-raiting.color .rating-container .rating-stars {
   color: white;
 }
 
-span.thumbnail-views{
-    position:absolute; 
-    top: 10px; 
-    right: 10px;   
-    font-size:12px;  
-    color:white;  
-}
-
 .duration-holder{
   position: absolute;
   bottom: 10px;
@@ -482,24 +428,6 @@ span.thumbnail-views{
   opacity: 1;
 }
 
-.logo-hd{
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  display: inline-block;
-}
-
-.logo-hd.top{
-  left:10px;
-  top:40px;
-  bottom: auto;
-}
-
-.logo-hd img{
-   width: 50%;
-}
-
-
 .play.small{
   background-image: url(/images/play-small.png);
   height: 36px;
@@ -507,16 +435,6 @@ span.thumbnail-views{
   margin-left: -18px;
   margin-top: -18px;
   width: 36px;
-}
-
-.video-info-title{
-  font-size: 1.3em;
-  color: #FFF;
-  margin: 0;
-  padding: 7px 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
 }
 
 .tags-stream{
@@ -606,30 +524,6 @@ p.video-main-user{
   margin: 0 auto;
   margin-top: 20px;
 }
-
-.register-inputs{
-  background-color: black;
-  border: 1px solid orange;
-  color: orange;
-  font-size: 14px;
-  height: 50px;
-}
-
-.button-form{
-  font-size: 32px;
-  color: rgba(255, 255, 255, 0.81);
-  font-weight: bold;
-  text-shadow:0 4px 0 rgba(0, 0, 0, 0.25);
-  background: -webkit-linear-gradient(bottom right,orange, black, orange); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(top left,orange, black, orange); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(top left,orange, black, orange); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to top right,orange, black, orange); /* Standard syntax (must be last) */
-}
-
-.button-form.android{
-  max-width: 70%;
-}
-
 
 @media (max-width: 500px) {
   .settings p{
@@ -744,6 +638,9 @@ label.error {
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 
+.login-form .form-group.success .form-control{
+  border-color: #adadad;
+}
 
 .dropdown-submenu {
   position: relative;
@@ -801,4 +698,72 @@ label.error {
   -webkit-border-radius: 6px 0 6px 6px;
   -moz-border-radius: 6px 0 6px 6px;
   border-radius: 6px 0 6px 6px;
+}
+
+
+#footer {
+    height: 50px;
+    color: #333;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    bottom: 0px;
+    background-color: #888;
+    z-index: 10;
+}
+
+#footer
+p {
+    padding: 10px 20px;
+    color: #ff00c0;
+}
+
+#footer a, #footer
+p {
+    color: #333 !important;
+    font-size: 12px;
+    margin: 10px 5px;
+    line-height: 100%;
+    padding: 0;
+}
+
+#footer
+a {
+    float: right;
+    margin-left: 0;
+    float: none;
+}
+
+#footer a:hover {
+    text-decoration: none;
+}
+
+#footer a:hover {
+    color: #222;
+}
+
+#footer {
+    width: 100%;
+    bottom: 0px;
+    position: fixed;
+}
+
+
+.copyRight span {
+  display: block;
+  color: #333;
+  padding: 5px 0 0 0;
+}
+
+.subscriptions-holder{
+  margin-top: 40px;
+}
+
+.cancel-subscription{
+  text-align: right;
+}
+
+input:-webkit-autofill {
+    color: #2a2a2a !important;
 }

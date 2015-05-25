@@ -8,10 +8,10 @@
 
 		<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 		<link href="/css/jasny-bootstrap.css" rel="stylesheet" type="text/css">
-		<link href="/css/header.css" rel="stylesheet">
-		<link rel="stylesheet" href="/css/custom.css" type="text/css">
+		<link href="/css/header.css" rel="stylesheet" type="text/css">
+		<link href="/css/custom.css" rel="stylesheet" type="text/css">
 		<link href="/css/star-rating.css" rel="stylesheet" type="text/css">
-
+		<link href="/css/toastr.css" rel="stylesheet" type="text/css">
 
 	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	    <!--[if lt IE 9]>
@@ -35,7 +35,7 @@
 	})(window,document,'script','dataLayer','GTM-PHJRLR');</script>
 	<!-- End Google Tag Manager -->
 
-	<div class="navmenu navmenu-default navmenu-inverse navmenu-fixed-left offcanvas-sm">
+	<div class="navmenu navmenu-default navmenu-inverse navmenu-fixed-left offcanvas-md">
 		<ul class="nav navmenu-nav">
 			<li><a href="/">Home</a></li>
 			<?php foreach ($this->categories as $category) { 
@@ -48,24 +48,27 @@
 		</ul>
 	</div>
 
-    <div class="navbar navbar-default navmenu-inverse navbar-fixed-top hidden-md hidden-lg col-xs-12">
-		<div class="col-xs-2 no-padding">
+    <div class="navbar navbar-default navmenu-inverse navbar-fixed-top hidden-lg col-md-12">
+		<div class="col-xs-2 col-sm-2 col-md-2 no-padding">
 			<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
 		</div>
-		<div class="col-xs-8">
+		<div class="col-xs-8 col-sm-8 col-md-8">
 			<a class="navbar-brand" href="/" ><img class="logo-img" src="/images/fappexxx_logo.png"></a>
 		</div>
 		<?php 
-			$terms_url = $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'terms'), 'default', true); 
+			$terms_url = $this->url(array('module' => 'default', 'controller' => 'static', 'action' => 'terms'), 'default', true);
+			$privacy_url = $this->url(array('module' => 'default', 'controller' => 'static', 'action' => 'privacy'), 'default', true);
+			$faq_url = $this->url(array('module' => 'default', 'controller' => 'static', 'action' => 'faq'), 'default', true);
+
 			$login_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true); 
 			$logout_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'logout'), 'default', true);
 			$profile_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'profile'), 'default', true);
 		?>
-		<div class="col-xs-2 no-padding">
+		<div class="col-xs-2 col-sm-2 col-md-2 no-padding">
 			<ul class="nav navbar-right">
 	            <li class="dropdown user-dropdown">
 	                <a href="#" class="dropdown-toggle action-icon" data-toggle="dropdown">
@@ -114,11 +117,20 @@
 
     </div>
     <div class="container layout-holder no-padding">
-        <div class="row main-content">
-            <?php echo $this->layout()->content; ?>
-        </div>
+    	<div id="flash-messanger" style="display:none;"><?php echo $this->flashMessenger(); ?></div>
+        <?php echo $this->layout()->content; ?>
     </div> 
     
+    <div id="footer" class="fix" >
+        <p class="copyRight">
+            <a href="<?php echo $terms_url;?>">Terms of Service</a> 
+            <a href="<?php echo $privacy_url;?>">Privacy Policy</a>
+            <a href="<?php echo $faq_url;?>">FAQ</a>
+				<span>Copyright © 2015 Fappexxx</span>
+        </p>
+    </div>
+
+	<script src="<?php echo $this->baseUrl('/js/toastr.js'); ?>"></script>
 	<script src="<?php echo $this->baseUrl('/js/flowplayer/flowplayer-3.2.12.min.js'); ?>"></script>
 	<script src="<?php echo $this->baseUrl('/js/flowplayer/flowplayer.ipad-3.2.12.js'); ?>"></script>
 	<script src="<?php //echo $this->baseUrl('/js/front/add2home.js'); ?>"></script>
@@ -130,6 +142,6 @@
 	<script src="<?php echo $this->baseUrl('/js/front/bootstrap.min.js'); ?>"></script>
 	<script src="<?php echo $this->baseUrl('/js/jasny-bootstrap.min.js'); ?>"></script>
 
-	<div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm offcanvas-clone"></div>
+	<div class="navmenu navmenu-default navmenu-fixed-left offcanvas-md offcanvas-clone"></div>
 </body>
 </html>

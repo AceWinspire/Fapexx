@@ -87,4 +87,5 @@ class ContentController extends Zend_Controller_Action {
 		$this->view->existing = $this->my_service_contents->getContent($video_id);
 		$this->my_service_log->contentViewed($this->view->existing->id, $ip_address);
 	}
+
 }

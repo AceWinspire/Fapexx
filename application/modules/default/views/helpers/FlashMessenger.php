@@ -31,12 +31,7 @@ class Zend_View_Helper_FlashMessenger extends Zend_View_Helper_Abstract {
         if (!empty($messages)) {
             // Posible type: error, info, alert, success
             foreach ($messages as $key => $message) {
-                $output .=
-                        '<script>
-                    $(document).ready(function() {
-                    alert("' . current($message) . '");
-                    });
-                </script>';
+                $output .='<div class="wrapper_'.$key.'" data-message="'.current($message).'" data-type="'.key($message).'"><div class="alert alert-'.key($message).'">'.current($message).'</div></div>';
             }
             Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger')->clearCurrentMessages();
         }

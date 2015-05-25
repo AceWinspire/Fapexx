@@ -155,17 +155,14 @@ class My_Service_Users extends My_Service{
 			throw new Exception('Service unavailable');
 		}
 	}
-	public function verify($code, $password, $repeated_password, $ip_address){
+	
+	public function passRecovery($email){
 		try {
-			$this->http_client->setUri($this->api_url.'/users/verify');
-
+			$this->http_client->setUri($this->api_url.'/users/pass-recovery');
 			$this->http_client->resetParameters();
 
-			$this->http_client->setParameterGet(array('app_id'				=> $this->app_id));
-			$this->http_client->setParameterGet(array('code'				=> $code));
-			$this->http_client->setParameterGet(array('password'			=> $password));
-			$this->http_client->setParameterGet(array('repeated_password'	=> $repeated_password));
-			$this->http_client->setParameterGet(array('ip_address'			=> $ip_address));
+			$this->http_client->setParameterGet(array('app_id'		=> $this->app_id));
+			$this->http_client->setParameterGet(array('identity'	=> $email));
 
 			$response = $this->http_client->request('GET');
 			$result   = json_decode($response->getBody());
@@ -181,13 +178,14 @@ class My_Service_Users extends My_Service{
 		}
 	}
 
-	public function passRecovery($email){
+	public function resetPassword($code, $password){
 		try {
-			$this->http_client->setUri($this->api_url.'/users/pass-recovery');
+			$this->http_client->setUri($this->api_url.'/users/reset-password');
 			$this->http_client->resetParameters();
 
-			$this->http_client->setParameterGet(array('app_id'	=> $this->app_id));
-			$this->http_client->setParameterGet(array('identity'	=> $email));
+			$this->http_client->setParameterGet(array('app_id'		=> $this->app_id));
+			$this->http_client->setParameterGet(array('code'		=> $code));
+			$this->http_client->setParameterGet(array('password'	=> $password));
 
 			$response = $this->http_client->request('GET');
 			$result   = json_decode($response->getBody());
@@ -203,7 +201,7 @@ class My_Service_Users extends My_Service{
 		}
 	}
 
-	public function register($email, $password, $session_id){
+	public function register($email, $password){
 		try {
 			$this->http_client->setUri($this->api_url.'/users/register');
 
@@ -212,7 +210,6 @@ class My_Service_Users extends My_Service{
 			$this->http_client->setParameterGet(array('app_id'	=> $this->app_id));
 			$this->http_client->setParameterGet(array('identity'	=> $email));
 			$this->http_client->setParameterGet(array('password'	=> $password));
-			$this->http_client->setParameterGet(array('session_id'	=> $session_id));
 
 			$response = $this->http_client->request('GET');
 			$result   = json_decode($response->getBody());

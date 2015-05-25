@@ -5,9 +5,6 @@ $( document ).ready(function() {
 $( window ).resize(function() {
     $('.right-part').css('height',$('.left-part').height());
 });
-//@todo event update-channel za statistiku ne radi kako treba, ako se pusti jedan kanal, trigeruje se update-channel/channel_id na 
-// odredjeni interval, kada se pusti drugi kanal, trigeruje se update-channel sa id-em tog kanala ali se trigeruje i prvi event i 	
-// dobija se netacna statistika
 
 var ua = navigator.userAgent;
 var video = document.createElement("video"),
@@ -32,11 +29,6 @@ function checkAndroidVersion() {
     }
 }
 function resizeVideoContainer() {
-    /*var windowHeight = $(window).height();
-    var headerHeight = $("#header").height();
-    var footerHeight = $("#footer").height();
-    var channelsHeight = $(".channels").height();
-    var heightSum = headerHeight + footerHeight + channelsHeight;*/
     var webTv = $("#webtv").width();
     var h = webTv * 9 / 16;
     return h;
@@ -46,62 +38,20 @@ function alertFn() {
     window.location.href = BASE_URL + "user/login";
     return;
 }
-/*function streamValidationCheck() {
-    if (time != false) {
-        reloadInterval = setInterval(function() {
-            checkSession();
-            //updateChannel();
-        }, stat_interval * 1000);
-    } else {
-        clearInterval(reloadInterval);
-    }
-}
-function checkSession() {
-    jQuery.ajax({
-        url: BASE_URL + 'ajax/check-session',
-        type: 'POST',
-        data: {
-            channel: current_channel_id
-        },
-        dataType: "json",
-        success: function(result) {
-            if (result != false) {
-                alertFn();
-            }
-        }
-    });
-}
-function updateChannel() {
-    jQuery.ajax({
-        url: BASE_URL + 'ajax/update-channel',
-        type: 'POST',
-        data: {
-            channel: current_channel_id
-        },
-        dataType: "json"
-    });
-}
-function streamLoopTest() {
-    timerHelper = timerHelper + 1;
-    console.log(timerHelper);
-}*/
+
 function onJavaScriptBridgeCreated(playerId)
 {
     if (player == null) {
         player = document.getElementById(playerId);
-        //console.log('player',player);
         player.addEventListener("complete", "completeFunc");
         if (checkHelper == null) {
             checkHelper = true;
             time = true;
-            //streamValidationCheck();
         }
     }
 }
 
 function playerStrobe(obj) {
-    //console.log('obj',obj);
-    //console.log('charged_user',charged_user);
     if (noflash == true || flashembed.getVersion()[0] < 10) {
         noFlashFn();
         return;
@@ -113,7 +63,7 @@ function playerStrobe(obj) {
     var width = $("#webtv").width();
     var h = resizeVideoContainer();
     var parameters = {
-        src: obj.url + "playlist.m3u8",
+        src: obj.url,
         autoPlay: "true",
         verbose: true,
         controlBarAutoHide: "true",
@@ -176,11 +126,11 @@ function playerInitialize(obj) {
         clip: {
             scaling: 'fit',
             autoPlay: true,
-            url: obj.url + "playlist.m3u8",
-            ipadUrl: obj.url + "playlist.m3u8",
+            url: obj.url,
+            ipadUrl: obj.url,
             urlResolvers: ["httpstreaming", "brselect"],
             provider: "httpstreaming",
-            //image: obj.img,
+            image: obj.img,
             bitrates: [
                 {
                     bitrate: 600,
@@ -195,7 +145,6 @@ function playerInitialize(obj) {
             ],
             onStart: function(clip) {
                 time = true;
-                //streamValidationCheck();
             }
         },
         plugins: {
@@ -246,17 +195,18 @@ function videoJsInitialize(obj) {
     var h = resizeVideoContainer();
     videoTag += '<div style="height:' + h + ';width:' + $("#webtv").width() + '">';
     videoTag += '<video class="video-js" width="100%" height="100%" preload="none" controls x-webkit-airplay="allow">';
-    videoTag += '  <source src="' + obj.url + 'playlist.m3u8" type="application/vnd.apple.mpegurl" />';
+    videoTag += '<source src="' + obj.url + '" type="application/vnd.apple.mpegurl" />';
     videoTag += '</video>';
     videoTag += '</div>';
     $("#webtv").html(videoTag);
     VideoJS.setupAllWhenReady();
 }
 function html5Video(obj) {
+    var name = obj['is_premium'] && charged_user == false ? "premium_video" : '';
     var videoTag = "";
     var h = resizeVideoContainer();
     videoTag += '<div style="position:relative;height:' + h + ';width:' + $("#webtv").width() + '">';
-    videoTag += '<video id="webtv_html5Video" style="position:relative;z-index:5" width="100%" height="' + h + '" preload="none" autoplay controls x-webkit-airplay="allow" src="' + obj.url + 'playlist.m3u8" poster="' + obj.img + '">';
+    videoTag += '<video id="webtv_html5Video" style="position:relative;z-index:5" width="100%" height="' + h + '" preload="none" autoplay controls x-webkit-airplay="allow" src="' + obj.url + '" poster="' + obj.img + '" name="' + name + '" type="application/x-mpegURL">';
     videoTag += '</video>';
     videoTag += '<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:999" id="click-simulate"></div>';
     videoTag += '</div>';
@@ -269,14 +219,22 @@ function html5Video(obj) {
         setTimeout(function() {
             video.play();
         }, 500);
-
     });
+    video.addEventListener('ended', endVideo, false);
 }
+
+function endVideo() {
+    var video = $('#webtv_html5Video')[0];
+    if(video.getAttribute('name').indexOf("premium_video") > -1){
+        window.location.href = BASE_URL + "index/packages";
+    }
+};
+
 function directStream(obj) {
     var player = document.getElementById("webtv");
     var h = resizeVideoContainer();
     $("#webtv").removeClass('fp3');
-    player.innerHTML = '<a href="' + obj.url + 'playlist.m3u8" style="height:' + h + 'px;display:block;width:100%;background:url(' + obj.img + ') no-repeat center center"></a>';
+    player.innerHTML = '<a href="' + obj.url + '" style="height:' + h + 'px;display:block;width:100%;background:url(' + obj.img + ') no-repeat center center"></a>';
 }
 
 function noFlashFn() {
@@ -312,17 +270,15 @@ $( document ).ready(function() {
     if(result != ''){
         if (checkAndroidVersion() >= 4.0 && checkAndroidVersion() < 4.3) {
             html5Video(result);
-            //streamValidationCheck();
             return;
         }
         if (checkAndroidVersion() >= 4.3) {
-            directStream(result);
-            //streamValidationCheck();
+            html5Video(result);
+            //directStream(result);
             return;
         }
         if (idevice) {
             html5Video(result);
-            //streamValidationCheck();
             return;
         }
         $("#webtv").slideDown('fast', function() {
@@ -331,67 +287,47 @@ $( document ).ready(function() {
     }
 });
 
-/*function validateForm(){
-    var first_name = $('input[name="first_name"]').val();
-    var last_name = $('input[name="last_name"]').val();
-    var card_number = $('input[name="card_number"]').val();
-    var zip_code = $('input[name="zip_code"]').val();
-    var email = $('input[name="email"]').val();
-    var expiration_month = $('input[name="expiration_month"]').val();
-    var expiration_year = $('input[name="expiration_year"]').val();
-    
-    if(first_name == ''){
-        alert('Enter first name!');
-        return false;
-    }
-
-    if(last_name == ''){
-        alert('Enter your last name!');
-        return false;
-    }
-
-    if(card_number.length != 16){
-        alert('Card number not valid!');
-        return false;
-    }
-
-    if(zip_code.length < 4){
-        alert('Zip code not valid!');
-        return false;
-    }
-
-    if(!(/^\d+$/.test(card_number))){
-        alert('Card number not valid, digits only!');
-        return false;
-    }
-
-    if(!(/^\d+$/.test(zip_code))){
-        alert('Zip code not valid, digits only!');
-        return false;
-    }
-
-    if(expiration_month > 12 || expiration_month < 1){
-        alert('Month in expiration date not valid!');
-        return false;   
-    }
-
-    if(expiration_year < 2015){
-        alert('Year in expiration date not valid!');
-        return false;   
-    }
-    
-    var email_regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(!email_regex.test(email)){
-        alert('Email address not valid!');
-        return false;
-    }
-
-    return true;
-}*/
-
 $("input[id='fake-rating']").rating({
     'showClear':false,
     'disabled':true,
     'showCaption':false,
 });
 
+$( document ).ready(function() {
+    if( !$('#flash-messanger').is(':empty') ) {
+        var opts = {
+                "closeButton": true,
+                "debug": false,
+                "positionClass": "toast-bottom-right",
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+        $.each($("div[class^='wrapper']"),function(){
+            var message = $(this).data("message");
+            var type = $(this).data("type");
+            switch(type){
+                case 'success': 
+                    toastr.success(message, null, opts);
+                    break;
+                case 'info' : 
+                    toastr.info(message, null, opts);
+                    break;
+                case 'error' :
+                    toastr.error(message, null, opts);
+                    break;
+                case 'warning' :
+                    toastr.warning(message, null, opts);
+                    break;
+                default:
+                    break;
+            }
+        })
+    }
+})

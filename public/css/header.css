@@ -92,7 +92,7 @@ ul.nav.navbar-right{
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1198px) {
   body {
     padding: 0 0 0 300px;
   }
