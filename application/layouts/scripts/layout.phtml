@@ -63,6 +63,7 @@
 			$terms_url = $this->url(array('module' => 'default', 'controller' => 'static', 'action' => 'terms'), 'default', true);
 			$privacy_url = $this->url(array('module' => 'default', 'controller' => 'static', 'action' => 'privacy'), 'default', true);
 			$faq_url = $this->url(array('module' => 'default', 'controller' => 'static', 'action' => 'faq'), 'default', true);
+			$customer_support_url = $this->url(array('module' => 'default', 'controller' => 'static', 'action' => 'customer'), 'default', true);
 
 			$login_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true); 
 			$logout_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'logout'), 'default', true);
@@ -125,6 +126,7 @@
         <p class="copyRight">
             <a href="<?php echo $terms_url;?>">Terms of Service</a> 
             <a href="<?php echo $privacy_url;?>">Privacy Policy</a>
+			<a href="<?php echo $customer_support_url; ?>">Customer support</a>
             <a href="<?php echo $faq_url;?>">FAQ</a>
 				<span>Copyright © 2015 Fappexxx</span>
         </p>

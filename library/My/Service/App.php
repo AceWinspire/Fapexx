@@ -35,7 +35,7 @@ class My_Service_App extends My_Service{
 		}
 	}
 
-	public function getTranslate($lang){
+	public function getTranslate($lang = null){
 		try {
 			$this->http_client->setUri($this->api_url.'/app/get-translate');
 
