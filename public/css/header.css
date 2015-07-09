@@ -8,6 +8,10 @@ body {
   padding: 50px 0 0 0;
 }
 
+body.android{
+  padding: 0;
+}
+
 .navmenu {
   padding-top: 50px;
 }
@@ -88,7 +92,7 @@ ul.nav.navbar-right{
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1198px) {
   body {
     padding: 0 0 0 300px;
   }

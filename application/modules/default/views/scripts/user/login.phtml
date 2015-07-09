@@ -1,26 +1,27 @@
-<div class="col-sm-12 login">
-    <div class="col-sm-1">
-    </div>
-    <div class="col-sm-10">
-        <?php $form_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true); ?>
-        <form role="form"  method="POST" class="login-form" id="login_form" action="<?php echo $form_url?>" >
-            <div class="form-group">
-				<input type="email" class="form-control" name="email" id="email" value="" placeholder="Email" />
-			</div>
-			<div class="form-group">
-				<input type="password" class="form-control" name="password" id="password" placeholder="Password" />
-			</div>
-			<div class="form-group">
-				<button type="submit" name="login-submit" class="btn login-submit">Login</button>
-			</div>
-        </form>
-				<a class="register-login" href="/user/register">Register</a>
-				<a class="forgot-password-login" href="/user/forgotten-password">Forgot your password?</a>
-				<?php if($this->msg){
-					echo $this->msg;
-					} ?>
-    </div>
-    <div class="col-sm-1">
+<div class="login">
+    <div class="main-content">
+        <div class="col-sm-12 ">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-10">
+                <?php $form_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true); ?>
+                <form role="form"  method="POST" class="login-form" id="login_form" action="<?php echo $form_url?>" autocomplete="off"  >
+                    <div class="form-group">
+        				<input type="email" class="form-control" name="email" id="email" value="" placeholder="Email" />
+        			</div>
+        			<div class="form-group">
+        				<input type="password" class="form-control" name="password" id="password" placeholder="Password" />
+        			</div>
+        			<div class="form-group">
+        				<button type="submit" name="login-submit" class="btn login-submit">Login</button>
+        			</div>
+                </form>
+        				<a class="register-login" href="/user/register">Register</a>
+         				<a class="forgot-password-login" href="/user/forgotten-password">Forgot your password?</a>
+            </div>
+            <div class="col-sm-1">
+            </div>
+        </div>
     </div>
 </div>
 

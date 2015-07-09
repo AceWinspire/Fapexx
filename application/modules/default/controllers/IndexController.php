@@ -34,17 +34,12 @@ class IndexController extends Zend_Controller_Action {
 		$this->view->cc_sub_packages = $this->my_service_app->getCcSubscriptionPackages();
 	}
 
-	
-
-	public function termsAction(){
-		
-	}
-
 	public function desktopAction(){
+		$this->_helper->layout()->disableLayout();
 	}
 
 	public function androidAction(){
+		$this->_helper->layout()->disableLayout();
 	}
 
-	
 }
