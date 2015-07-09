@@ -19,4 +19,7 @@ class StaticController extends Zend_Controller_Action {
 
 	public function faqAction() {
     }
+
+    public function customerAction() {
+    }
 }

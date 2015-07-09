@@ -15,8 +15,13 @@ class My_Plugin_Front extends Zend_Controller_Plugin_Abstract {
 
         $my_service_contents  	= new My_Service_Contents();
         $my_service_app  		= new My_Service_App();
+        $view->translate    = $my_service_app->getTranslate();
 		$view->categories 	= $my_service_contents->getCategories();
 		$view->app_settings	= $my_service_app->getInfo();
+
+        foreach($view->translate as $key=>$value){
+            Zend_Registry::set($key, $value);
+        }
 
         $session = new Zend_Session_Namespace('no_android');
         $remote_ip = Zend_Registry::get('remote_ip');
