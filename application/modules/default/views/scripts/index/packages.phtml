@@ -12,6 +12,11 @@
 		    <div class="cc-sub-packages">
 		    	<a href="<?php echo $cc_pack_url;?>"><img src="<?php echo $one->img; ?>" width="100%"></a>
 		    </div>
-		<?php } ?>
+		<?php }
+		$login_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true); 
+		 ?>
+    	<a class="forgot-password-login" href="<?php echo $login_url;?>">Login</a>
     </div>
+
+    
 </div>
