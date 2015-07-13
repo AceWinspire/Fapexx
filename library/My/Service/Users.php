@@ -15,7 +15,7 @@ class My_Service_Users extends My_Service{
 
 	public function get($user_id){
 		try {
-			$this->http_client->setUri($this->api_url.'/segpay-users/get');
+			$this->http_client->setUri($this->api_url.'/users/get');
 
 			$this->http_client->resetParameters();
 
@@ -38,7 +38,7 @@ class My_Service_Users extends My_Service{
 
 	public function auth($email, $password, $session_id){
 		try {
-			$this->http_client->setUri($this->api_url.'/segpay-users/auth');
+			$this->http_client->setUri($this->api_url.'/users/auth');
 
 			$this->http_client->resetParameters();
 
@@ -65,7 +65,7 @@ class My_Service_Users extends My_Service{
 	
 	public function checkSession($user_id, $session_id){
 		try {
-			$this->http_client->setUri($this->api_url.'/segpay-users/check-session');
+			$this->http_client->setUri($this->api_url.'/users/check-session');
 
 			$this->http_client->resetParameters();
 
@@ -89,7 +89,7 @@ class My_Service_Users extends My_Service{
 
 	public function charged($user_id){
 		try {
-			$this->http_client->setUri($this->api_url.'/segpay-users/charged');
+			$this->http_client->setUri($this->api_url.'/users/charged');
 
 			$this->http_client->resetParameters();
 
@@ -112,7 +112,7 @@ class My_Service_Users extends My_Service{
 
 	public function charge($user_id){
 		try {
-			$this->http_client->setUri($this->api_url.'/segpay-users/charge');
+			$this->http_client->setUri($this->api_url.'/users/charge');
 
 			$this->http_client->resetParameters();
 
@@ -135,7 +135,7 @@ class My_Service_Users extends My_Service{
 
 	public function uncharge($user_id){
 		try {
-			$this->http_client->setUri($this->api_url.'/segpay-users/uncharge');
+			$this->http_client->setUri($this->api_url.'/users/uncharge');
 
 			$this->http_client->resetParameters();
 
@@ -158,7 +158,7 @@ class My_Service_Users extends My_Service{
 	
 	public function passRecovery($email){
 		try {
-			$this->http_client->setUri($this->api_url.'/segpay-users/pass-recovery');
+			$this->http_client->setUri($this->api_url.'/users/pass-recovery');
 			$this->http_client->resetParameters();
 
 			$this->http_client->setParameterGet(array('app_id'		=> $this->app_id));
@@ -180,7 +180,7 @@ class My_Service_Users extends My_Service{
 
 	public function resetPassword($code, $password){
 		try {
-			$this->http_client->setUri($this->api_url.'/segpay-users/reset-password');
+			$this->http_client->setUri($this->api_url.'/users/reset-password');
 			$this->http_client->resetParameters();
 
 			$this->http_client->setParameterGet(array('app_id'		=> $this->app_id));
@@ -203,7 +203,7 @@ class My_Service_Users extends My_Service{
 
 	public function register($email, $password){
 		try {
-			$this->http_client->setUri($this->api_url.'/segpay-users/register');
+			$this->http_client->setUri($this->api_url.'/users/register');
 
 			$this->http_client->resetParameters();
 
@@ -227,7 +227,7 @@ class My_Service_Users extends My_Service{
 
 	public function update($data, $user_id){
 		try {
-			$this->http_client->setUri($this->api_url.'/segpay-users/update');
+			$this->http_client->setUri($this->api_url.'/users/update');
 
 			$this->http_client->resetParameters();
 
