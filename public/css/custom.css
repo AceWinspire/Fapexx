@@ -71,7 +71,7 @@ h4{
 }
 
 .cc-sub-packages{
-  padding: 0% 8% 8% 8%;
+  padding: 0% 8% 4% 8%;
 }
 
 .packages-container h2{
@@ -219,7 +219,7 @@ h4.user-title{
   background-size: cover;         /* Generic*/
 }
 .login-form{
-  margin: 30% auto 10%;
+  margin: 30% auto 7%;
   width: 80%;
 }
 
