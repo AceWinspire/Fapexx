@@ -1,22 +1,14 @@
 <div class="packages-container">
     <div class="main-content">
 		<h2>CHOOSE YOUR PREMIUM SUBSCRIPTION</h2>
-		<?php
-		
-		 		foreach($this->cc_sub_packages as $one){ ?>
-		    <?php 
-		        $cc_pack_url =  $one->button_link;
-
-		        // $this->user ? $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'payment', 'package_id' => $one->id), 'default', true) :  $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'register'), 'default', true);
-		    ?>
+			<?php foreach($this->cc_sub_packages as $one){ ?>
+		    <?php $cc_pack_url =  $one->button_link;?>
 		    <div class="cc-sub-packages">
 		    	<a href="<?php echo $cc_pack_url;?>"><img src="<?php echo $one->img; ?>" width="100%"></a>
 		    </div>
-		<?php }
-		$login_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true); 
-		 ?>
-    	<a class="forgot-password-login" href="<?php echo $login_url;?>">Login</a>
+			<?php } $login_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true); 
+		 	if (empty($this->user)) {
+    	 		echo '<a class="forgot-password-login" href="'.$login_url.'">Login</a>';
+    		}?>
     </div>
-
-    
 </div>
