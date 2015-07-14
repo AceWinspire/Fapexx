@@ -215,7 +215,7 @@ class UserController extends Zend_Controller_Action {
 			$session->$user_id = null;
 
 			$this->user_auth->clearIdentity();
-			$this->_redirect('user/register');
+			$this->_redirect('user/login');
 		}else{
 			$this->_redirect('user/login');
 		}
@@ -223,7 +223,7 @@ class UserController extends Zend_Controller_Action {
 
 	public function profileAction() {
 		if (!$this->user_auth->hasIdentity()) {
-			$this->_redirect('user/register');
+			$this->_redirect('user/login');
 		}
 		
 		$this->view->cc_sub_packages = $this->my_service_app->getCcSubscriptionPackages();
