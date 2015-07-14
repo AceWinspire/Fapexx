@@ -127,7 +127,7 @@ function playerInitialize(obj) {
         clip: {
             scaling: 'fit',
             autoPlay: true,
-            url: obj.url,
+            url: (obj['is_premium'] && charged_user == false) ? obj.preview_url : obj.url,
             ipadUrl: obj.url,
             urlResolvers: ["httpstreaming", "brselect"],
             provider: "httpstreaming",
