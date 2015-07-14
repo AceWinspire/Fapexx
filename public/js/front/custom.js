@@ -82,7 +82,7 @@ function playerStrobe(obj) {
                 parameters[parameterName];
     }
 
-    var wmodeValue = "direct";
+    var wmodeValue = "transparent";
     var wmodeOptions = ["direct", "opaque", "transparent", "window"];
     if (parameters.hasOwnProperty("wmode"))
     {
