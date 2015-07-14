@@ -53,7 +53,7 @@ class ContentController extends Zend_Controller_Action {
 			$video->url = $video->preview_url;
 		}
 
-		$this->view->charged_user = ($this->user && $this->user->charged == true) ? 'true' : 'false';
+		$this->view->charged_user = $this->user ? 'true' : 'false';
 
 		$this->view->existing = $video;
 
