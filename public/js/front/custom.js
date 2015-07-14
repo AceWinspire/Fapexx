@@ -42,7 +42,7 @@ function alertFn() {
 function onJavaScriptBridgeCreated(playerId)
 {
     if (player == null) {
-        player = document.getElementById(playerId);
+        player = document.getElementById('strobe');
         player.addEventListener("complete", "completeFunc");
         if (checkHelper == null) {
             checkHelper = true;
@@ -56,61 +56,65 @@ function playerStrobe(obj) {
         noFlashFn();
         return;
     }
-    $("#webtv").html("<div id='strobe'></div>");
-    clip = obj;
-    var pqs = new ParsedQueryString();
-    var parameterNames = pqs.params(false);
-    var width = $("#webtv").width();
-    var h = resizeVideoContainer();
-    var parameters = {
-        src: obj.url,
-        autoPlay: "true",
-        verbose: true,
-        controlBarAutoHide: "true",
-        controlBarPosition: "bottom",
-        scaleMode: "stretch",
-        streamType: "live",
-        javascriptCallbackFunction: "onJavaScriptBridgeCreated",
-        poster: obj.img,
-        plugin_hls: BASE_URL + "js/strobe/HLSDynamicPlugin.swf"
-    };
+    if (player == null){
+        $("#webtv").html("<div id='strobe'></div>");
+        clip = obj;
+        var pqs = new ParsedQueryString();
+        var parameterNames = pqs.params(false);
+        var width = $("#webtv").width();
+        var h = resizeVideoContainer();
+        var parameters = {
+            src: obj.url,
+            autoPlay: "true",
+            verbose: true,
+            controlBarAutoHide: "true",
+            controlBarPosition: "bottom",
+            scaleMode: "stretch",
+            streamType: "live",
+            javascriptCallbackFunction: "onJavaScriptBridgeCreated",
+            poster: obj.img,
+            plugin_hls: BASE_URL + "js/strobe/HLSDynamicPlugin.swf"
+        };
 
-    for (var i = 0; i < parameterNames.length; i++) {
-        var parameterName = parameterNames[i];
-        parameters[parameterName] = pqs.param(parameterName) ||
-                parameters[parameterName];
-    }
-
-    var wmodeValue = "direct";
-    var wmodeOptions = ["direct", "opaque", "transparent", "window"];
-    if (parameters.hasOwnProperty("wmode"))
-    {
-        if (wmodeOptions.indexOf(parameters.wmode) >= 0)
-        {
-            wmodeValue = parameters.wmode;
+        for (var i = 0; i < parameterNames.length; i++) {
+            var parameterName = parameterNames[i];
+            parameters[parameterName] = pqs.param(parameterName) ||
+                    parameters[parameterName];
         }
-        delete parameters.wmode;
-    }
-    var name = "StrobeMediaPlayback_" ;
-        name += obj['is_premium'] && charged_user == false ? "premium_video" : '';
 
-    // Embed the player SWF:	            
-    swfobject.embedSWF(
-            BASE_URL + "js/strobe/StrobeMediaPlayback.swf"
-            , "strobe"
-            , width
-            , h
-            , "10.1.0"
-            , "expressInstall.swf"
-            , parameters
-            , {
-        allowFullScreen: "true",
-        wmode: wmodeValue
+        var wmodeValue = "direct";
+        var wmodeOptions = ["direct", "opaque", "transparent", "window"];
+        if (parameters.hasOwnProperty("wmode"))
+        {
+            if (wmodeOptions.indexOf(parameters.wmode) >= 0)
+            {
+                wmodeValue = parameters.wmode;
+            }
+            delete parameters.wmode;
+        }
+        var name = "StrobeMediaPlayback_" ;
+            name += obj['is_premium'] && charged_user == false ? "premium_video" : '';
+
+        // Embed the player SWF:	            
+        swfobject.embedSWF(
+                BASE_URL + "js/strobe/StrobeMediaPlayback.swf"
+                , "strobe"
+                , width
+                , h
+                , "10.1.0"
+                , "expressInstall.swf"
+                , parameters
+                , {
+            allowFullScreen: "true",
+            wmode: wmodeValue
+        }
+        , {
+            name: name
+        }
+        );
+    }else{
+        player.setMediaResourceURL(obj.url);
     }
-    , {
-        name: name
-    }
-    );
 }
 
 function playerInitialize(obj) {
