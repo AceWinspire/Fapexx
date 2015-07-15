@@ -42,7 +42,7 @@ function alertFn() {
 function onJavaScriptBridgeCreated(playerId)
 {
     if (player == null) {
-        player = document.getElementById(playerId);
+        player = document.getElementById('strobe');
         player.addEventListener("complete", "completeFunc");
         if (checkHelper == null) {
             checkHelper = true;
@@ -56,6 +56,7 @@ function playerStrobe(obj) {
         noFlashFn();
         return;
     }
+
     $("#webtv").html("<div id='strobe'></div>");
     clip = obj;
     var pqs = new ParsedQueryString();
@@ -81,7 +82,7 @@ function playerStrobe(obj) {
                 parameters[parameterName];
     }
 
-    var wmodeValue = "direct";
+    var wmodeValue = "transparent";
     var wmodeOptions = ["direct", "opaque", "transparent", "window"];
     if (parameters.hasOwnProperty("wmode"))
     {
@@ -126,7 +127,7 @@ function playerInitialize(obj) {
         clip: {
             scaling: 'fit',
             autoPlay: true,
-            url: obj.url,
+            url: (obj['is_premium'] && charged_user == false) ? obj.preview_url : obj.url,
             ipadUrl: obj.url,
             urlResolvers: ["httpstreaming", "brselect"],
             provider: "httpstreaming",
