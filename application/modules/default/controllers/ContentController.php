@@ -49,11 +49,11 @@ class ContentController extends Zend_Controller_Action {
 
 		$video  =  $this->my_service_contents->getContent($video_id);
 
-		if(!($this->user) && $video->is_premium){  //not charged user only preview video
+		if(!($this->user && $this->user->charged == true) && $video->is_premium){
 			$video->url = $video->preview_url;
 		}
 
-		$this->view->charged_user = $this->user ? 'true' : 'false';  //charged user is if user exists
+		$this->view->charged_user = ($this->user && $this->user->charged == true) ? 'true' : 'false';
 
 		$this->view->existing = $video;
 
