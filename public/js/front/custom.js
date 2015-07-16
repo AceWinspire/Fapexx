@@ -12,7 +12,6 @@ var video = document.createElement("video"),
         noflash = flashembed.getVersion()[0] === 0;
 //simulate = !idevice && noflash && !!(video.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"').replace(/no/, ''));
 var BASE_URL = 'http://' + window.location.hostname + '/';
-var fp3config;
 var time;
 var redirect = false;
 var player = null;
@@ -114,94 +113,6 @@ function playerStrobe(obj) {
     );
 }
 
-function playerInitialize(obj) {
-    $("#webtv").width("100%");
-    $("#webtv").height(resizeVideoContainer());
-    fp3config = {
-        key: '#$e3c796a02c1cb268250',
-        buffering: false,
-        logo: {
-            fullscreenOnly: false,
-            displayTime: 2000
-        },
-        clip: {
-            scaling: 'fit',
-            autoPlay: true,
-            url: (obj['is_premium'] && charged_user == false) ? obj.preview_url : obj.url,
-            ipadUrl: obj.url,
-            urlResolvers: ["httpstreaming", "brselect"],
-            provider: "httpstreaming",
-            image: obj.img,
-            bitrates: [
-                {
-                    bitrate: 600,
-                    label: "LOW",
-                    sd: true
-                },
-                {
-                    bitrate: 2500,
-                    label: "HIGH",
-                    hd: true
-                },
-            ],
-            onStart: function(clip) {
-                time = true;
-            }
-        },
-        plugins: {
-            menu: {
-                url: BASE_URL + "js/flowplayer/flowplayer.menu-3.2.12.swf",
-                items: [
-                    {
-                        label: "select bitrate:",
-                        enabled: false
-                    }
-                ]
-            },
-            brselect: {
-                url: BASE_URL + "js/flowplayer/flowplayer.bitrateselect-3.2.13.swf",
-                menu: true
-            },
-            httpstreaming: {
-                url: BASE_URL + "js/flowplayer/flowplayer.httpstreaminghls-3.2.10.swf"
-            },
-            controls: {
-                url: BASE_URL + "js/flowplayer/flowplayer.controls-3.2.15.swf"
-            }
-        },
-        onLoad: function() {
-        }
-    };
-    $f("webtv", {
-        src: BASE_URL + "js/flowplayer/flowplayer.commercial-3.2.16.swf",
-        debug: true
-    }, fp3config).ipad({
-        simulateiDevice: simulate
-    }); // sets up the player on iOS
-    $f("webtv").onFullscreen(function() {
-        this.setClip({
-            scaling: "scale"
-        });
-        this.play();
-    });
-    $f("webtv").onFullscreenExit(function() {
-        this.setClip({
-            scaling: "fit"
-        });
-        this.play();
-    });
-}
-function videoJsInitialize(obj) {
-    var videoTag = "";
-    var h = resizeVideoContainer();
-    videoTag += '<div style="height:' + h + ';width:' + $("#webtv").width() + '">';
-    videoTag += '<video class="video-js" width="100%" height="100%" preload="none" controls x-webkit-airplay="allow">';
-    videoTag += '<source src="' + obj.url + '" type="application/vnd.apple.mpegurl" />';
-    videoTag += '</video>';
-    videoTag += '</div>';
-    $("#webtv").html(videoTag);
-    VideoJS.setupAllWhenReady();
-}
 function html5Video(obj) {
     var name = obj['is_premium'] && charged_user == false ? "premium_video" : '';
     var videoTag = "";
@@ -220,6 +131,7 @@ function html5Video(obj) {
         setTimeout(function() {
             video.play();
         }, 500);
+        videoPlayedListener(obj.is_premium);
     });
     video.addEventListener('ended', endVideo, false);
 }
@@ -247,6 +159,19 @@ function noFlashFn() {
 function completeFunc() {
     if(player['name'].indexOf("premium_video") > -1){
         window.location.href = BASE_URL + "index/packages";
+    }
+}
+
+function videoPlayedListener(video_is_premium){
+    if(charged_user == false && video_is_premium){
+        var counter_video_played = 0;
+        var increase = window.setInterval(function(){
+            counter_video_played++;
+            if(counter_video_played == 20){
+                clearInterval(increase);
+                window.location.href = BASE_URL + "index/packages";
+            }
+        }, 1000);
     }
 }
 
