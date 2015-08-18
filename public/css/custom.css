@@ -620,7 +620,10 @@ p.video-main-user{
   }
 }
 .container.layout-holder{
+<<<<<<< HEAD
   min-height: 100%;
+=======
+>>>>>>> master
   /*height: 100%;*/
 }
 
@@ -800,7 +803,11 @@ input:-webkit-autofill {
   color: white;
 }
 
-.height100{
-  height: 100%;
+.margin-bottom25{
+  margin-bottom: 25%;
+}
+
+.padding5-3{
+  padding: 5% 3%;
 }
 
