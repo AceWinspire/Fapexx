@@ -36,14 +36,14 @@ class My_Service_Users extends My_Service{
 		}
 	}
 
-	public function auth($email, $password, $session_id){
+	public function auth($username, $password, $session_id){
 		try {
 			$this->http_client->setUri($this->api_url.'/segpay-users/auth');
 
 			$this->http_client->resetParameters();
 
 			$this->http_client->setParameterGet(array('app_id'	=> $this->app_id));
-			$this->http_client->setParameterGet(array('identity'	=> $email));
+			$this->http_client->setParameterGet(array('identity'	=> $username));
 			$this->http_client->setParameterGet(array('password'	=> $password));
 			$this->http_client->setParameterGet(array('session_id'	=> $session_id));
 

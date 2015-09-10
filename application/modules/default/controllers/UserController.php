@@ -63,7 +63,7 @@ class UserController extends Zend_Controller_Action {
 				return;
 			}
 
-			$result = $this->my_service_users->auth( $username, $password, $session_id);
+			$result = $this->my_service_users->auth($username, $password, $session_id);
 			if($result->success == true){
 				$user_info = $this->my_service_users->get($result->user_id);
 				$this->auth_storage->write($user_info);
