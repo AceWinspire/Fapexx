@@ -49,12 +49,12 @@ class UserController extends Zend_Controller_Action {
 		}
 
 		if($this->_request->isPost()){
-			$email = $this->_getParam('email');
+			$username = $this->_getParam('username');
 			$password = $this->_getParam('password');
 			$session_id =  md5(rand(1000, 10000).time());
 
-			if (!$this->email_validator->isValid($email)) {
-				My_Utilities::fmsg('error_email_not_valid', 'error');
+			if (!$username) {
+				My_Utilities::fmsg('error_username_required', 'error');
 				return;
 			}
 
@@ -63,7 +63,7 @@ class UserController extends Zend_Controller_Action {
 				return;
 			}
 
-			$result = $this->my_service_users->auth( $email, $password, $session_id);
+			$result = $this->my_service_users->auth( $username, $password, $session_id);
 			if($result->success == true){
 				$user_info = $this->my_service_users->get($result->user_id);
 				$this->auth_storage->write($user_info);
@@ -150,16 +150,6 @@ class UserController extends Zend_Controller_Action {
 		if($this->_request->isPost()){
 			$user_id = $this->user->id;
 
-			/*$first_name = $this->_getParam('first_name');
-			$last_name = $this->_getParam('last_name');
-			$card_number = $this->_getParam('card_number');
-			$expiration_month = $this->_getParam('expiration_month');
-			$expiration_year = $this->_getParam('expiration_year');
-			$zip_code = $this->_getParam('zip_code');
-			$country = $this->_getParam('country');
-			$email = $this->_getParam('email');
-			$package_id = $this->_getParam('hidden_package_id');*/
-
 			$result = $this->my_service_users->charge($user_id);
 			if($result->success == true){
 				$user_info = $this->my_service_users->get($result->user_id);
@@ -168,44 +158,6 @@ class UserController extends Zend_Controller_Action {
 			}else{
 				My_Utilities::fmsg($result->msg, 'error');
 			}
-		}
-	}
-
-	public function registerAction(){
-		if($this->_request->isPost()){
-			$email = $this->_getParam('email');
-			$password = $this->_getParam('password');
-			$re_password = $this->_getParam('re_password');
-
-			if (!$this->email_validator->isValid($email)) {
-				My_Utilities::fmsg('error_email_not_valid', 'error');
-				return;
-			}
-
-			if (!$password) {
-				My_Utilities::fmsg('error_password_required', 'error');
-				return;
-			}
-			if (!$re_password) {
-				My_Utilities::fmsg('error_password_repeated_required', 'error');
-				return;
-			}
-			if ($password !== $re_password) {
-				My_Utilities::fmsg('error_password_not_match', 'error');
-				return;
-			}
-
-			$result = $this->my_service_users->register($email, $password);
-			
-			if($result->success == true){
-				$user_info = $this->my_service_users->get($result->user_id);
-				$this->auth_storage->write($user_info);
-				$this->_redirect('user/payment');
-			}else{
-				My_Utilities::fmsg($result->msg, 'error');
-			}
-
-
 		}
 	}
 

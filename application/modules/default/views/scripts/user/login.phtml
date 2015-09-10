@@ -7,7 +7,7 @@
                 <?php $form_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true); ?>
                 <form role="form"  method="POST" class="login-form" id="login_form" action="<?php echo $form_url?>" autocomplete="off"  >
                     <div class="form-group">
-        				<input type="email" class="form-control" name="email" id="email" value="" placeholder="Email" />
+        				<input type="text" class="form-control" name="username" id="username" value="" placeholder="Username" />
         			</div>
         			<div class="form-group">
         				<input type="password" class="form-control" name="password" id="password" placeholder="Password" />
@@ -36,9 +36,8 @@
 
         $('#login_form').validate({
             rules: {
-                email: {
+                username: {
                 	required: true,
-                    email: true
                 },
                 password : {
                     required: true
