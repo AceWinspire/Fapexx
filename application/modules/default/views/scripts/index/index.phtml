@@ -3,7 +3,7 @@
     $class = $index > $this->app_settings->first_x_big_thumbs_contents-1  && $index% 2 == 0 ? '' : 'odd';
     $video_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'video', 'id' => $one->id,'cat_id' => 0), 'default', true);
     if($index < $this->app_settings->first_x_big_thumbs_contents) {?>
-        <div class="col-md-12 no-padding">
+        <div class="col-sm-12 col-md-8 no-padding">
             <div class="row holder">
                 <a href="<?php echo $video_url;?>" class="video-link">
                     <div class="img-container">
