@@ -1,0 +1,35 @@
+<?php foreach ($this->categories as $category) { 
+    if($category->id == $this->cat_id ){
+        $title = $category->title;
+    } 
+}?>
+<div class="main-content">
+    <div class="categorie-title">
+        <h4><?php echo $title; ?></h4>
+    </div>
+    <?php $i = 0; foreach ($this->videos as $one) {
+        $class = ($i % 2 == 0) ? 'odd' : '';
+        $video_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'video', 'id' => $one->id, 'cat_id' => $this->cat_id), 'default', true); ?>
+        <div class="col-md-12 no-padding">
+            <div class="row holder <?php echo $class;?>">
+                 <div class="left-part">
+                    <a href="<?php echo $video_url;?>" class="video-link">
+                        <img class="video-image" src="<?php echo $one->thumb_url; ?>">
+                        <div class="play small"></div>
+                    </a>
+                </div>
+                <div class="right-part">
+                    <a class="title-holder" href="<?php echo $video_url; ?>">
+                        <p><?php echo $one->title; ?></p>
+                    </a>
+                    <div class="stars-holder">
+                        <input id="fake-rating" type="number" class="rating smallest" min=0 max=5 step=1 value=<?php echo $one->rating?> data-size="xs">
+                    </div>
+                    <div class="views-holder">
+                        <span class="video-date"><?php echo $one->view_count.' views';?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php $i++; } ?>
+</div>

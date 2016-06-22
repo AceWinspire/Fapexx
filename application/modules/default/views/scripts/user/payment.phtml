@@ -1,0 +1,97 @@
+<div class="user">
+    <div class="main-content">
+        <div class="col-sm-12">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-10">
+                <h2 class="payment-title">Payment</h2>
+                <?php $form_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'payment'), 'default', true); ?>
+                <form role="form"  method="POST" class="centered" id="payment_form" action="<?php echo $form_url?>" >
+                    <input type="hidden" id="hidden_package_id" name="hidden_package_id" value="<?php echo $this->package_id;?>">
+                <?php foreach(json_decode($this->app_settings->submit_form_elements) as $one){ ?>
+                    <?php if($one->type == 'button'){?>
+                        
+                        <button type="submit" name="<?php echo $one->name?>" id="register_form_button" class="form-control btn btn-primary btn-block"><?php echo $one->label?> <i class="glyphicon glyphicon-arrow-right"></i>
+                        </button>
+                    <?php } else if($one->type == 'select'){?>
+                    <div class="form-group">
+                        <label class="label-payment-form"><?php echo $one->label;?></label>
+                        <select  class="form-control" name="<?php echo $one->name?>" required="<?php echo $one->required;?>">
+                            <option value="">Country</option>
+                            <option value="srbija">Srbija</option>
+                            <option value="crna_gora">Crna Gora</option>
+                        </select>
+                    </div>
+                    <?php } else if($one->type == 'expiration_month'){?>
+                    <div class="form-group">
+                        <label class="label-payment-form"><?php echo $one->label;?></label>
+
+                        <select  class="form-control" name="<?php echo $one->name?>" required="<?php echo $one->required;?>">
+                            <option value="">Month</option>
+                            <?php for ($i=1; $i < 13; $i++) { ?>
+                                <option value="<?php echo $i?>"><?php echo $i?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                     <?php } else if($one->type == 'expiration_year'){?>
+                     <div class="form-group">
+                        <select  class="form-control" name="<?php echo $one->name?>" required="<?php echo $one->required;?>">
+                            <option value="">Year</option>
+                            <?php for ($i=date('Y'); $i < date('Y')+10; $i++) { ?>
+                              <option value="<?php echo $i?>"><?php echo $i?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <?php }else{?>
+                    <div class="form-group">
+                        <label class="label-payment-form"><?php echo $one->label;?></label>
+                        <input type="text" class="form-control" name="<?php echo $one->name?>" required="<?php echo $one->required;?>"/>
+                    </div>
+                    <?php }?>
+                <?php } ?>
+                </form>
+            </div>
+            <div class="col-sm-1">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function($){  
+        $('.label-payment-form').each(function(){
+            var text = $(this).text().split('-');
+            var last = text.pop();
+            var result =  text.join(" ") + (text.length > 0 ? '<span class="last">'+ '-' + last+'</span>' : last); 
+            $(this).html(result);
+        })
+
+        $('#payment_form').submit(function(e){
+            var isvalidate = $("#payment_form").valid();
+            if(!isvalidate){
+              e.preventDefault();
+            }
+        })
+
+        $('#payment_form').validate({
+            rules: {
+                email: {
+                    email: true
+                },
+                card_number : {
+                    digits: true
+                }
+            },
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('success').addClass('error');
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass('error').addClass('success');
+            },
+            success: function (element) {
+                element.addClass('valid')
+                    .closest('.form-group').removeClass('error').addClass('success');
+            }
+        });
+    });
+</script>

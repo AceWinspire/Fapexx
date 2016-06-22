@@ -1,0 +1,52 @@
+<div class="main-content">
+    <div class="col-md-12 no-padding">
+        <div id="webtv" class="fp3" data-id='<?php echo $this->existing->id;?>'> </div>
+        <div class="row holder">
+            <div style="min-height:138px;">
+                <p class="content-title"><?php echo $this->existing->title;?></p>
+                
+                 <p class='content-raiting color'>
+                    <input id="fake-rating" type="number" class="rating" min=0 max=5 step=1 value=<?php echo $this->existing->rating?> data-size="sm">
+                </p>              
+                <div class="tags-stream">
+                    <?php foreach($this->existing->tags as $one_tag){?>
+                        <span class="label label-default"><?php echo $one_tag;?></span>
+                    <?php }?>
+                </div> 
+                <div class="duration-holder"><?php echo $this->existing->view_count.' views'; ?></div> 
+            </div>             
+        </div>
+
+        <?php $i = 1; foreach ($this->videos as $video) {
+            $class = ($i % 2 == 0) ? 'odd' : '';
+            if($video->id == $this->existing->id){
+                continue;
+            }
+            $video_url = $this->url(array('module' => 'default', 'controller' => 'content', 'action' => 'video', 'id' => $video->id,'cat_id' => $this->cat_id), 'default', true);
+        ?>
+        <div class="row holder <?php echo $class;?>">
+            <div class="left-part">
+                <a href="<?php echo $video_url;?>" class="video-link">
+                    <img class="video-image" src="<?php echo $video->thumb_url; ?>">
+                    <div class="play small"></div>
+                </a>
+            </div>
+            <div class="right-part">
+                <a class="title-holder" href="<?php echo $video_url; ?>">
+                    <p><?php echo $video->title; ?></p>
+                </a>
+                <div class="stars-holder">
+                    <input id="fake-rating" type="number" class="rating smallest" min=0 max=5 step=1 value=<?php echo $video->rating?> data-size="xs">
+                </div>
+                <div class="views-holder">
+                    <span class="video-date"><?php echo $video->view_count.' views';?></span>
+                </div>
+            </div>
+        </div>
+        <?php $i++; } ?>
+    </div>
+</div>
+<script>
+    var content_object = <?php echo json_encode($this->existing);?>;
+    var charged_user = <?php echo $this->charged_user; ?>;
+</script>
