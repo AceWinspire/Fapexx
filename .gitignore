@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -47,9 +48,14 @@ Network Trash Folder
 Temporary Items
 .apdisk
 =======
+=======
+>>>>>>> 910e80fd936adc0765df84f1623c646dd6cda234
 .project
 .zfproject.xml
 nbproject/
 .buildpath
 .settings
+<<<<<<< HEAD
+>>>>>>> 910e80fd936adc0765df84f1623c646dd6cda234
+=======
 >>>>>>> 910e80fd936adc0765df84f1623c646dd6cda234
